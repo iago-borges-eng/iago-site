@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sistema no Lovable (para iniciantes) — Iago Bald</title>
+<meta name="description" content="Como criar um sistema de verdade — com telas, banco de dados e login — do jeito simples, com o Lovable Cloud. Você monta o pedido com uma IA, joga no Lovable e ele constrói. Exemplo: loja de roupas." />
+<meta property="og:title" content="Sistema no Lovable (para iniciantes)" />
+<meta property="og:description" content="Crie um sistema funcional com o Lovable, sem programar — do jeito simples, com Lovable Cloud. Exemplo: gestão de loja de roupas." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Lato:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+<div class="grain"></div><div class="glow"></div>
+<header>
+  <nav>
+    <a class="brand" href="/"><span class="bars"><i></i><i></i><i></i></span>Iago&nbsp;Bald</a>
+    <div class="nav-links"><a href="/tutoriais">← Tutoriais</a><a href="/">Portfólio</a></div>
+  </nav>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div class="eyebrow">Tutorial · Para iniciantes</div>
+    <h1 class="title">Sistema no Lovable</h1>
+    <p class="lead">Como criar um <b>sistema de verdade</b> — com telas, banco de dados e login — só <b>conversando com a IA</b>, do jeito mais simples possível. Você monta o pedido com ajuda de uma IA (ChatGPT, Claude…), joga no <b>Lovable</b> e ele constrói. Nosso exemplo: um sistema de gestão pra uma <b>loja de roupas</b>.</p>
+    <div class="meta">
+      <span class="pill"><b>Nível</b> Iniciante</span>
+      <span class="pill"><b>Tempo</b> ~30 min</span>
+      <span class="pill"><b>Custo</b> R$ 0 pra testar</span>
+    </div>
+    <div class="tools">
+      <span class="tl">FERRAMENTAS:</span>
+      <img src="../assets/logos/lovable.svg" alt="Lovable" /> <img src="../assets/logos/supabase.svg" alt="Supabase" />
+    </div>
+  </section>
+
+  <article class="wrap">
+    <div class="outcome">
+      <h3>🎯 O que você vai ter no final</h3>
+      <p>Um <b>sistema web funcional</b> (não só um site): cadastro de produtos, controle de estoque, registro de vendas e um painel com os números — rodando no ar num endereço <code>.lovable.app</code>, que você abre do <b>celular ou do computador</b> e usa no dia a dia.</p>
+    </div>
+
+    <div class="callout note">
+      <div class="ct"><svg class="cic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.1V16h6v-.4c0-.8.4-1.5 1-2.1A6 6 0 0 0 12 3z"/></svg> Neste tutorial: Lovable Cloud (o jeito simples)</div>
+      <p>Vamos usar o <b>Lovable Cloud</b>: o <b>banco de dados e o login já vêm embutidos</b>, sem você criar conta em nenhum outro lugar. Quando o Lovable perguntar, é só <b>ativar</b> — e pronto, você nem pensa nisso de novo. (Existe a opção de usar um Supabase por fora, mas isso é mais avançado; deixei pro final.)</p>
+    </div>
+
+    <h2><svg class="hic" viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="4" rx="1"/><path d="M8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><path d="M9 13l2 2 4-4"/></svg>Antes de tudo — o que você precisa</h2>
+    <p>Quase nada, e nenhum conhecimento técnico:</p>
+    <div class="needs">
+      <ul class="checklist">
+        <li><b>Um computador com internet.</b></li>
+        <li><b>Zero programação.</b> Você descreve o que quer; o Lovable escreve o código.</li>
+        <li><b>Uma conta grátis no <a href="https://lovable.dev" target="_blank" rel="noopener">Lovable</a>.</b> O plano grátis te dá <b>alguns créditos por dia, renovados todo dia</b> — dá pra ir montando e melhorando seu sistema aos poucos, de graça.</li>
+        <li><b>Uma IA pra te ajudar a escrever o pedido</b> — o <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a> ou o <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a> servem bem (o plano grátis já dá conta).</li>
+        <li><b>(Opcional) um domínio próprio.</b> No Lovable, ligar domínio próprio <b>exige plano pago</b>. Pra começar, o endereço grátis <code>.lovable.app</code> já resolve.</li>
+      </ul>
+    </div>
+
+    <h2><svg class="hic" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Existem várias formas de criar um sistema</h2>
+    <p>Este tutorial usa <b>IA (Lovable)</b>. Mas é justo conhecer as alternativas — cada uma serve pra um caso. Veja os prós e contras:</p>
+    <div class="alts">
+      <div class="alt-card">
+        <div class="alt-head">
+          <span class="alt-logos"><img src="../assets/logos/bolt.svg" alt="Bolt" /><img src="../assets/logos/replit.svg" alt="Replit" /><img src="../assets/logos/vercel.svg" alt="v0" /></span>
+          <h4>Outros construtores com IA (Bolt, Replit, v0)</h4>
+        </div>
+        <div class="proscons">
+          <div class="pc pros"><h5>Prós</h5><ul><li>Também é "vibe coding"</li><li>Rápidos pra prototipar</li></ul></div>
+          <div class="pc cons"><h5>Contras</h5><ul><li>Cada um tem suas manias</li><li>Banco + login prontos não vêm tão "de fábrica"</li></ul></div>
+        </div>
+      </div>
+      <div class="alt-card">
+        <div class="alt-head">
+          <span class="alt-logos"><img src="../assets/logos/bubble.svg" alt="Bubble" /></span>
+          <h4>No-code visual (Bubble)</h4>
+        </div>
+        <div class="proscons">
+          <div class="pc pros"><h5>Prós</h5><ul><li>Arrasta-e-solta, poderoso</li><li>Controle fino da lógica</li></ul></div>
+          <div class="pc cons"><h5>Contras</h5><ul><li>Curva de aprendizado real</li><li>Você monta cada regra na mão</li></ul></div>
+        </div>
+      </div>
+      <div class="alt-card best">
+        <div class="alt-head">
+          <span class="alt-logos"><img src="../assets/logos/lovable.svg" alt="Lovable" /><img src="../assets/logos/supabase.svg" alt="Supabase" /></span>
+          <h4>Lovable</h4>
+          <span class="tag">este tutorial</span>
+        </div>
+        <div class="proscons">
+          <div class="pc pros"><h5>Prós</h5><ul><li>Você descreve em português, ele constrói o app inteiro</li><li>Banco e login já embutidos (Cloud)</li><li>Publica num clique</li></ul></div>
+          <div class="pc cons"><h5>Contras</h5><ul><li>Créditos grátis limitados por dia</li><li>Domínio próprio é pago</li></ul></div>
+        </div>
+      </div>
+    </div>
+
+    <h2><svg class="hic" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 5 5v13c3-.5 5.5 0 7 1.5M12 6.5C13.5 5 16 4.5 19 5v13c-3-.5-5.5 0-7 1.5M12 6.5V20"/></svg>Os termos, rapidinho</h2>
+    <p>Quatro palavras que vão aparecer. Em 30 segundos você entende:</p>
+    <div class="gloss"><b>Vibe coding</b><span>Construir software <b>conversando</b> com a IA em linguagem natural. Você diz o que quer; ela escreve o código.</span></div>
+    <div class="gloss"><b>Front e back</b><span>O <b>front</b> são as telas que você vê e clica. O <b>back</b> é o "motor" invisível: onde os dados ficam e quem pode entrar.</span></div>
+    <div class="gloss"><b>Banco de dados</b><span>Onde o sistema <b>guarda as informações</b> de forma permanente (seus produtos, suas vendas). Não some quando você fecha a página.</span></div>
+    <div class="gloss"><b>Lovable Cloud</b><span>O <b>banco de dados e o login já embutidos</b> no Lovable — sem criar conta em outro lugar. É o que torna tudo simples. Por baixo, ele usa o Supabase; você quase não vê.</span></div>
+    <div class="diagram">
+      <div class="dbox"><div class="di">💬</div><h4>Você + uma IA</h4><p>montam o pedido (o prompt)</p></div>
+      <div class="darrow">→</div>
+      <div class="dbox"><div class="di">🤖</div><h4>Lovable constrói</h4><p>telas, banco e login</p></div>
+      <div class="darrow">→</div>
+      <div class="dbox"><div class="di">🚀</div><h4>Você publica</h4><p>no ar, num clique</p></div>
+    </div>
+
+    <h2><svg class="hic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Conhecendo o Lovable</h2>
+    <p>Trinta segundos pra entender a ferramenta antes de pôr a mão na massa. O Lovable é um <b>chat em linguagem natural</b>: você escreve, em português, o que quer — e ele constrói o app na hora, mostrando o resultado ao lado. Sem menu complicado; é conversa.</p>
+    <figure class="shot">
+      <img src="../assets/shots/lovable-home.jpg" alt="Tela inicial do Lovable" loading="lazy" />
+      <figcaption>A tela inicial do Lovable: você descreve a ideia na caixa e manda construir.</figcaption>
+    </figure>
+    <p>Tem um detalhe que muda o jogo: <b>cada pedido feito aqui gasta crédito</b>. Por isso o nosso passo 1 <b>não é aqui dentro</b> — é montar o pedido caprichado numa <b>outra IA</b> (o ChatGPT ou o Claude, a que você preferir) e só colar o texto pronto no Lovable. Você chega com tudo mastigado e <b>gasta menos crédito</b>.</p>
+    <p>E não precisa partir do zero: o Lovable tem uma galeria de <b>modelos prontos</b> — os "Modelos adoráveis" — pra você se inspirar ou usar como ponto de partida.</p>
+    <figure class="shot">
+      <img src="../assets/shots/lovable-templates.jpg" alt="Galeria de modelos do Lovable" loading="lazy" />
+      <figcaption>"Modelos adoráveis": a galeria de exemplos prontos pra usar como ponto de partida.</figcaption>
+    </figure>
+
+    <div class="step">
+      <div class="num">1<small>MONTAR</small></div>
+      <div class="step-body">
+        <h3 class="h3-ic"><svg class="hic" viewBox="0 0 24 24"><path d="M20 4H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h4v4l4-4h8a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1z"/></svg>Monte o pedido com ajuda de uma IA</h3>
+        <p><b>Este é o começo.</b> Escrever o pedido inteiro do zero dá trabalho — então deixa uma IA fazer o rascunho com você. Abra o <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a>, o <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a> ou a que você preferir, <b>cole o modelo abaixo</b> e responda o que ela perguntar. No fim, ela te devolve um texto pronto pra <b>copiar e colar no Lovable</b>.</p>
+        <figure class="shot">
+          <img src="../assets/shots/claude-chat.jpg" alt="Tela do Claude" loading="lazy" />
+          <figcaption>No Claude (ou no ChatGPT): cole o modelo, responda as perguntas e copie o texto pronto.</figcaption>
+        </figure>
+
+        <div class="promptbox">
+          <div class="ph">📋 MODELO — cole no ChatGPT ou no Claude e edite os [colchetes]</div>
+          <pre><code>Me ajude a montar o pedido de um SISTEMA WEB completo e
+funcional. Faça perguntas se faltar algo e no final me
+entregue um texto pronto pra colar no Lovable.
+
+O QUE O SISTEMA FAZ
+- Nome do sistema: [NOME]
+- Pra quem é: [QUEM VAI USAR]
+- Problema que resolve (1 frase): [PROBLEMA]
+
+FUNCIONALIDADES (o que a pessoa faz nele)
+- [FUNCIONALIDADE 1]
+- [FUNCIONALIDADE 2]
+- [FUNCIONALIDADE 3]
+- [FUNCIONALIDADE 4]
+
+DADOS (o que o sistema guarda)
+- [COISA 1]: [campos, ex: nome, preço, quantidade]
+- [COISA 2]: [campos]
+
+TELAS
+- [TELA 1, ex: painel inicial com resumo]
+- [TELA 2]
+- [TELA 3]
+
+ACESSO
+- Precisa de login? [Sim/Não]. Quem entra: [QUEM]
+
+VISUAL
+- Vibe: [ex: limpa e profissional]
+- Cor principal: [COR]
+- Responsivo (funciona no celular e no computador).</code></pre>
+        </div>
+
+        <div class="promptbox ex">
+          <div class="ph">✅ EXEMPLO preenchido — loja de roupas</div>
+          <pre><code>O QUE O SISTEMA FAZ
+- Nome: Guarda-Roupa (gestão da minha loja)
+- Pra quem: eu e minha equipe da loja de roupas
+- Problema: controlar estoque e vendas sem planilha
+  bagunçada
+
+FUNCIONALIDADES
+- Cadastrar produtos (nome, tamanho, cor, preço, foto)
+- Controlar estoque (sobe quando entra, desce ao vender)
+- Registrar vendas (escolher produtos, somar o total e
+  dar baixa no estoque)
+- Ver um painel com: vendas do dia, produtos com
+  estoque baixo e os mais vendidos
+
+DADOS
+- Produtos: nome, categoria, tamanho, cor, preço,
+  quantidade em estoque, foto
+- Vendas: data, itens vendidos, valor total, pagamento
+
+TELAS
+- Painel inicial com os números do dia
+- Lista de produtos (com busca e filtro por categoria)
+- Tela de nova venda (tipo um caixa/PDV)
+- Relatório simples de vendas
+
+ACESSO
+- Sim, com login. Só eu e minha equipe entram.
+
+VISUAL
+- Vibe: limpa e profissional, fácil de usar no balcão
+- Cor principal: verde-esmeralda
+- Responsivo (uso no celular e no computador)</code></pre>
+        </div>
+
+        <div class="callout note">
+          <div class="ct"><svg class="cic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.1V16h6v-.4c0-.8.4-1.5 1-2.1A6 6 0 0 0 12 3z"/></svg> Por que usar outra IA antes?</div>
+          <p>Ela transforma sua ideia solta num pedido <b>completo e organizado</b> — e ainda te faz perguntas que você não tinha pensado. Você chega no Lovable com o texto pronto e o sistema já sai mais perto do que você quer.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">2<small>CONSTRUIR</small></div>
+      <div class="step-body">
+        <h3 class="h3-logo"><img src="../assets/logos/lovable.svg" alt="Lovable" />Cole no Lovable e ative o Cloud</h3>
+        <p>Entre em <a href="https://lovable.dev" target="_blank" rel="noopener">lovable.dev</a>, crie a conta grátis e <b>cole o pedido</b> que você montou. Quando ele oferecer o <b>Lovable Cloud</b>, <b>ative</b> — é o que dá banco de dados e login sem você configurar nada. Em segundos, o app aparece pronto do lado.</p>
+        <div class="callout tip">
+          <div class="ct"><svg class="cic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg> Dica: planejar antes de construir</div>
+          <p>O Lovable tem um modo de <b>planejar</b>: antes de sair fazendo, ele monta um plano do sistema pra você revisar e aprovar. Gasta <b>mais créditos</b>, mas em sistema maior evita retrabalho. Pra começar pequeno, pode ir direto ao build.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">3<small>AJUSTAR</small></div>
+      <div class="step-body">
+        <h3 class="h3-ic"><svg class="hic" viewBox="0 0 24 24"><path d="M4 7h8M16 7h4M4 12h4M12 12h8M4 17h11M19 17h1"/><circle cx="14" cy="7" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="17" cy="17" r="2"/></svg>Vá ajustando conversando</h3>
+        <p>Com o <b>Cloud ligado, você não conecta banco nenhum</b> — já está tudo lá. Não gostou de algo? <b>É só falar</b>, em português mesmo:</p>
+        <ul>
+          <li>"Deixa o botão de <b>vender</b> mais destacado."</li>
+          <li>"Adiciona um campo de <b>desconto</b> na tela de venda."</li>
+          <li>"Coloca uma <b>busca</b> na lista de produtos."</li>
+          <li>"No painel, mostra o <b>total vendido no mês</b>."</li>
+        </ul>
+        <p>Vá <b>por partes</b> — uma mudança por vez fica mais fácil de revisar e de voltar atrás se não gostar.</p>
+        <div class="callout note">
+          <div class="ct"><svg class="cic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.1V16h6v-.4c0-.8.4-1.5 1-2.1A6 6 0 0 0 12 3z"/></svg> Sobre os créditos</div>
+          <p>Cada pedido consome créditos, e <b>o quanto varia</b>: um ajuste pequeno gasta pouco; um pedido grande, que gera muita coisa de uma vez, pode consumir bem mais. Por isso vale <b>pedir por partes e ser específico</b>. Como os créditos <b>renovam todo dia</b>, se acabar é só continuar no dia seguinte — dá pra evoluir de graça, sem pressa.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">4<small>PUBLICAR</small></div>
+      <div class="step-body">
+        <h3 class="h3-ic"><svg class="hic" viewBox="0 0 24 24"><path d="M5 15c-1.5 1.2-2 5-2 5s3.8-.5 5-2M14.5 4.5C11.5 6 9 9 9 12l3 3c3 0 6-2.5 7.5-5.5.6-2.5.5-5 .5-5s-2.4-.1-5.5.5z"/><circle cx="15.5" cy="8.5" r="1.2"/></svg>Coloque no ar</h3>
+        <p>No canto superior direito, clique em <b>Publish</b>. Pronto — seu sistema fica no ar em <code>algumnome.lovable.app</code>.</p>
+        <p>Manda o link pra sua equipe: cada um abre no <b>próprio celular</b> e já usa. Toda vez que você ajustar algo, é só publicar de novo.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">5<small>EXTRAS</small></div>
+      <div class="step-body">
+        <h3 class="h3-ic"><svg class="hic" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg>Extras e caminhos avançados</h3>
+        <p>Quando pegar o jeito, dá pra ir além. Nada disso é obrigatório:</p>
+
+        <p><b>› Domínio próprio.</b> Trocar o <code>.lovable.app</code> por <code>sistema.sualoja.com.br</code> <b>exige plano pago</b> no Lovable (em <b>Settings → Domains</b>). Pra site/portfólio estático dá pra usar domínio de graça pelo Cloudflare — veja o outro tutorial —, mas pra um sistema com banco, o caminho é o plano pago.</p>
+
+        <p><b>› Supabase por fora.</b> Se um dia quiser <b>controle total do banco</b> (SQL na mão, mais opções de login), dá pra sair do Lovable Cloud e usar seu próprio Supabase. Sendo honesto: <b>é chato de fazer</b> — eu mesmo tentei algumas vezes e travei. Só encare isso quando realmente precisar e com calma; pra quase todo caso, o Lovable Cloud resolve.</p>
+
+        <div class="callout tip">
+          <div class="ct"><svg class="cic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 3v12a3 3 0 0 0 3 3h6M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM15 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg> Avançado: GitHub + Claude Code</div>
+          <p>Dá pra <b>conectar o projeto ao GitHub</b> e editar o código no seu computador com o <b>Claude Code</b>; as mudanças sincronizam de volta com o Lovable. Duas vantagens: editar por fora assim <b>não consome créditos do Lovable</b>, e você ganha um fluxo de desenvolvimento profissional. É um passo mais técnico — vale quando o sistema cresce.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout note" style="margin-top:34px">
+      <div class="ct"><svg class="cic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg> Até onde isso vai?</div>
+      <p>Foi com <b>esse mesmo método</b> — montar o pedido, construir, ajustar, publicar — que eu construí o <b>SaldoMed</b>, um app financeiro pra médicos autônomos, com login, banco e várias telas. Você começa numa loja de roupas; o teto é o que você conseguir descrever.</p>
+    </div>
+
+    <div class="cta">
+      <h3>É isso. Você acabou de montar um sistema de verdade.</h3>
+      <p>Funcional, no ar, e que cresce conforme você pede. Travou em algum passo? Me chama.</p>
+      <a class="btn" href="/links">Meus contatos →</a>
+      <a class="btn ghost" href="/tutoriais">← Outros tutoriais</a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="foot">
+    <span>© 2026 Iago Bald · Tutoriais</span>
+    <span><a href="/tutoriais">Tutoriais</a> · <a href="/">Portfólio</a></span>
+  </div>
+</footer>
+</body>
+</html>

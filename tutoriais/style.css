@@ -46,7 +46,7 @@ h1.title{font-size:clamp(2rem,5.5vw,3rem);font-weight:800;margin-bottom:16px}
 article{padding:34px 0 60px}
 article p{margin:0 0 18px;color:#d7d9e6}
 article p b,article li b{color:var(--bege)}
-article h2{font-size:1.05rem;font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin:44px 0 18px;font-weight:400}
+article h2{font-size:1.05rem;font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin:44px 0 18px;font-weight:400;display:flex;align-items:center;gap:10px}
 article ul,article ol{margin:0 0 18px;padding-left:22px;color:#d7d9e6}
 article li{margin-bottom:9px}
 article a{border-bottom:1px solid rgba(255,103,1,.4)}
@@ -57,7 +57,8 @@ article a{border-bottom:1px solid rgba(255,103,1,.4)}
 .outcome p{margin:0;color:#d7d9e6}
 
 /* passos */
-.step{display:grid;grid-template-columns:52px 1fr;gap:20px;padding:30px 0;border-top:1px solid var(--line)}
+.step{display:grid;grid-template-columns:52px 1fr;gap:20px;padding:30px 18px;margin:0 -18px;border-top:1px solid var(--line);transition:background .35s ease}
+.step:hover{background:linear-gradient(90deg,rgba(255,103,1,.045),transparent 70%)}
 .step .num{font-family:'Sora';font-weight:800;font-size:1.5rem;color:var(--orange);line-height:1;padding-top:2px}
 .step .num small{display:block;font-family:'Space Mono',monospace;font-size:10px;color:var(--dim);font-weight:400;letter-spacing:.1em;margin-top:6px}
 .step h3{font-family:'Sora';font-size:1.4rem;font-weight:700;margin-bottom:12px}
@@ -185,3 +186,23 @@ footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index
 .opt p:last-child{margin-bottom:0}
 .opt .plus{color:var(--tip);font-weight:700}.opt .minus{color:var(--warn);font-weight:700}
 @media(max-width:560px){.opts{grid-template-columns:1fr}}
+
+/* ===== ícones + polish ===== */
+.hic{width:20px;height:20px;stroke:var(--orange);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none;transition:stroke .25s,transform .25s}
+article h2 .hic{width:15px;height:15px;stroke-width:2}
+.h3-ic{display:inline-flex;align-items:center;gap:11px}
+.step:hover .h3-ic .hic{transform:translateY(-1px)}
+.callout .ct .cic{width:15px;height:15px;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px}
+.callout.note .ct .cic{stroke:var(--orange)}
+.callout.tip .ct .cic{stroke:var(--tip)}
+.callout.warn .ct .cic{stroke:var(--warn)}
+
+/* screenshot / figura — padrão dos tutoriais */
+.shot{margin:20px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#05060c;transition:border-color .25s}
+.shot:hover{border-color:rgba(255,103,1,.35)}
+.shot img{width:100%;display:block}
+.shot figcaption{font-family:'Space Mono',monospace;font-size:12px;color:var(--dim);padding:11px 15px;border-top:1px solid var(--line)}
+.shot.ph{border-style:dashed;background:linear-gradient(120deg,rgba(255,103,1,.03),transparent);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 22px;gap:9px;min-height:150px}
+.shot.ph .pic{width:26px;height:26px;stroke:var(--dim);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.shot.ph .pt{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.03em;color:var(--muted);max-width:44ch}
+.shot.ph .pn{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
