@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Site + Linktree com o Claude (para iniciantes) — Iago Bald</title>
+<meta name="description" content="Como criar um site e um linktree usando o Claude e colocar no ar de graça — do zero absoluto, sem programar." />
+<meta property="og:title" content="Site + Linktree com o Claude (para iniciantes)" />
+<meta property="og:description" content="Crie um site e um linktree com o Claude e publique de graça — do zero, sem programar." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Lato:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+<div class="grain"></div><div class="glow"></div>
+<header>
+  <nav>
+    <a class="brand" href="/"><span class="bars"><i></i><i></i><i></i></span>Iago&nbsp;Bald</a>
+    <div class="nav-links"><a href="/tutoriais">← Tutoriais</a><a href="/">Portfólio</a></div>
+  </nav>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div class="eyebrow">Tutorial · Para iniciantes</div>
+    <h1 class="title">Site + Linktree com o Claude</h1>
+    <p class="lead">Como criar um site e uma página de links (linktree) usando o <b>Claude</b> e colocar no ar <b>de graça</b> — do zero absoluto, sem programar e sem complicação.</p>
+    <div class="meta">
+      <span class="pill"><b>Nível</b> Iniciante</span>
+      <span class="pill"><b>Tempo</b> ~25 min</span>
+      <span class="pill"><b>Custo</b> R$ 0</span>
+    </div>
+    <div class="tools">
+      <span class="tl">FERRAMENTAS:</span>
+      <img src="../assets/logos/claude.svg" alt="Claude" /> <img src="../assets/logos/cloudflare.svg" alt="Cloudflare" />
+    </div>
+  </section>
+
+  <article class="wrap">
+    <div class="outcome">
+      <h3>🎯 O que você vai ter no final</h3>
+      <p>Um <b>site</b> e um <b>linktree</b> bonitos, no ar na internet, que você atualiza quando quiser — <b>sem pagar mensalidade</b>. Começa num endereço grátis e, se quiser, liga o <b>seu próprio domínio</b> depois.</p>
+    </div>
+
+    <h2>Antes de tudo — o que você precisa</h2>
+    <p>Quase nada, e nenhum conhecimento técnico:</p>
+    <div class="needs">
+      <ul class="checklist">
+        <li><b>Um computador com internet.</b></li>
+        <li><b>Zero programação.</b> O Claude escreve o código pra você.</li>
+        <li><b>Duas contas gratuitas</b> (a gente cria na hora): o <b>Claude</b> (pra criar as páginas — o <b>plano grátis já dá conta</b>) e o <b>Cloudflare</b> (pra colocar no ar).</li>
+        <li><b>(Opcional) um domínio próprio</b> — tipo <code>seunome.com.br</code>. Não precisa pra começar.</li>
+      </ul>
+    </div>
+
+    <h2>Existem várias formas de fazer um site</h2>
+    <p>Este tutorial usa <b>IA (Claude) + hospedagem grátis</b>. Mas é justo você conhecer as alternativas — cada uma serve pra um caso. Veja os prós e contras:</p>
+    <div class="alts">
+      <div class="alt-card">
+        <div class="alt-head">
+          <span class="alt-logos"><img src="../assets/logos/wix.svg" alt="Wix" /><img src="../assets/logos/squarespace.svg" alt="Squarespace" /><img src="../assets/logos/framer.svg" alt="Framer" /></span>
+          <h4>Construtores visuais (Wix, Squarespace, Framer)</h4>
+        </div>
+        <div class="proscons">
+          <div class="pc pros"><h5>Prós</h5><ul><li>Arrasta-e-solta, sem código</li><li>Bonito rápido</li></ul></div>
+          <div class="pc cons"><h5>Contras</h5><ul><li>Mensalidade</li><li>Cara de template</li><li>Você "aluga" — preso à plataforma</li></ul></div>
+        </div>
+      </div>
+      <div class="alt-card">
+        <div class="alt-head">
+          <span class="alt-logos"><img src="../assets/logos/wordpress.svg" alt="WordPress" /></span>
+          <h4>WordPress</h4>
+        </div>
+        <div class="proscons">
+          <div class="pc pros"><h5>Prós</h5><ul><li>Poderosíssimo, plugin pra tudo</li><li>Padrão do mercado</li></ul></div>
+          <div class="pc cons"><h5>Contras</h5><ul><li>Curva de aprendizado maior</li><li>Precisa de hospedagem (geralmente paga)</li><li>Fácil de complicar</li></ul></div>
+        </div>
+      </div>
+      <div class="alt-card best">
+        <div class="alt-head">
+          <span class="alt-logos"><img src="../assets/logos/claude.svg" alt="Claude" /><img src="../assets/logos/cloudflare.svg" alt="Cloudflare" /></span>
+          <h4>IA + hospedagem grátis</h4>
+          <span class="tag">este tutorial</span>
+        </div>
+        <div class="proscons">
+          <div class="pc pros"><h5>Prós</h5><ul><li>De graça</li><li>100% seu, código único (não é template)</li><li>Você controla tudo</li></ul></div>
+          <div class="pc cons"><h5>Contras</h5><ul><li>Uns cliques a mais no começo</li><li>Depende de você pedir bem pra IA</li></ul></div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Os termos, rapidinho</h2>
+    <p>Três palavras que vão aparecer. Em 30 segundos você entende:</p>
+    <div class="gloss"><b>Arquivo .html</b><span>A "receita" de uma página — o navegador lê e desenha o site. Você <b>não escreve</b> na mão: o Claude gera pra você.</span></div>
+    <div class="gloss"><b>Hospedagem</b><span>O "terreno" onde seu site fica de pé, ligado 24h, pra qualquer um acessar.</span></div>
+    <div class="gloss"><b>Domínio</b><span>O endereço, a "placa" do site (<code>seunome.com.br</code>). Opcional.</span></div>
+    <div class="diagram">
+      <div class="dbox"><div class="di">📄</div><h4>A página</h4><p>o arquivo .html (o Claude cria)</p></div>
+      <div class="darrow">→</div>
+      <div class="dbox"><div class="di">🏠</div><h4>A hospedagem</h4><p>onde ela mora (grátis)</p></div>
+      <div class="darrow">→</div>
+      <div class="dbox"><div class="di">🌐</div><h4>O domínio</h4><p>o endereço (opcional)</p></div>
+    </div>
+
+    <div class="step">
+      <div class="num">1<small>CRIAR</small></div>
+      <div class="step-body">
+        <h3 class="h3-logo"><img src="../assets/logos/claude.svg" alt="Claude" />Crie suas páginas com o Claude</h3>
+        <p>Você precisa de dois arquivos: <code>index.html</code> (o site) e <code>links.html</code> (o linktree). Entre em <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>, crie uma conta grátis, e <b>copie e cole o modelo abaixo</b> — é só trocar pelas suas informações:</p>
+
+        <div class="promptbox">
+          <div class="ph">📋 MODELO — copie, cole no Claude e edite os [colchetes]</div>
+          <pre><code>Crie DOIS arquivos HTML completos e prontos pra publicar:
+1) index.html — meu site pessoal (uma página só, com rolagem)
+2) links.html — minha página de links, estilo linktree
+
+SOBRE MIM
+- Nome: [SEU NOME]
+- O que eu faço: [SUA ÁREA/PROFISSÃO em 1 frase]
+- Frase que me define: [UMA FRASE DE IMPACTO]
+- Mini bio (2 a 3 linhas): [QUEM VOCÊ É / EXPERIÊNCIA]
+
+MEUS LINKS
+- Instagram: [LINK]
+- YouTube: [LINK]
+- WhatsApp (com DDD): [NÚMERO]
+- Outro: [LINK]
+
+VISUAL
+- Vibe: [ex: moderna e escura / clean e clara]
+- Cores: [ex: laranja e azul escuro]
+- Responsivo (funcionar no celular) e elegante.
+
+Me entregue o código completo de cada arquivo, um de
+cada vez, em bloco de código pra eu copiar. Sem enrolação.</code></pre>
+        </div>
+
+        <div class="promptbox ex">
+          <div class="ph">✅ EXEMPLO preenchido (pra você ver como fica)</div>
+          <pre><code>SOBRE MIM
+- Nome: Iago Borges (Iago Bald)
+- O que eu faço: engenheiro que usa IA e dados pra
+  aumentar a produtividade de times
+- Frase que me define: "Exatas + Pessoas — traduzo o
+  complexo em simples"
+- Mini bio: engenheiro, agilista e entusiasta de IA.
+  Crio sistemas e ensino tecnologia de forma prática.
+
+MEUS LINKS
+- Instagram: instagram.com/iago_bald
+- YouTube: youtube.com/@iago_bald
+- LinkedIn: linkedin.com/in/iagobald
+
+VISUAL
+- Vibe: moderna e escura, tech premium
+- Cores: laranja (#FF6701) e azul escuro (#0C0E23)</code></pre>
+        </div>
+
+        <p>Quando o Claude entregar, <b>baixe/salve os dois arquivos</b> (<code>index.html</code> e <code>links.html</code>) e coloque-os numa pasta no seu computador, ex: <code>meu-site</code>.</p>
+
+        <div class="callout note">
+          <div class="ct">◆ Precisa do Claude Pro?</div>
+          <p><b>Não.</b> O plano <b>grátis</b> já cria as páginas (ele tem os Artifacts e gera o código). O grátis tem um limite de uso ao longo do dia — se pausar, é só esperar um pouco e continuar. O Pro só libera mais uso.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">2<small>PUBLICAR</small></div>
+      <div class="step-body">
+        <h3 class="h3-logo"><img src="../assets/logos/cloudflare.svg" alt="Cloudflare" />Coloque no ar de graça</h3>
+        <p>Existem dois caminhos pra publicar. Comece pelo <b>Simples</b> — o Avançado você adota quando pegar o jeito.</p>
+        <div class="opts">
+          <div class="opt rec">
+            <div class="oh">Simples <span class="tag">recomendado</span></div>
+            <div class="osub">arrasta e solta</div>
+            <p><span class="plus">+</span> Mais fácil, sem conta extra: você arrasta a pasta e pronto.</p>
+            <p><span class="minus">–</span> Pra atualizar, você sobe a pasta de novo (manual).</p>
+          </div>
+          <div class="opt">
+            <div class="oh">Avançado <img src="../assets/logos/github.svg" alt="GitHub" style="height:18px" /></div>
+            <div class="osub">deploy automático (GitHub)</div>
+            <p><span class="plus">+</span> Você guarda o site no GitHub e conecta no Cloudflare. Mexeu no código, deu <code>git push</code> → o site <b>atualiza sozinho</b>. Nunca mais re-sobe arquivo.</p>
+            <p><span class="minus">–</span> Precisa de conta no GitHub e uns passos de configuração no começo.</p>
+          </div>
+        </div>
+        <p>Vamos de <b>Simples</b>:</p>
+        <ul>
+          <li>Crie conta grátis no <a href="https://dash.cloudflare.com" target="_blank" rel="noopener">Cloudflare</a>.</li>
+          <li>Vá em <b>Workers &amp; Pages → Create → aba Pages</b> e escolha <b>"Upload your static files"</b> (<b>não</b> a opção de Git).</li>
+          <li>Dê um nome ao projeto e <b>arraste a pasta</b> <code>meu-site</code> pra área de upload.</li>
+          <li>Clique em <b>Deploy</b>.</li>
+        </ul>
+        <p>Pronto! 🎉 Seu site já está no ar em <code>seunome.pages.dev</code>, e o linktree em <code>seunome.pages.dev/links</code>.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">3<small>ATUALIZAR</small></div>
+      <div class="step-body">
+        <h3>Atualize quando quiser</h3>
+        <p>Mudou de ideia ou quer trocar um texto? É simples — depende do caminho que você escolheu no passo 2:</p>
+        <ul>
+          <li><b>No Simples:</b> peça a nova versão pro Claude, salve o arquivo na pasta e <b>suba a pasta de novo</b> no Cloudflare (ele cria uma versão nova por cima).</li>
+          <li><b>No Avançado:</b> só dar <code>git push</code> — o site atualiza <b>sozinho</b>, sem re-upload.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">4<small>OPCIONAL</small></div>
+      <div class="step-body">
+        <h3 class="h3-logo"><img src="../assets/logos/hostinger.svg" alt="Domínio" />(Opcional) Ligue um domínio próprio</h3>
+        <p>Só faça se quiser trocar o <code>.pages.dev</code> por <code>seunome.com.br</code>.</p>
+        <ul>
+          <li><b>Não tem domínio ainda?</b> Compre um (ex: <a href="https://www.hostinger.com.br" target="_blank" rel="noopener">Hostinger</a> ou <a href="https://registro.br" target="_blank" rel="noopener">Registro.br</a>) — alguns reais por ano.</li>
+          <li>No Cloudflare: <b>Add a site → Connect a domain</b>, digite o domínio, plano <b>Free</b>. Ele te dá <b>2 nameservers</b>.</li>
+          <li>No painel de onde você comprou o domínio, troque os nameservers pelos 2 do Cloudflare e salve.</li>
+          <li>Quando ativar, no projeto do Pages → <b>Custom domains</b> → adicione seu domínio e o <code>www</code>.</li>
+        </ul>
+        <div class="callout warn">
+          <div class="ct">▲ Cuidado</div>
+          <p>Ao trocar de nameserver, confira se não sumiu nenhum registro que você já usa (e-mail/MX ou subdomínios). E desligue o <b>DNSSEC</b> se estiver ligado.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <h3>É isso. Você acabou de montar uma base profissional.</h3>
+      <p>Sem mensalidade e que cresce com você. Travou em algum passo? Me chama.</p>
+      <a class="btn" href="/links">Meus contatos →</a>
+      <a class="btn ghost" href="/tutoriais">← Outros tutoriais</a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="foot">
+    <span>© 2026 Iago Bald · Tutoriais</span>
+    <span><a href="/tutoriais">Tutoriais</a> · <a href="/">Portfólio</a> · <a href="/links">Links</a></span>
+  </div>
+</footer>
+</body>
+</html>
