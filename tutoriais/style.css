@@ -129,7 +129,8 @@ footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index
   body{font-size:1rem}
   .step{grid-template-columns:1fr;gap:8px}
   .step .num{font-size:1.2rem}
-  .nav-links a:not(:last-child){display:none}
+  nav{height:auto;flex-wrap:wrap;gap:12px;padding-top:14px;padding-bottom:14px}
+  .nav-links{width:100%;flex-wrap:wrap;gap:16px;font-size:13px}
   .darrow{transform:rotate(90deg);width:100%;justify-content:center;padding:8px 0}
 }
 
