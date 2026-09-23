@@ -17,6 +17,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Lato:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../tutoriais/style.css" />
+<style>
+  .leadform{display:flex;flex-direction:column;gap:12px;max-width:560px;margin:18px 0 0}
+  .leadform .lf-row{display:flex;gap:12px;flex-wrap:wrap}
+  .leadform .lf-row input{flex:1;min-width:180px}
+  .leadform input,.leadform textarea{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:12px 14px;color:#F4F4F6;font-family:'Lato',system-ui,sans-serif;font-size:15px;outline:none}
+  .leadform input:focus,.leadform textarea:focus{border-color:var(--orange,#FF6701)}
+  .leadform textarea{resize:vertical}
+  .lf-hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+  .lf-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .lf-actions button{background:var(--orange,#FF6701);color:#160a02;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:11px 22px;border:none;border-radius:8px;cursor:pointer}
+  .lf-actions button:disabled{opacity:.6;cursor:default}
+  .lf-wa{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,0.16);color:#F4F4F6;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:11px 18px;border-radius:8px}
+  .lead-ok{color:#3ddc97;font-size:1.02rem;margin-top:14px}
+</style>
 </head>
 <body>
 <div class="grain"></div><div class="glow"></div>
@@ -83,8 +97,20 @@
 
       <div class="cta">
         <h3>Vamos achar teu primeiro furo?</h3>
-        <p>Sem pacote fixo — a gente começa pelo vazamento que devolve mais dinheiro com menos esforço. Me chama que a gente conversa.</p>
-        <a class="btn" href="https://wa.me/5571999960809?text=Oi%20Iago%2C%20quero%20falar%20sobre%20a%20consultoria">Falar no WhatsApp →</a>
+        <p>Sem pacote fixo — a gente começa pelo vazamento que devolve mais dinheiro com menos esforço. Deixa teu contato que eu retorno, ou me chama direto no WhatsApp.</p>
+        <form id="leadForm" class="leadform" novalidate>
+          <div class="lf-row">
+            <input name="nome" placeholder="Seu nome" required autocomplete="name" />
+            <input name="contato" placeholder="WhatsApp ou e-mail" required />
+          </div>
+          <textarea name="motivo" rows="3" placeholder="O que você precisa? (ex.: organizar o financeiro, achar onde perco dinheiro…)"></textarea>
+          <input type="text" name="website" class="lf-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="lf-actions">
+            <button type="submit">Enviar</button>
+            <a class="lf-wa" href="https://wa.me/5571999960809?text=Oi%20Iago%2C%20quero%20falar%20sobre%20a%20consultoria" target="_blank" rel="noopener">WhatsApp →</a>
+          </div>
+        </form>
+        <p id="leadOk" class="lead-ok" hidden>Recebido. Eu retorno logo no contato que você deixou. 🙌</p>
       </div>
     </article>
   </section>
@@ -95,5 +121,30 @@
     <span><a href="/">Portfólio</a> · <a href="/tutoriais">Tutoriais</a></span>
   </div>
 </footer>
+<script>
+(function(){
+  var SUPA='https://rgunvvbtqeugzzxfnvhi.supabase.co';
+  var KEY='sb_publishable_-NZo96CyCR32RBLum8mEag_Z9yJ0SKX';
+  var f=document.getElementById('leadForm');
+  if(!f) return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var fd=new FormData(f);
+    var done=function(){ f.hidden=true; document.getElementById('leadOk').hidden=false; };
+    if(fd.get('website')){ done(); return; } // honeypot
+    if(!(fd.get('nome')||'').trim() || !(fd.get('contato')||'').trim()){ alert('Preenche nome e contato, por favor.'); return; }
+    var btn=f.querySelector('button[type=submit]');
+    btn.disabled=true; btn.textContent='Enviando…';
+    var motivo=[(fd.get('motivo')||'').trim(),'(via página consultoria)'].filter(Boolean).join(' ');
+    var id='site-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);
+    fetch(SUPA+'/rest/v1/leads_site',{
+      method:'POST',
+      headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
+      body:JSON.stringify({id:id,nome:fd.get('nome'),contato:fd.get('contato'),motivo:motivo,origem:'site'})
+    }).then(function(r){ if(!r.ok) throw 0; done(); })
+      .catch(function(){ btn.disabled=false; btn.textContent='Enviar'; alert('Ops, não consegui enviar agora. Me chama no WhatsApp que resolvo na hora.'); });
+  });
+})();
+</script>
 </body>
 </html>

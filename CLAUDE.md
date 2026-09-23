@@ -31,7 +31,7 @@ IMPORTANTE: rodar git só aqui no Claude Code (nativo). Não deixar outra ferram
 - Prévia renderizada: tutorial multi-arquivo não abre estilizado sozinho (CSS/imagens relativos). Pra revisar num visualizador, gerar versão self-contained com CSS inline + imagens em base64.
 
 ## Captura de lead (peça crítica)
-- O form na home (`index.html`, seção contato) faz `POST` direto pra `leads_site` no Supabase do **iago-bald** (mesma base do CRM), com a **chave publishable** (anon) e honeypot anti-bot. O lead cai no funil com `origem:'site'`.
+- O form existe na **home** (`index.html`, seção contato) e nas páginas de oferta **consultoria** e **mentoria** (bloco `.cta`, feito 2026-09-23). Faz `POST` direto pra `leads_site` no Supabase do **iago-bald** (mesma base do CRM), com a **chave publishable** (anon) e honeypot anti-bot. O lead cai no funil com `origem:'site'` (a RLS exige `origem='site'`; a página de origem vai anotada no `motivo`, ex.: "(via página consultoria)").
 - **Segurança (auditada 2026-09-23):** RLS OK. O `anon` só tem policy de **INSERT** com `with_check (origem='site')`; **não há SELECT** pro anon, então a chave pública no HTML NÃO lê a lista de leads. Não afrouxar essa policy.
 - Limitação: se o POST falhar, o lead se perde (só `alert`). Melhoria futura: fallback (e-mail/Formspree) ou retry.
 
@@ -41,7 +41,6 @@ IMPORTANTE: rodar git só aqui no Claude Code (nativo). Não deixar outra ferram
 
 ## Pendências
 - **Analytics (depende do Iago):** site voa cego, sem GA/Plausible/CF Web Analytics. Recomendado Cloudflare Web Analytics (grátis, sem cookie) — precisa pegar o beacon token no dashboard da Cloudflare.
-- **Form de lead nas páginas de oferta:** consultoria e mentoria só têm botão de WhatsApp; levar o form de captura da home pra elas aumenta conversão de quem chega direto.
 - **Prova social:** sem depoimentos/logos/resultados; maior lacuna de conversão (depende de coletar material).
 - Levar os ícones/transições novos (já no Tutorial 2 do Lovable) para o Tutorial 1 (site-linktree), pra ficarem iguais.
 - Tutorial 2: faltam (opcionais) prints do botão **Publish** e do **sistema pronto** aparecendo.
