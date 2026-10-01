@@ -1,0 +1,2 @@
+/tutoriais /recursos 301
+/tutoriais/* /recursos/:splat 301
