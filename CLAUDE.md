@@ -1,6 +1,6 @@
 # iago-site — Portfólio + Linktree + Tutoriais (Iago Bald)
 
-@~/Documents/claude-iagopessoal/CLAUDE.md
+@~/Code/claude-iagopessoal/CLAUDE.md
 
 Site estático publicado no **Cloudflare Pages** em **iagobald.com.br** (repo GitHub: `iago-borges-eng/iago-site`). Marca, tom e restrições vêm do import acima.
 
