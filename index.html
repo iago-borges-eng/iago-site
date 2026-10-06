@@ -113,7 +113,9 @@
   .marquee span::after{content:"";width:7px;height:7px;background:var(--orange);border-radius:50%;-webkit-text-stroke:0}
   @keyframes mq{to{transform:translateX(-50%)}}
 
-  section{position:relative;z-index:3}
+  section{position:relative;z-index:3;background:var(--bg)}
+  .hero{background:transparent}
+  .band{background:transparent}
   .block{padding:104px 0}
   .kicker{font-family:'Space Mono',monospace;font-size:13px;color:var(--orange);letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:12px;margin-bottom:22px}
   .kicker::before{content:attr(data-n);color:var(--dim)}
@@ -128,13 +130,14 @@
 
   /* projects */
   .proj-list{border-top:1px solid var(--line)}
-  .proj{display:grid;grid-template-columns:70px 1fr 1.1fr 200px;gap:26px;align-items:center;padding:30px 8px;border-bottom:1px solid var(--line);transition:padding .3s,background .3s;position:relative}
+  .proj{display:grid;grid-template-columns:70px 1fr auto;gap:26px;align-items:center;padding:30px 8px;border-bottom:1px solid var(--line);transition:padding .3s,background .3s;position:relative}
   .proj:hover{padding-left:22px;background:linear-gradient(90deg,rgba(255,103,1,.06),transparent 65%)}
   .proj .idx{font-family:'Space Mono',monospace;color:var(--dim);font-size:14px}
   .proj:hover .idx{color:var(--orange)}
+  .proj-body{display:flex;flex-direction:column;gap:6px}
   .proj h3{font-size:clamp(1.1rem,2.1vw,1.5rem);font-weight:600}
   .proj .pd{color:var(--muted);font-size:.96rem}
-  .proj .pt{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-start}
+  .proj .pt{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-self:center}
   .proj .pt span{font-family:'Space Mono',monospace;font-size:11px;color:var(--orange-2);border:1px solid rgba(255,103,1,.28);padding:4px 10px;border-radius:100px}
   .proj .arrow{position:absolute;right:8px;opacity:0;transform:translateX(-8px);transition:.25s;color:var(--orange)}
   .proj:hover .arrow{opacity:1;transform:translateX(0)}
@@ -166,7 +169,7 @@
   .proj-mock .m-bubble-r{border-radius:8px 8px 2px 8px;padding:4px 7px;background:rgba(255,255,255,.05);margin-left:auto;margin-bottom:3px}
   .proj-mock .m-txt-s{height:4px;border-radius:2px;background:rgba(255,103,1,.3)}
   .proj-mock .m-txt-b{height:4px;border-radius:2px;background:rgba(255,255,255,.1)}
-  @media(max-width:960px){.proj{grid-template-columns:50px 1fr;gap:14px}.proj .pd{grid-column:1/-1}.proj .pt{grid-column:1/-1;justify-content:flex-start}.proj .arrow{display:none}.proj-mock{display:none!important}}
+  @media(max-width:960px){.proj{grid-template-columns:50px 1fr;gap:14px}.proj .pt{grid-column:1/-1;justify-content:flex-start}.proj .arrow{display:none}}
 
   /* atuação — galeria de quadrados */
   .atu-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
@@ -336,96 +339,47 @@
       <div class="proj-list" style="margin-top:44px">
         <div class="proj rv">
           <span class="idx">01</span>
-          <h3>Sistema para Médicos e Clínicas</h3>
-          <div><p class="pd">Controle financeiro centralizado: receitas de múltiplas fontes, despesas e fluxo de caixa em um único painel.</p><div class="pt" style="margin-top:10px"><span>Saúde</span><span>Fintech</span></div></div>
-          <div class="proj-mock" style="display:flex;flex-direction:column">
-            <div class="m-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
-            <div class="m-body" style="flex:1">
-              <div class="m-row" style="gap:6px;margin-bottom:4px">
-                <div class="m-card" style="height:22px;display:flex;align-items:center;padding:0 6px"><div class="m-text-o" style="width:60%"></div></div>
-                <div class="m-card" style="height:22px;display:flex;align-items:center;padding:0 6px"><div class="m-text" style="width:70%"></div></div>
-              </div>
-              <div class="m-chart" style="height:44px">
-                <div class="m-col" style="height:30%"></div><div class="m-col" style="height:55%"></div><div class="m-col hi" style="height:80%"></div><div class="m-col" style="height:60%"></div><div class="m-col" style="height:70%"></div><div class="m-col hi" style="height:90%"></div><div class="m-col" style="height:50%"></div>
-              </div>
-            </div>
+          <div class="proj-body">
+            <h3>Sistema para Médicos e Clínicas</h3>
+            <p class="pd">Controle financeiro centralizado: receitas de múltiplas fontes, despesas e fluxo de caixa em um único painel.</p>
           </div>
+          <div class="pt"><span>Saúde</span><span>Fintech</span></div>
           <span class="arrow">→</span>
         </div>
         <div class="proj rv">
           <span class="idx">02</span>
-          <h3>Sistema de Gestão para Indústria</h3>
-          <div><p class="pd">Operação integrada: projetos, pessoas, capacidade e financeiro visíveis em tempo real.</p><div class="pt" style="margin-top:10px"><span>Indústria</span><span>Gestão</span></div></div>
-          <div class="proj-mock" style="display:flex;flex-direction:column">
-            <div class="m-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
-            <div style="flex:1;display:flex">
-              <div class="m-side"><div class="m-side-item act"></div><div class="m-side-item"></div><div class="m-side-item"></div><div class="m-side-item"></div><div class="m-side-item"></div></div>
-              <div style="flex:1;padding:7px 6px;display:flex;flex-direction:column;gap:5px">
-                <div class="m-bar-h" style="height:7px;width:80%;border-radius:2px"></div>
-                <div class="m-table">
-                  <div class="m-tr"><div class="m-td" style="width:35%"></div><div class="m-td o" style="width:20%"></div><div class="m-td" style="width:25%"></div></div>
-                  <div class="m-tr"><div class="m-td" style="width:45%"></div><div class="m-td" style="width:15%"></div><div class="m-td o" style="width:30%"></div></div>
-                  <div class="m-tr"><div class="m-td" style="width:30%"></div><div class="m-td o" style="width:25%"></div><div class="m-td" style="width:20%"></div></div>
-                </div>
-              </div>
-            </div>
+          <div class="proj-body">
+            <h3>Sistema de Gestão para Indústria</h3>
+            <p class="pd">Operação integrada: projetos, pessoas, capacidade e financeiro visíveis em tempo real.</p>
           </div>
+          <div class="pt"><span>Indústria</span><span>Gestão</span></div>
           <span class="arrow">→</span>
         </div>
         <div class="proj rv">
           <span class="idx">03</span>
-          <h3>Sistema de Backoffice para Assessores Financeiros</h3>
-          <div><p class="pd">CRM, pipeline de clientes, follow-ups e gestão de carteira: pra quem faz negócio por relacionamento.</p><div class="pt" style="margin-top:10px"><span>Finanças</span><span>CRM</span></div></div>
-          <div class="proj-mock" style="display:flex;flex-direction:column">
-            <div class="m-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
-            <div class="m-body" style="flex:1;flex-direction:column;gap:4px;padding:6px 7px">
-              <div style="flex:1;display:flex;flex-direction:column;gap:5px">
-                <div class="m-text-o" style="width:70%;height:5px;border-radius:2px"></div>
-                <div style="background:rgba(255,255,255,.04);border-radius:4px;padding:5px 5px;display:flex;flex-direction:column;gap:3px"><div class="m-text" style="width:80%"></div><div class="m-text" style="width:60%"></div></div>
-                <div style="background:rgba(255,255,255,.04);border-radius:4px;padding:5px 5px;display:flex;flex-direction:column;gap:3px"><div class="m-text" style="width:75%"></div><div class="m-text" style="width:50%"></div></div>
-                <div style="background:rgba(255,103,1,.08);border:1px solid rgba(255,103,1,.2);border-radius:4px;padding:5px 5px;display:flex;flex-direction:column;gap:3px"><div class="m-text-o" style="width:65%"></div><div class="m-text" style="width:45%"></div></div>
-              </div>
-            </div>
+          <div class="proj-body">
+            <h3>Sistema de Backoffice para Assessores Financeiros</h3>
+            <p class="pd">CRM, pipeline de clientes, follow-ups e gestão de carteira: pra quem faz negócio por relacionamento.</p>
           </div>
+          <div class="pt"><span>Finanças</span><span>CRM</span></div>
           <span class="arrow">→</span>
         </div>
         <div class="proj rv">
           <span class="idx">04</span>
-          <h3>Painel de BI para Grupos Empresariais</h3>
-          <div><p class="pd">Consolidação financeira de múltiplas empresas com dashboard executivo em tempo real.</p><div class="pt" style="margin-top:10px"><span>BI</span><span>Finanças</span></div></div>
-          <div class="proj-mock">
-            <div class="m-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
-            <div class="m-body">
-              <div class="m-row" style="gap:5px;margin-bottom:5px">
-                <div class="m-card" style="height:22px"></div>
-                <div class="m-card" style="height:22px"></div>
-                <div class="m-card" style="height:22px;border:1px solid rgba(255,103,1,.3)"></div>
-              </div>
-              <div class="m-row" style="align-items:flex-end;gap:5px;height:44px">
-                <div style="flex:2;height:100%;background:rgba(255,255,255,.04);border-radius:4px;display:flex;align-items:flex-end;padding:5px"><div style="width:100%;background:linear-gradient(180deg,rgba(255,103,1,.4),rgba(255,103,1,.1));border-radius:2px;height:70%"></div></div>
-                <div style="flex:1;height:100%;display:flex;flex-direction:column;gap:4px">
-                  <div style="flex:1;background:rgba(255,103,1,.12);border-radius:3px"></div>
-                  <div style="flex:1;background:rgba(255,255,255,.05);border-radius:3px"></div>
-                </div>
-              </div>
-            </div>
+          <div class="proj-body">
+            <h3>Painel de BI para Grupos Empresariais</h3>
+            <p class="pd">Consolidação financeira de múltiplas empresas com dashboard executivo em tempo real.</p>
           </div>
+          <div class="pt"><span>BI</span><span>Finanças</span></div>
           <span class="arrow">→</span>
         </div>
         <div class="proj rv">
           <span class="idx">05</span>
-          <h3>Agente de IA para Atendimento e Operações</h3>
-          <div><p class="pd">Atende via WhatsApp, qualifica leads e automatiza rotinas: 24/7 sem equipe adicional.</p><div class="pt" style="margin-top:10px"><span>IA</span><span>Automação</span></div></div>
-          <div class="proj-mock">
-            <div class="m-bar"><div class="m-dot"></div><div class="m-dot"></div><div class="m-dot"></div></div>
-            <div class="m-body" style="padding:6px 8px;gap:4px">
-              <div class="m-bubble"><div class="m-txt-s" style="width:70%"></div></div>
-              <div class="m-bubble-r"><div class="m-txt-b" style="width:60%"></div></div>
-              <div class="m-bubble"><div class="m-txt-s" style="width:80%"></div></div>
-              <div class="m-bubble"><div class="m-txt-s" style="width:50%"></div></div>
-              <div class="m-bubble-r"><div class="m-txt-b" style="width:65%"></div></div>
-            </div>
+          <div class="proj-body">
+            <h3>Agente de IA para Atendimento e Operações</h3>
+            <p class="pd">Atende via WhatsApp, qualifica leads e automatiza rotinas: 24/7 sem equipe adicional.</p>
           </div>
+          <div class="pt"><span>IA</span><span>Automação</span></div>
           <span class="arrow">→</span>
         </div>
       </div>
@@ -513,7 +467,7 @@
         <div class="about-body rv">
           <h2 class="h2">Na interseção entre quem constrói e quem organiza.</h2>
           <p>8 anos construindo sistemas em <b>Cartão Elo</b>, <b>Banco BV</b>, <b>SENAI CIMATEC</b> e <b>DNA de Vendas</b>. Aprendi que tecnologia sem organização é só bagunça mais rápida.</p>
-          <p>Fundador da <b>Bald</b> — uso IA para construir sistemas sob medida para pequenos e médios negócios em semanas, não meses.</p>
+          <p>Fundador da <b>Bald Ops</b> — uso IA para construir sistemas sob medida para pequenos e médios negócios em semanas, não meses.</p>
           <p>Meu trabalho é pegar complexidade e transformar em sistema simples que o dono consegue usar. <b>Building is my love language.</b></p>
         </div>
       </div>
