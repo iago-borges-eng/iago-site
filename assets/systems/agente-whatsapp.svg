@@ -1,0 +1,253 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0c0e23"/>
+      <stop offset="100%" style="stop-color:#0f1535"/>
+    </linearGradient>
+    <linearGradient id="phone" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1f42"/>
+      <stop offset="100%" style="stop-color:#141830"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#161b3a"/>
+      <stop offset="100%" style="stop-color:#111428"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="20" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <clipPath id="phoneClip">
+      <rect x="80" y="60" width="340" height="600" rx="32"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bg)"/>
+
+  <!-- Ambient glow left -->
+  <ellipse cx="260" cy="360" rx="220" ry="180" fill="#FF6701" opacity="0.04"/>
+  <!-- Ambient glow right -->
+  <ellipse cx="960" cy="300" rx="260" ry="180" fill="#25D366" opacity="0.04"/>
+
+  <!-- === PHONE MOCKUP === -->
+  <g filter="url(#shadow)">
+    <!-- Phone body -->
+    <rect x="80" y="60" width="340" height="600" rx="32" fill="url(#phone)" stroke="#2a2f5a" stroke-width="1.5"/>
+
+    <!-- Notch -->
+    <rect x="210" y="72" width="80" height="20" rx="10" fill="#0c0e23"/>
+
+    <!-- WhatsApp Header -->
+    <rect x="80" y="100" width="340" height="56" fill="#1a2744" clip-path="url(#phoneClip)"/>
+    <!-- Back arrow -->
+    <polyline points="104,128 114,118 114,138" fill="none" stroke="#aab" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Avatar circle -->
+    <circle cx="134" cy="128" r="16" fill="#25D366" opacity="0.9"/>
+    <text x="134" y="133" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="white">B</text>
+    <!-- Name + status -->
+    <text x="158" y="122" font-family="-apple-system,sans-serif" font-size="13" font-weight="600" fill="#f0f4ff">Atendente Bald</text>
+    <circle cx="158" cy="134" r="4" fill="#25D366"/>
+    <text x="168" y="138" font-family="-apple-system,sans-serif" font-size="10" fill="#25D366">online agora</text>
+
+    <!-- Chat area -->
+    <rect x="80" y="156" width="340" height="460" fill="#0e1220" clip-path="url(#phoneClip)"/>
+
+    <!-- Date separator -->
+    <rect x="195" y="170" width="110" height="18" rx="9" fill="#1c2240"/>
+    <text x="250" y="182" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#7888aa">Hoje, 14:32</text>
+
+    <!-- Incoming message 1 -->
+    <rect x="90" y="196" width="220" height="42" rx="12" rx="12" ry="12" fill="#1e2550"/>
+    <text x="102" y="212" font-family="-apple-system,sans-serif" font-size="11" fill="#c8d4f0">Oi! Quero saber mais sobre</text>
+    <text x="102" y="228" font-family="-apple-system,sans-serif" font-size="11" fill="#c8d4f0">os planos de consultoria</text>
+
+    <!-- Bot response 1 -->
+    <rect x="138" y="248" width="272" height="78" rx="12" fill="#0d3d1c"/>
+    <text x="150" y="264" font-family="-apple-system,sans-serif" font-size="11" fill="#dcfce7">Olá! Sou o assistente do Iago</text>
+    <text x="150" y="280" font-family="-apple-system,sans-serif" font-size="11" fill="#dcfce7">Bald. Posso te ajudar com:</text>
+    <text x="150" y="297" font-family="-apple-system,sans-serif" font-size="10" fill="#86efac">✦ Diagnóstico de negócio</text>
+    <text x="150" y="312" font-family="-apple-system,sans-serif" font-size="10" fill="#86efac">✦ Sistemas sob medida</text>
+    <text x="150" y="327" font-family="-apple-system,sans-serif" font-size="9" fill="#4ade80" text-anchor="end" x="402">⋮⋮ 14:32</text>
+
+    <!-- Typing indicator -->
+    <rect x="90" y="338" width="68" height="28" rx="14" fill="#1e2550"/>
+    <circle cx="108" cy="352" r="4" fill="#4a5580"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.2s" repeatCount="indefinite"/></circle>
+    <circle cx="122" cy="352" r="4" fill="#4a5580"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.2s" begin="0.2s" repeatCount="indefinite"/></circle>
+    <circle cx="136" cy="352" r="4" fill="#4a5580"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.2s" begin="0.4s" repeatCount="indefinite"/></circle>
+
+    <!-- Incoming message 2 -->
+    <rect x="90" y="376" width="200" height="28" rx="12" fill="#1e2550"/>
+    <text x="102" y="394" font-family="-apple-system,sans-serif" font-size="11" fill="#c8d4f0">Me fala sobre diagnóstico</text>
+
+    <!-- Bot response 2 -->
+    <rect x="138" y="414" width="270" height="56" rx="12" fill="#0d3d1c"/>
+    <text x="150" y="430" font-family="-apple-system,sans-serif" font-size="11" fill="#dcfce7">O diagnóstico mapeia onde seu</text>
+    <text x="150" y="446" font-family="-apple-system,sans-serif" font-size="11" fill="#dcfce7">negócio perde dinheiro. Tem</text>
+    <text x="150" y="462" font-family="-apple-system,sans-serif" font-size="11" fill="#dcfce7">interesse em agendar?</text>
+
+    <!-- Incoming quick reply -->
+    <rect x="90" y="480" width="120" height="28" rx="14" fill="#1c2240" stroke="#FF6701" stroke-width="1"/>
+    <text x="150" y="498" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" fill="#FF6701">Sim, quero!</text>
+
+    <!-- Input bar -->
+    <rect x="80" y="588" width="340" height="50" fill="#12162e" clip-path="url(#phoneClip)"/>
+    <rect x="92" y="598" width="268" height="30" rx="15" fill="#1e2550"/>
+    <text x="106" y="617" font-family="-apple-system,sans-serif" font-size="11" fill="#4a5580">Mensagem</text>
+    <circle cx="374" cy="613" r="14" fill="#25D366"/>
+    <path d="M368 613 l5-5 5 5 M373 608 l0 10" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+
+    <!-- Home indicator -->
+    <rect x="215" y="645" width="70" height="4" rx="2" fill="#2a2f5a"/>
+  </g>
+
+  <!-- === RIGHT PANEL - METRICS === -->
+  <g>
+    <!-- Panel bg -->
+    <rect x="480" y="60" width="760" height="600" rx="16" fill="url(#panel)" stroke="#1e2550" stroke-width="1" filter="url(#shadow)"/>
+
+    <!-- Panel header -->
+    <rect x="480" y="60" width="760" height="56" rx="16" fill="#161b3a"/>
+    <rect x="480" y="92" width="760" height="24" fill="#161b3a"/>
+    <circle cx="510" cy="88" r="6" fill="#ff5f57"/>
+    <circle cx="530" cy="88" r="6" fill="#febc2e"/>
+    <circle cx="550" cy="88" r="6" fill="#28c840"/>
+    <text x="640" y="93" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="12" fill="#5a6080">Atendente Bald — Dashboard</text>
+    <!-- Orange dot live -->
+    <circle cx="764" cy="88" r="5" fill="#FF6701" filter="url(#glow)"/>
+    <text x="776" y="92" font-family="-apple-system,sans-serif" font-size="11" fill="#FF6701">ao vivo</text>
+
+    <!-- === KPI CARDS ROW === -->
+    <!-- Card 1: Mensagens -->
+    <rect x="500" y="132" width="170" height="90" rx="10" fill="#1a2040" stroke="#252b55" stroke-width="1"/>
+    <text x="516" y="155" font-family="-apple-system,sans-serif" font-size="10" fill="#6880aa">Mensagens hoje</text>
+    <text x="516" y="188" font-family="-apple-system,sans-serif" font-size="32" font-weight="700" fill="#f0f4ff">847</text>
+    <text x="516" y="208" font-family="-apple-system,sans-serif" font-size="10" fill="#25D366">↑ 23% vs ontem</text>
+
+    <!-- Card 2: Tempo resposta -->
+    <rect x="686" y="132" width="170" height="90" rx="10" fill="#1a2040" stroke="#252b55" stroke-width="1"/>
+    <text x="702" y="155" font-family="-apple-system,sans-serif" font-size="10" fill="#6880aa">Tempo médio resposta</text>
+    <text x="702" y="188" font-family="-apple-system,sans-serif" font-size="32" font-weight="700" fill="#f0f4ff">2.4s</text>
+    <text x="702" y="208" font-family="-apple-system,sans-serif" font-size="10" fill="#FF6701">24/7 sem parar</text>
+
+    <!-- Card 3: Leads -->
+    <rect x="872" y="132" width="170" height="90" rx="10" fill="#1a2040" stroke="#252b55" stroke-width="1"/>
+    <text x="888" y="155" font-family="-apple-system,sans-serif" font-size="10" fill="#6880aa">Leads qualificados</text>
+    <text x="888" y="188" font-family="-apple-system,sans-serif" font-size="32" font-weight="700" fill="#f0f4ff">23</text>
+    <text x="888" y="208" font-family="-apple-system,sans-serif" font-size="10" fill="#25D366">esta semana</text>
+
+    <!-- Card 4: Satisfação -->
+    <rect x="1058" y="132" width="162" height="90" rx="10" fill="#1a2040" stroke="#252b55" stroke-width="1"/>
+    <text x="1074" y="155" font-family="-apple-system,sans-serif" font-size="10" fill="#6880aa">Satisfação</text>
+    <text x="1074" y="188" font-family="-apple-system,sans-serif" font-size="32" font-weight="700" fill="#f0f4ff">4.9</text>
+    <text x="1074" y="208" font-family="-apple-system,sans-serif" font-size="10" fill="#facc15">★★★★★</text>
+
+    <!-- === CHART AREA === -->
+    <rect x="500" y="238" width="450" height="200" rx="10" fill="#1a2040" stroke="#252b55" stroke-width="1"/>
+    <text x="516" y="260" font-family="-apple-system,sans-serif" font-size="11" font-weight="600" fill="#e0e8ff">Conversas por hora</text>
+
+    <!-- Bar chart -->
+    <g transform="translate(516, 270)">
+      <!-- X-axis -->
+      <line x1="0" y1="148" x2="418" y2="148" stroke="#252b55" stroke-width="1"/>
+      <!-- Bars -->
+      <rect x="4" y="98" width="22" height="50" rx="4" fill="#252b55"/>
+      <rect x="34" y="78" width="22" height="70" rx="4" fill="#252b55"/>
+      <rect x="64" y="58" width="22" height="90" rx="4" fill="#252b55"/>
+      <rect x="94" y="48" width="22" height="100" rx="4" fill="#1e4d5a"/>
+      <rect x="124" y="28" width="22" height="120" rx="4" fill="#25D366" opacity="0.8"/>
+      <rect x="154" y="18" width="22" height="130" rx="4" fill="#FF6701" opacity="0.9"/>
+      <rect x="184" y="38" width="22" height="110" rx="4" fill="#FF6701" opacity="0.7"/>
+      <rect x="214" y="58" width="22" height="90" rx="4" fill="#252b55"/>
+      <rect x="244" y="68" width="22" height="80" rx="4" fill="#252b55"/>
+      <rect x="274" y="88" width="22" height="60" rx="4" fill="#252b55"/>
+      <rect x="304" y="108" width="22" height="40" rx="4" fill="#252b55"/>
+      <rect x="334" y="98" width="22" height="50" rx="4" fill="#252b55"/>
+      <!-- Labels -->
+      <text x="15" y="162" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#4a5580">8h</text>
+      <text x="145" y="162" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#FF6701">14h</text>
+      <text x="175" y="162" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#FF6701">15h</text>
+      <text x="355" y="162" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#4a5580">20h</text>
+    </g>
+
+    <!-- === CONVERSATION LIST === -->
+    <rect x="966" y="238" width="254" height="200" rx="10" fill="#1a2040" stroke="#252b55" stroke-width="1"/>
+    <text x="982" y="260" font-family="-apple-system,sans-serif" font-size="11" font-weight="600" fill="#e0e8ff">Últimas conversas</text>
+
+    <!-- Conv items -->
+    <g transform="translate(982, 272)">
+      <circle cx="12" cy="16" r="10" fill="#25D366" opacity="0.8"/>
+      <text x="12" y="20" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white" font-weight="bold">M</text>
+      <text x="30" y="13" font-family="-apple-system,sans-serif" font-size="11" fill="#d0d8f0">Marina S.</text>
+      <text x="30" y="26" font-family="-apple-system,sans-serif" font-size="9" fill="#4a5580">Agendamento confirmado</text>
+      <rect x="196" y="8" width="8" height="8" rx="4" fill="#25D366"/>
+    </g>
+    <line x1="982" y1="308" x2="1208" y2="308" stroke="#1e2550" stroke-width="1"/>
+    <g transform="translate(982, 314)">
+      <circle cx="12" cy="16" r="10" fill="#FF6701" opacity="0.8"/>
+      <text x="12" y="20" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white" font-weight="bold">R</text>
+      <text x="30" y="13" font-family="-apple-system,sans-serif" font-size="11" fill="#d0d8f0">Ricardo L.</text>
+      <text x="30" y="26" font-family="-apple-system,sans-serif" font-size="9" fill="#4a5580">Pergunta sobre planos</text>
+      <text x="196" y="15" text-anchor="end" font-family="-apple-system,sans-serif" font-size="9" fill="#FF6701">ativo</text>
+    </g>
+    <line x1="982" y1="350" x2="1208" y2="350" stroke="#1e2550" stroke-width="1"/>
+    <g transform="translate(982, 356)">
+      <circle cx="12" cy="16" r="10" fill="#6366f1" opacity="0.8"/>
+      <text x="12" y="20" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white" font-weight="bold">C</text>
+      <text x="30" y="13" font-family="-apple-system,sans-serif" font-size="11" fill="#d0d8f0">Carlos F.</text>
+      <text x="30" y="26" font-family="-apple-system,sans-serif" font-size="9" fill="#4a5580">Lead qualificado → CRM</text>
+      <rect x="190" y="8" width="8" height="8" rx="4" fill="#6366f1"/>
+    </g>
+    <line x1="982" y1="392" x2="1208" y2="392" stroke="#1e2550" stroke-width="1"/>
+    <g transform="translate(982, 398)">
+      <circle cx="12" cy="16" r="10" fill="#14b8a6" opacity="0.8"/>
+      <text x="12" y="20" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white" font-weight="bold">A</text>
+      <text x="30" y="13" font-family="-apple-system,sans-serif" font-size="11" fill="#d0d8f0">Ana P.</text>
+      <text x="30" y="26" font-family="-apple-system,sans-serif" font-size="9" fill="#4a5580">Diagnóstico agendado ✓</text>
+    </g>
+
+    <!-- === BOTTOM ROW === -->
+    <!-- AI Stats -->
+    <rect x="500" y="454" width="290" height="118" rx="10" fill="#1a2040" stroke="#252b55" stroke-width="1"/>
+    <text x="516" y="476" font-family="-apple-system,sans-serif" font-size="11" font-weight="600" fill="#e0e8ff">Automação ativa</text>
+    <g transform="translate(516, 486)">
+      <circle cx="6" cy="10" r="4" fill="#25D366"/>
+      <text x="18" y="14" font-family="-apple-system,sans-serif" font-size="11" fill="#c0d0f0">FAQ respondido automaticamente</text>
+      <text x="18" y="28" font-family="-apple-system,sans-serif" font-size="10" fill="#4a5580">78% das mensagens</text>
+      <circle cx="6" cy="42" r="4" fill="#FF6701"/>
+      <text x="18" y="46" font-family="-apple-system,sans-serif" font-size="11" fill="#c0d0f0">Leads qualificados para CRM</text>
+      <text x="18" y="60" font-family="-apple-system,sans-serif" font-size="10" fill="#4a5580">Perfil mapeado antes da reunião</text>
+      <circle cx="6" cy="74" r="4" fill="#6366f1"/>
+      <text x="18" y="78" font-family="-apple-system,sans-serif" font-size="11" fill="#c0d0f0">Humano assume quando necessário</text>
+      <text x="18" y="92" font-family="-apple-system,sans-serif" font-size="10" fill="#4a5580">22% transferido para Iago</text>
+    </g>
+
+    <!-- Uptime -->
+    <rect x="806" y="454" width="414" height="118" rx="10" fill="#0d1f14" stroke="#1a3d22" stroke-width="1"/>
+    <text x="822" y="476" font-family="-apple-system,sans-serif" font-size="11" font-weight="600" fill="#86efac">Sistema operacional · 99.8% uptime</text>
+    <g transform="translate(822, 486)">
+      <text x="0" y="14" font-family="-apple-system,sans-serif" font-size="11" fill="#4ade80">✓</text>
+      <text x="18" y="14" font-family="-apple-system,sans-serif" font-size="11" fill="#c0d0f0">WhatsApp Business API</text>
+      <text x="360" y="14" text-anchor="end" font-family="-apple-system,sans-serif" font-size="10" fill="#25D366">ativo</text>
+      <text x="0" y="34" font-family="-apple-system,sans-serif" font-size="11" fill="#4ade80">✓</text>
+      <text x="18" y="34" font-family="-apple-system,sans-serif" font-size="11" fill="#c0d0f0">Modelo de IA (Gemini Flash)</text>
+      <text x="360" y="34" text-anchor="end" font-family="-apple-system,sans-serif" font-size="10" fill="#25D366">ativo</text>
+      <text x="0" y="54" font-family="-apple-system,sans-serif" font-size="11" fill="#4ade80">✓</text>
+      <text x="18" y="54" font-family="-apple-system,sans-serif" font-size="11" fill="#c0d0f0">Banco de dados (Supabase)</text>
+      <text x="360" y="54" text-anchor="end" font-family="-apple-system,sans-serif" font-size="10" fill="#25D366">ativo</text>
+      <text x="0" y="74" font-family="-apple-system,sans-serif" font-size="11" fill="#4ade80">✓</text>
+      <text x="18" y="74" font-family="-apple-system,sans-serif" font-size="11" fill="#c0d0f0">Notificações para o dono</text>
+      <text x="360" y="74" text-anchor="end" font-family="-apple-system,sans-serif" font-size="10" fill="#25D366">ativo</text>
+    </g>
+
+    <!-- Brand mark -->
+    <text x="1220" y="648" text-anchor="end" font-family="-apple-system,sans-serif" font-size="10" fill="#2a3060">Bald Ops</text>
+  </g>
+
+  <!-- Label badge top left -->
+  <rect x="20" y="20" width="160" height="26" rx="13" fill="#FF6701" opacity="0.12" stroke="#FF6701" stroke-width="1" stroke-opacity="0.4"/>
+  <circle cx="40" cy="33" r="4" fill="#FF6701" filter="url(#glow)"/>
+  <text x="52" y="37" font-family="-apple-system,sans-serif" font-size="11" fill="#FF6701">IA · WhatsApp · 24/7</text>
+</svg>
