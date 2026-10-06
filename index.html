@@ -640,6 +640,8 @@
 
   // Hero entrance
   var h1 = document.querySelector('.hero h1');
+  // h1 has .rv (opacity:0 CSS) — set parent visible so char splits can animate
+  if(h1) gsap.set(h1, {opacity:1, y:0});
   var split = h1 ? new SplitText(h1, {type:'chars,words'}) : null;
 
   var heroTl = gsap.timeline({delay:0.1});
