@@ -506,30 +506,13 @@
         <a class="chan" href="https://www.youtube.com/@bald_cast" target="_blank" rel="noopener"><span><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>BaldCast · @bald_cast</span><span>↗</span></a>
           </div>
         </div>
-        <div class="contact-right rv">
-          <p class="lead" style="margin-bottom:24px">Um papo sobre o seu negócio, uma dúvida, ou ver se dá pra organizar e botar sistema no lugar.</p>
-          <form id="leadForm" class="leadform" novalidate>
-            <div class="lf-topics">
-              <p>Sobre o que você quer falar?</p>
-              <div class="lf-chips">
-                <label><input type="checkbox" name="topico" value="diagnostico"><span>Diagnóstico do negócio</span></label>
-                <label><input type="checkbox" name="topico" value="sistema"><span>Sistema sob medida</span></label>
-                <label><input type="checkbox" name="topico" value="agente"><span>Agente de IA no WhatsApp</span></label>
-                <label><input type="checkbox" name="topico" value="aula"><span>Aula ou workshop</span></label>
-                <label><input type="checkbox" name="topico" value="duvida"><span>Só uma dúvida</span></label>
-              </div>
-            </div>
-            <div class="lf-row">
-              <input name="nome" placeholder="Seu nome" required autocomplete="name" />
-              <input name="contato" placeholder="WhatsApp ou e-mail" required />
-            </div>
-            <textarea name="motivo" rows="2" placeholder="Algo que queira me contar antes da conversa? (opcional)"></textarea>
-            <input type="text" name="website" class="lf-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <div class="contact-actions">
-              <button type="submit" class="btn btn-primary">Enviar mensagem</button>
-            </div>
-          </form>
-          <p id="leadOk" class="lead-ok" hidden>Recebido. Eu retorno logo no contato que você deixou.</p>
+        <div class="contact-right rv" style="display:flex;flex-direction:column;justify-content:center;gap:24px">
+          <p class="lead">Uma conversa de 30 minutos é suficiente para diagnosticar onde o negócio perde dinheiro e tempo.</p>
+          <p style="color:var(--muted);font-size:1rem;line-height:1.6">Você escolhe o assunto — consultoria, mentoria, curso ou só uma dúvida. Eu retorno pessoalmente.</p>
+          <a href="/formulario" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:10px;padding:16px 28px;font-size:1rem;width:fit-content">
+            Iniciar conversa
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
         </div>
       </div>
     </div>
@@ -544,30 +527,6 @@
   </div>
 </footer>
 
-<script>
-(function(){
-  var SUPA='https://rgunvvbtqeugzzxfnvhi.supabase.co';
-  var KEY='sb_publishable_-NZo96CyCR32RBLum8mEag_Z9yJ0SKX';
-  var f=document.getElementById('leadForm');
-  if(!f) return;
-  f.addEventListener('submit',function(e){
-    e.preventDefault();
-    var fd=new FormData(f);
-    var done=function(){ f.hidden=true; document.getElementById('leadOk').hidden=false; };
-    if(fd.get('website')){ done(); return; } // honeypot: bot preencheu → finge sucesso, não envia
-    if(!(fd.get('nome')||'').trim() || !(fd.get('contato')||'').trim()){ alert('Preenche nome e contato, por favor.'); return; }
-    var btn=f.querySelector('button[type=submit]');
-    btn.disabled=true; btn.textContent='Enviando…';
-    var id='site-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);
-    fetch(SUPA+'/rest/v1/leads_site',{
-      method:'POST',
-      headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
-      body:JSON.stringify({id:id,nome:fd.get('nome'),contato:fd.get('contato'),motivo:fd.get('motivo')||null,origem:'site',topicos:fd.getAll('topico').join(', ')||null})
-    }).then(function(r){ if(!r.ok) throw 0; done(); })
-      .catch(function(){ btn.disabled=false; btn.textContent='Enviar'; alert('Ops, não consegui enviar agora. Me chama no WhatsApp que resolvo na hora.'); });
-  });
-})();
-</script>
 
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();

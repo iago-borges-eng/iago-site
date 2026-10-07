@@ -293,6 +293,13 @@
 
 <script>
 (function(){
+  // Pre-select tipo from URL param (?tipo=consultoria etc.)
+  var tipoParam = new URLSearchParams(window.location.search).get('tipo');
+  if (tipoParam) {
+    var radio = document.querySelector('input[name="tipo"][value="' + tipoParam + '"]');
+    if (radio) radio.checked = true;
+  }
+
   var SUPA = 'https://rgunvvbtqeugzzxfnvhi.supabase.co';
   var KEY  = 'sb_publishable_-NZo96CyCR32RBLum8mEag_Z9yJ0SKX';
 
