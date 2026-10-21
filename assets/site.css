@@ -43,7 +43,8 @@ nav{display:flex;align-items:center;justify-content:space-between;height:74px}
 section{position:relative;z-index:3}
 
 /* ── Hero (proporção do /cursos .page-hero) ── */
-.hero{padding:148px 0 72px;border-bottom:1px solid var(--line)}
+/* padding-top/bottom em longhand pra NÃO sobrescrever o padding lateral (32px) do .wrap. */
+.hero{padding-top:148px;padding-bottom:72px;border-bottom:1px solid var(--line)}
 .eyebrow,.kicker{font-family:'Space Mono',monospace;font-size:13px;color:var(--orange);letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:12px;margin-bottom:22px}
 .eyebrow::before{content:"→";color:var(--dim)}
 .hero .title{font-size:clamp(2.2rem,5vw,4rem);font-weight:800;margin-bottom:20px}
@@ -51,7 +52,7 @@ section{position:relative;z-index:3}
 .hero .rule{display:none}
 
 /* ── Coluna de conteúdo (legível sob o hero largo) ── */
-main > section.wrap{padding:72px 0}
+main > section.wrap{padding-top:72px;padding-bottom:72px}
 main > section.wrap > article{max-width:820px}
 article > h2{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;margin:56px 0 24px}
 article > h2:first-child{margin-top:0}
@@ -111,4 +112,4 @@ footer{border-top:1px solid var(--line);padding:40px 0;position:relative;z-index
   .nav-links .btn{margin:14px 32px}
   .nav-toggle{display:block}
 }
-@media(max-width:640px){.wrap,.foot,.foot-bot{padding:0 20px}.hero{padding:120px 0 56px}main > section.wrap{padding:52px 0}}
+@media(max-width:640px){.wrap,.foot,.foot-bot{padding:0 20px}.hero{padding-top:120px;padding-bottom:56px}main > section.wrap{padding-top:52px;padding-bottom:52px}}
