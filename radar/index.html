@@ -57,23 +57,41 @@
     var sb = supabase.createClient(SUPA, KEY);
     var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]; }); };
 
+    // Permalink: /radar/<slug> abre a edição direto (cada publicação tem o seu link).
+    function slugDaURL() {
+      var m = location.pathname.match(/\/radar\/([^/?#]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      if (location.hash) return location.hash.replace(/^#/, '');
+      return null;
+    }
+
     async function carregar() {
       var res = await sb.from('edicoes').select('*').eq('status', 'publicada').order('numero', { ascending: false });
       var eds = res.data || [];
       if (eds.length === 0) { document.getElementById('edicao').innerHTML = '<p class="vazio">Em breve a primeira edição.</p>'; return; }
       document.getElementById('lista').innerHTML = eds.map(function (e) {
-        return '<a href="#' + esc(e.slug) + '" data-id="' + esc(e.id) + '">#' + e.numero + ' · ' + esc(e.semana) + '</a>';
+        return '<a href="/radar/' + esc(e.slug) + '" data-slug="' + esc(e.slug) + '">#' + e.numero + ' · ' + esc(e.semana) + '</a>';
       }).join('');
-      abrir(eds[0], eds);
+      var slug = slugDaURL();
+      var alvo = eds.filter(function (e) { return e.slug === slug; })[0] || eds[0];
+      abrir(alvo, false);
       document.getElementById('lista').addEventListener('click', function (ev) {
         var a = ev.target.closest('a'); if (!a) return;
-        abrir(eds.find(function (e) { return e.id === a.dataset.id; }), eds);
+        ev.preventDefault();
+        abrir(eds.filter(function (e) { return e.slug === a.dataset.slug; })[0], true);
+      });
+      window.addEventListener('popstate', function () {
+        var s = slugDaURL();
+        abrir(eds.filter(function (e) { return e.slug === s; })[0] || eds[0], false);
       });
     }
 
-    async function abrir(e, eds) {
+    async function abrir(e, push) {
+      if (!e) return;
+      if (push) history.pushState({}, '', '/radar/' + e.slug);
+      document.title = (e.manchete || 'Edição #' + e.numero) + ' · Radar da Semana';
       Array.from(document.querySelectorAll('#lista a')).forEach(function (a) {
-        a.classList.toggle('ativa', a.dataset.id === e.id);
+        a.classList.toggle('ativa', a.dataset.slug === e.slug);
       });
       var res = await sb.from('edicao_itens').select('*').eq('edicao_id', e.id).order('ordem', { ascending: true });
       var itens = res.data || [];
