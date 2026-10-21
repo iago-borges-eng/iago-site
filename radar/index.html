@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Radar da Semana · Iago Bald</title>
+  <meta name="description" content="As notícias de IA pra negócios que importam, toda semana, com a leitura de quem implementa." />
+  <link rel="canonical" href="https://iagobald.com.br/radar" />
+  <meta property="og:title" content="Radar da Semana · Iago Bald" />
+  <meta property="og:description" content="As notícias de IA pra negócios que importam, com a leitura de quem implementa." />
+  <meta property="og:url" content="https://iagobald.com.br/radar" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Lato:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#08090f;--panel:#0f1120;--line:rgba(255,255,255,.10);
+      --bege:#F4F4F6;--muted:#9a9ec0;--dim:#666a86;--orange:#FF6701;--orange2:#ff8a3d;--max:760px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{background:var(--bg);color:var(--bege);font-family:'Lato',system-ui,sans-serif;line-height:1.75;font-size:1.06rem;-webkit-font-smoothing:antialiased}
+    a{color:var(--orange);text-decoration:none}
+    a:hover{color:var(--orange2)}
+    .wrap{max-width:var(--max);margin:0 auto;padding:54px 22px 90px}
+    .eyebrow{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:18px}
+    h1{font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2rem,5.5vw,3rem);letter-spacing:-.02em;line-height:1.12;margin-bottom:14px}
+    .lead{color:var(--muted);font-size:1.15rem;max-width:56ch;margin-bottom:34px}
+    .edicoes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
+    .edicoes a{font-family:'Space Mono',monospace;font-size:12px;color:var(--bege);border:1px solid var(--line);border-radius:100px;padding:6px 14px}
+    .edicoes a.ativa{border-color:var(--orange);color:var(--orange)}
+    article h2{font-family:'Sora',sans-serif;font-weight:800;font-size:1.7rem;letter-spacing:-.02em;margin-bottom:18px}
+    blockquote{border-left:3px solid var(--orange);padding:4px 0 4px 18px;margin:0 0 34px;color:var(--bege);font-size:1.12rem}
+    .item{border-top:1px solid var(--line);padding:24px 0}
+    .item h3{font-family:'Sora',sans-serif;font-weight:700;font-size:1.18rem;margin-bottom:8px}
+    .item p{color:var(--muted);font-size:1rem;margin-bottom:8px}
+    .item .sig{color:var(--orange2);font-size:.98rem}
+    .item .fonte{font-family:'Space Mono',monospace;font-size:12px}
+    .vazio{color:var(--dim);padding:40px 0}
+    footer{color:var(--dim);font-family:'Space Mono',monospace;font-size:12px;margin-top:50px}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="eyebrow">◣◣◣ Radar da Semana</div>
+    <h1>O que importa em IA pra negócios</h1>
+    <p class="lead">As notícias que mexem com o seu negócio, toda semana, com a leitura de quem implementa — não de quem só fala sobre.</p>
+    <nav id="lista" class="edicoes"></nav>
+    <article id="edicao"></article>
+    <footer>Iago Bald · traduzir o complexo em simples · <a href="/">iagobald.com.br</a></footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    var SUPA = 'https://rgunvvbtqeugzzxfnvhi.supabase.co';
+    var KEY  = 'sb_publishable_-NZo96CyCR32RBLum8mEag_Z9yJ0SKX';
+    var sb = supabase.createClient(SUPA, KEY);
+    var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]; }); };
+
+    async function carregar() {
+      var res = await sb.from('edicoes').select('*').eq('status', 'publicada').order('numero', { ascending: false });
+      var eds = res.data || [];
+      if (eds.length === 0) { document.getElementById('edicao').innerHTML = '<p class="vazio">Em breve a primeira edição.</p>'; return; }
+      document.getElementById('lista').innerHTML = eds.map(function (e) {
+        return '<a href="#' + esc(e.slug) + '" data-id="' + esc(e.id) + '">#' + e.numero + ' · ' + esc(e.semana) + '</a>';
+      }).join('');
+      abrir(eds[0], eds);
+      document.getElementById('lista').addEventListener('click', function (ev) {
+        var a = ev.target.closest('a'); if (!a) return;
+        abrir(eds.find(function (e) { return e.id === a.dataset.id; }), eds);
+      });
+    }
+
+    async function abrir(e, eds) {
+      Array.from(document.querySelectorAll('#lista a')).forEach(function (a) {
+        a.classList.toggle('ativa', a.dataset.id === e.id);
+      });
+      var res = await sb.from('edicao_itens').select('*').eq('edicao_id', e.id).order('ordem', { ascending: true });
+      var itens = res.data || [];
+      document.getElementById('edicao').innerHTML =
+        '<h2>' + (esc(e.manchete) || 'Edição #' + e.numero) + '</h2>' +
+        (e.take ? '<blockquote>' + esc(e.take) + '</blockquote>' : '') +
+        itens.map(function (i) {
+          return '<section class="item"><h3>' + esc(i.titulo) + '</h3>' +
+            (i.resumo ? '<p>' + esc(i.resumo) + '</p>' : '') +
+            (i.significado ? '<p class="sig">↳ ' + esc(i.significado) + '</p>' : '') +
+            (i.url ? '<p class="fonte"><a href="' + esc(i.url) + '" target="_blank" rel="noreferrer">fonte →</a></p>' : '') +
+            '</section>';
+        }).join('');
+    }
+    carregar();
+  </script>
+</body>
+</html>
