@@ -28,6 +28,17 @@
     .item .sig{color:var(--orange-2)}
     .item .fonte{font-family:'Space Mono',monospace;font-size:12px}
     .vazio{color:var(--dim);padding:30px 0}
+    .assina{margin:60px 0 0;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;padding:36px 32px}
+    .assina h3{font-family:'Sora';font-size:1.4rem;font-weight:800;margin:0 0 8px}
+    .assina .sub{color:var(--muted);max-width:52ch;margin:0 0 20px;line-height:1.6}
+    .assina form{display:flex;gap:10px;flex-wrap:wrap;max-width:470px}
+    .assina input{flex:1;min-width:200px;background:#0f1118;border:1px solid #232634;border-radius:6px;color:var(--bege);font-family:'Lato',sans-serif;font-size:15px;padding:13px 15px;outline:none;transition:border-color .2s}
+    .assina input:focus{border-color:var(--orange)}
+    .assina button{background:var(--orange);color:#160a02;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:6px;padding:13px 22px;cursor:pointer;white-space:nowrap;transition:background .2s}
+    .assina button:hover{background:var(--orange-2)}
+    .assina button:disabled{opacity:.5;cursor:default}
+    .assina-msg{margin:14px 0 0;font-size:14px;min-height:1px}
+    .assina-msg.ok{color:#3ddc97}.assina-msg.erro{color:#ff6b6b}
   </style>
 </head>
 <body>
@@ -62,6 +73,16 @@
     <article>
       <nav id="lista" class="edicoes"></nav>
       <div id="edicao"></div>
+
+      <div class="assina" id="assina">
+        <h3>Receba o Radar toda semana</h3>
+        <p class="sub">As notícias de IA que mexem com o seu negócio, com a leitura de quem implementa. No seu e-mail, de graça.</p>
+        <form id="assinaForm">
+          <input type="email" id="assinaEmail" placeholder="seu@email.com" autocomplete="email" required>
+          <button type="submit" id="assinaBtn">Quero receber</button>
+        </form>
+        <p class="assina-msg" id="assinaMsg"></p>
+      </div>
     </article>
   </section>
 </main>
@@ -118,6 +139,30 @@
       }).join('');
   }
   carregar();
+
+  // Assinatura da newsletter (insere em newsletter_assinantes, origem='radar').
+  (function () {
+    var form = document.getElementById('assinaForm');
+    if (!form) return;
+    var msg = document.getElementById('assinaMsg');
+    var btn = document.getElementById('assinaBtn');
+    form.addEventListener('submit', async function (ev) {
+      ev.preventDefault();
+      var email = (document.getElementById('assinaEmail').value || '').trim();
+      if (!email) return;
+      btn.disabled = true; msg.className = 'assina-msg'; msg.textContent = 'Enviando...';
+      var id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(36).slice(2);
+      var r = await sb.from('newsletter_assinantes').insert({ id: id, email: email, origem: 'radar' });
+      if (!r.error) {
+        msg.className = 'assina-msg ok'; msg.textContent = 'Pronto. Você está na lista do Radar.'; form.reset();
+      } else if (r.error.code === '23505') {
+        msg.className = 'assina-msg ok'; msg.textContent = 'Você já estava inscrito. Tudo certo.'; form.reset();
+      } else {
+        msg.className = 'assina-msg erro'; msg.textContent = 'Deu um erro aqui. Tenta de novo em instantes.';
+      }
+      btn.disabled = false;
+    });
+  })();
 </script>
 <script src="/assets/site.js"></script>
 </body>
