@@ -5,97 +5,120 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Radar da Semana · Iago Bald</title>
   <meta name="description" content="As notícias de IA pra negócios que importam, toda semana, com a leitura de quem implementa." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="canonical" href="https://iagobald.com.br/radar" />
   <meta property="og:title" content="Radar da Semana · Iago Bald" />
   <meta property="og:description" content="As notícias de IA pra negócios que importam, com a leitura de quem implementa." />
   <meta property="og:url" content="https://iagobald.com.br/radar" />
+  <meta property="og:image" content="https://iagobald.com.br/assets/og.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Lato:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/site.css" />
   <style>
-    :root{
-      --bg:#08090f;--panel:#0f1120;--line:rgba(255,255,255,.10);
-      --bege:#F4F4F6;--muted:#9a9ec0;--dim:#666a86;--orange:#FF6701;--orange2:#ff8a3d;--max:760px;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-    body{background:var(--bg);color:var(--bege);font-family:'Lato',system-ui,sans-serif;line-height:1.75;font-size:1.06rem;-webkit-font-smoothing:antialiased}
-    a{color:var(--orange);text-decoration:none}
-    a:hover{color:var(--orange2)}
-    .wrap{max-width:var(--max);margin:0 auto;padding:54px 22px 90px}
-    .eyebrow{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:18px}
-    h1{font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2rem,5.5vw,3rem);letter-spacing:-.02em;line-height:1.12;margin-bottom:14px}
-    .lead{color:var(--muted);font-size:1.15rem;max-width:56ch;margin-bottom:34px}
-    .edicoes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
-    .edicoes a{font-family:'Space Mono',monospace;font-size:12px;color:var(--bege);border:1px solid var(--line);border-radius:100px;padding:6px 14px}
+    .edicoes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
+    .edicoes a{font-family:'Space Mono',monospace;font-size:12px;color:var(--bege);border:1px solid var(--line);border-radius:100px;padding:6px 14px;transition:border-color .2s,color .2s}
+    .edicoes a:hover{border-color:rgba(255,103,1,.5)}
     .edicoes a.ativa{border-color:var(--orange);color:var(--orange)}
-    article h2{font-family:'Sora',sans-serif;font-weight:800;font-size:1.7rem;letter-spacing:-.02em;margin-bottom:18px}
-    blockquote{border-left:3px solid var(--orange);padding:4px 0 4px 18px;margin:0 0 34px;color:var(--bege);font-size:1.12rem}
+    #edicao h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:800;margin:0 0 18px}
+    #edicao blockquote{border-left:3px solid var(--orange);padding:4px 0 4px 18px;margin:0 0 34px;color:var(--bege);font-size:1.12rem;line-height:1.6}
     .item{border-top:1px solid var(--line);padding:24px 0}
-    .item h3{font-family:'Sora',sans-serif;font-weight:700;font-size:1.18rem;margin-bottom:8px}
-    .item p{color:var(--muted);font-size:1rem;margin-bottom:8px}
-    .item .sig{color:var(--orange2);font-size:.98rem}
+    .item h3{font-family:'Sora';font-weight:700;font-size:1.18rem;margin-bottom:8px}
+    .item p{color:var(--muted);margin-bottom:8px;line-height:1.6}
+    .item .sig{color:var(--orange-2)}
     .item .fonte{font-family:'Space Mono',monospace;font-size:12px}
-    .vazio{color:var(--dim);padding:40px 0}
-    footer{color:var(--dim);font-family:'Space Mono',monospace;font-size:12px;margin-top:50px}
+    .vazio{color:var(--dim);padding:30px 0}
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <div class="eyebrow">◣◣◣ Radar da Semana</div>
-    <h1>O que importa em IA pra negócios</h1>
+<div class="grain"></div><div class="glow"></div>
+
+<header id="hdr">
+  <nav class="wrap">
+    <a href="/" class="brand"><span class="bars"><i></i><i></i><i></i></span>Iago&nbsp;Bald</a>
+    <div class="nav-links" id="navLinks">
+      <a class="navlink" href="/consultoria">Consultoria</a>
+      <a class="navlink" href="/mentoria">Mentoria</a>
+      <a class="navlink" href="/cursos">Cursos</a>
+      <a class="navlink" href="/recursos">Recursos</a>
+      <a class="navlink active" href="/radar">Radar</a>
+      <a class="navlink" href="/links">Links</a>
+      <a class="btn btn-primary" href="/formulario?tipo=radar">Falar comigo</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div class="eyebrow">Radar da Semana</div>
+    <h1 class="title">O que importa em IA pra negócios</h1>
     <p class="lead">As notícias que mexem com o seu negócio, toda semana, com a leitura de quem implementa — não de quem só fala sobre.</p>
-    <nav id="lista" class="edicoes"></nav>
-    <article id="edicao"></article>
-    <footer>Iago Bald · traduzir o complexo em simples · <a href="/">iagobald.com.br</a></footer>
-  </main>
+  </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    var SUPA = 'https://rgunvvbtqeugzzxfnvhi.supabase.co';
-    var KEY  = 'sb_publishable_-NZo96CyCR32RBLum8mEag_Z9yJ0SKX';
-    var sb = supabase.createClient(SUPA, KEY);
-    var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]; }); };
+  <section class="wrap">
+    <article>
+      <nav id="lista" class="edicoes"></nav>
+      <div id="edicao"></div>
+    </article>
+  </section>
+</main>
 
-    // Permalink por hash: /radar/#<slug> abre a edição direto (cada publicação tem o seu link,
-    // sem depender de rewrite no servidor — o Pages serve /radar/ e o JS lê o #slug).
-    function slugAtual() { return location.hash.replace(/^#/, '') || null; }
+<footer>
+  <div class="foot">
+    <span>© <span id="yr">2026</span> Iago Bald · Radar da Semana</span>
+    <span><a href="/">Portfólio</a> · <a href="/recursos">Recursos</a></span>
+  </div>
+</footer>
 
-    async function carregar() {
-      var res = await sb.from('edicoes').select('*').eq('status', 'publicada').order('numero', { ascending: false });
-      var eds = res.data || [];
-      if (eds.length === 0) { document.getElementById('edicao').innerHTML = '<p class="vazio">Em breve a primeira edição.</p>'; return; }
-      document.getElementById('lista').innerHTML = eds.map(function (e) {
-        return '<a href="#' + esc(e.slug) + '" data-slug="' + esc(e.slug) + '">#' + e.numero + ' · ' + esc(e.semana) + '</a>';
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  var SUPA = 'https://rgunvvbtqeugzzxfnvhi.supabase.co';
+  var KEY  = 'sb_publishable_-NZo96CyCR32RBLum8mEag_Z9yJ0SKX';
+  var sb = supabase.createClient(SUPA, KEY);
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]; }); };
+
+  // Permalink por hash: /radar/#<slug> abre a edição direto.
+  function slugAtual() { return location.hash.replace(/^#/, '') || null; }
+
+  async function carregar() {
+    var res = await sb.from('edicoes').select('*').eq('status', 'publicada').order('numero', { ascending: false });
+    var eds = res.data || [];
+    if (eds.length === 0) { document.getElementById('edicao').innerHTML = '<p class="vazio">Em breve a primeira edição.</p>'; return; }
+    document.getElementById('lista').innerHTML = eds.map(function (e) {
+      return '<a href="#' + esc(e.slug) + '" data-slug="' + esc(e.slug) + '">#' + e.numero + ' · ' + esc(e.semana) + '</a>';
+    }).join('');
+    function render() {
+      var s = slugAtual();
+      abrir(eds.filter(function (e) { return e.slug === s; })[0] || eds[0]);
+    }
+    render();
+    window.addEventListener('hashchange', render);
+  }
+
+  async function abrir(e) {
+    if (!e) return;
+    document.title = (e.manchete || 'Edição #' + e.numero) + ' · Radar da Semana';
+    Array.from(document.querySelectorAll('#lista a')).forEach(function (a) {
+      a.classList.toggle('ativa', a.dataset.slug === e.slug);
+    });
+    var res = await sb.from('edicao_itens').select('*').eq('edicao_id', e.id).order('ordem', { ascending: true });
+    var itens = res.data || [];
+    document.getElementById('edicao').innerHTML =
+      '<h2>' + (esc(e.manchete) || 'Edição #' + e.numero) + '</h2>' +
+      (e.take ? '<blockquote>' + esc(e.take) + '</blockquote>' : '') +
+      itens.map(function (i) {
+        return '<section class="item"><h3>' + esc(i.titulo) + '</h3>' +
+          (i.resumo ? '<p>' + esc(i.resumo) + '</p>' : '') +
+          (i.significado ? '<p class="sig">↳ ' + esc(i.significado) + '</p>' : '') +
+          (i.url ? '<p class="fonte"><a href="' + esc(i.url) + '" target="_blank" rel="noreferrer">fonte →</a></p>' : '') +
+          '</section>';
       }).join('');
-      function render() {
-        var s = slugAtual();
-        abrir(eds.filter(function (e) { return e.slug === s; })[0] || eds[0]);
-      }
-      render();
-      window.addEventListener('hashchange', render);
-    }
-
-    async function abrir(e) {
-      if (!e) return;
-      document.title = (e.manchete || 'Edição #' + e.numero) + ' · Radar da Semana';
-      Array.from(document.querySelectorAll('#lista a')).forEach(function (a) {
-        a.classList.toggle('ativa', a.dataset.slug === e.slug);
-      });
-      var res = await sb.from('edicao_itens').select('*').eq('edicao_id', e.id).order('ordem', { ascending: true });
-      var itens = res.data || [];
-      document.getElementById('edicao').innerHTML =
-        '<h2>' + (esc(e.manchete) || 'Edição #' + e.numero) + '</h2>' +
-        (e.take ? '<blockquote>' + esc(e.take) + '</blockquote>' : '') +
-        itens.map(function (i) {
-          return '<section class="item"><h3>' + esc(i.titulo) + '</h3>' +
-            (i.resumo ? '<p>' + esc(i.resumo) + '</p>' : '') +
-            (i.significado ? '<p class="sig">↳ ' + esc(i.significado) + '</p>' : '') +
-            (i.url ? '<p class="fonte"><a href="' + esc(i.url) + '" target="_blank" rel="noreferrer">fonte →</a></p>' : '') +
-            '</section>';
-        }).join('');
-    }
-    carregar();
-  </script>
+  }
+  carregar();
+</script>
+<script src="/assets/site.js"></script>
 </body>
 </html>
