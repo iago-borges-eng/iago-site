@@ -67,10 +67,10 @@
     .assina{background:var(--wash);border:1px solid var(--washLine);border-radius:18px;padding:34px 30px;margin-top:44px}
     .assina h3{font-size:1.5rem;font-weight:800;margin-bottom:8px}
     .assina .sub{color:var(--soft);max-width:48ch;margin-bottom:20px;line-height:1.6}
-    .assina form{display:flex;gap:10px;flex-wrap:wrap;max-width:470px}
-    .assina input{flex:1;min-width:200px;background:#fff;border:1px solid var(--line);border-radius:7px;color:var(--ink);font-family:'Lato';font-size:15px;padding:13px 15px;outline:none}
+    .assina form{display:flex;flex-direction:column;gap:10px;max-width:420px}
+    .assina input{width:100%;background:#fff;border:1px solid var(--line);border-radius:7px;color:var(--ink);font-family:'Lato';font-size:15px;padding:13px 15px;outline:none}
     .assina input:focus{border-color:var(--orange)}
-    .assina button{background:var(--orange);color:#160a02;font-family:'Sora';font-weight:700;font-size:15px;border:none;border-radius:7px;padding:13px 24px;cursor:pointer}
+    .assina button{align-self:flex-start;background:var(--orange);color:#160a02;font-family:'Sora';font-weight:700;font-size:15px;border:none;border-radius:7px;padding:13px 26px;cursor:pointer;margin-top:4px}
     .assina button:hover{background:var(--orange2)}
     .assina button:disabled{opacity:.5}
     .assina-msg{margin-top:14px;font-size:14px}
@@ -114,6 +114,7 @@
     <h3>Receba o Radar toda semana</h3>
     <p class="sub">As notícias de IA que mexem com o seu negócio, com a leitura de quem implementa. No seu e-mail, de graça.</p>
     <form id="assinaForm">
+      <input type="text" id="assinaNome" placeholder="Seu nome" autocomplete="name" required>
       <input type="email" id="assinaEmail" placeholder="seu@email.com" autocomplete="email" required>
       <button type="submit" id="assinaBtn">Quero receber</button>
     </form>
@@ -197,10 +198,11 @@
     var msg = document.getElementById('assinaMsg'), btn = document.getElementById('assinaBtn');
     form.addEventListener('submit', async function (ev) {
       ev.preventDefault();
+      var nome = (document.getElementById('assinaNome').value || '').trim();
       var email = (document.getElementById('assinaEmail').value || '').trim(); if (!email) return;
       btn.disabled = true; msg.className = 'assina-msg'; msg.textContent = 'Enviando...';
       var id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(36).slice(2);
-      var r = await sb.from('newsletter_assinantes').insert({ id: id, email: email, origem: 'radar' });
+      var r = await sb.from('newsletter_assinantes').insert({ id: id, nome: nome, email: email, origem: 'radar' });
       if (!r.error) { msg.className = 'assina-msg ok'; msg.textContent = 'Pronto. Você está na lista do Radar.'; form.reset(); }
       else if (r.error.code === '23505') { msg.className = 'assina-msg ok'; msg.textContent = 'Você já estava inscrito. Tudo certo.'; form.reset(); }
       else { msg.className = 'assina-msg erro'; msg.textContent = 'Deu um erro aqui. Tenta de novo em instantes.'; }
