@@ -45,7 +45,7 @@
 
       <div class="assina" id="assina">
         <h3>Receba o Radar toda semana</h3>
-        <p class="sub">As notícias de IA que mexem com o seu negócio, com a leitura de quem implementa. No seu e-mail, de graça.</p>
+        <p class="sub">Toda semana, o que fazer (uma dica prática com prompt pronto) e o que está acontecendo em IA pra negócios, com a leitura de quem implementa. No seu e-mail, de graça.</p>
         <form id="assinaForm">
           <input type="text" id="assinaNome" placeholder="Seu nome" autocomplete="name" required>
           <input type="email" id="assinaEmail" placeholder="seu@email.com" autocomplete="email" required>
@@ -107,7 +107,16 @@
       html += '<p class="ed-intro">Oi, aqui é o Iago. Essa é a leitura da semana, do jeito de quem implementa:</p>' +
         '<blockquote class="ed-take"><p>' + esc(e.take) + '</p><p class="sig">— Iago</p></blockquote><div class="ed-rule"></div>';
     }
-    html += '<div class="ed-label">No radar essa semana</div>';
+    if (e.insight_titulo) {
+      html += '<div class="ed-label">💡 Insight da semana</div>' +
+        '<div class="ed-insight"><h2>' + esc(e.insight_titulo) + '</h2>' +
+        '<div class="ed-insight-corpo">' + (e.insight_corpo || '').split(/\n\s*\n/).filter(Boolean).map(function (p) { return '<p>' + esc(p.trim()) + '</p>'; }).join('') + '</div>';
+      if (e.insight_prompt) {
+        html += '<div class="ed-prompt"><div class="t"><span>📋 Prompt pronto — copie e use</span><button type="button" class="copy">copiar</button></div><pre>' + esc(e.insight_prompt) + '</pre></div>';
+      }
+      html += '</div><div class="ed-rule"></div>';
+    }
+    html += '<div class="ed-label">📡 No radar essa semana</div>';
     html += itens.map(function (i, idx) {
       var img = IMAGENS[i.url];
       var dataPrefix = (i.resumo && i.resumo.indexOf('·') > -1) ? ' · ' + esc(i.resumo.split('·')[0].trim()) : '';
@@ -124,6 +133,15 @@
     document.getElementById('edicao').innerHTML = html;
   }
   carregar();
+
+  // Copiar o prompt do insight
+  document.getElementById('edicao').addEventListener('click', function (ev) {
+    var b = ev.target.closest('.copy'); if (!b) return;
+    var pre = b.closest('.ed-prompt').querySelector('pre');
+    if (navigator.clipboard && pre) navigator.clipboard.writeText(pre.textContent).then(function () {
+      b.textContent = 'copiado ✓'; setTimeout(function () { b.textContent = 'copiar'; }, 1600);
+    });
+  });
 
   // Assinatura (nome + email)
   (function () {
