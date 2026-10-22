@@ -13,48 +13,92 @@
   <meta property="og:image" content="https://iagobald.com.br/assets/og.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/site.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Lato:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet" />
   <style>
-    .edicoes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
-    .edicoes a{font-family:'Space Mono',monospace;font-size:12px;color:var(--bege);border:1px solid var(--line);border-radius:100px;padding:6px 14px;transition:border-color .2s,color .2s}
-    .edicoes a:hover{border-color:rgba(255,103,1,.5)}
+    :root{
+      --paper:#F6F6F4;--card:#fff;--ink:#15151c;--soft:#5b5f72;--line:#e7e7ea;
+      --orange:#FF6701;--orange2:#ff8a3d;--wash:#FFF4EC;--washLine:#ffd9bd;--dark:#0A0B18;--max:720px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{background:var(--paper);color:var(--ink);font-family:'Lato',system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+    a{color:var(--orange);text-decoration:none}
+    h1,h2,h3{font-family:'Sora',sans-serif;letter-spacing:-.02em}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+    header{border-bottom:1px solid var(--line);background:rgba(246,246,244,.9);backdrop-filter:blur(10px);position:sticky;top:0;z-index:50}
+    nav{display:flex;align-items:center;justify-content:space-between;height:66px;max-width:var(--max);margin:0 auto;padding:0 24px}
+    .brand img{height:22px;display:block}
+    .nav-links{display:flex;gap:24px;align-items:center}
+    .nav-links a{font-family:'Space Mono',monospace;font-size:13px;color:var(--soft);transition:color .2s}
+    .nav-links a:hover{color:var(--ink)}
+    .nav-links a.on{color:var(--orange)}
+    .nav-toggle{display:none;background:none;border:none;color:var(--ink);cursor:pointer}
+
+    main{padding:44px 0 80px}
+    .eyebrow{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-bottom:14px}
+    h1.manchete{font-size:clamp(1.9rem,5vw,2.9rem);font-weight:800;line-height:1.15;margin-bottom:20px;overflow-wrap:break-word}
+    .byline{display:flex;align-items:center;gap:11px;margin-bottom:28px}
+    .byline .ib{width:36px;height:36px;border-radius:50%;background:var(--dark);color:var(--orange);font-family:'Sora';font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center}
+    .byline .who{font-size:14px;color:var(--soft)}
+    .byline .who b{color:var(--ink)}
+    .rule{height:1px;background:var(--line);margin:28px 0}
+
+    .intro{font-size:17px;line-height:1.7;margin-bottom:16px}
+    blockquote{border-left:3px solid var(--orange);padding:4px 0 4px 20px;margin:0 0 10px}
+    blockquote p{font-size:18px;line-height:1.7;margin-bottom:12px}
+    blockquote .sig{font-family:'Sora';font-weight:700;font-size:14px;color:var(--soft)}
+
+    .label{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:30px 0 20px}
+    .item{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin-bottom:18px}
+    .item .n{font-family:'Space Mono',monospace;font-size:12px;color:var(--orange);letter-spacing:.06em;margin-bottom:10px}
+    .item h3{font-size:1.3rem;font-weight:700;line-height:1.3;margin-bottom:14px}
+    .item img{width:100%;border-radius:10px;display:block;margin-bottom:16px}
+    .item .resumo{color:var(--soft);font-size:15px;line-height:1.65;margin-bottom:16px}
+    .item .achei{background:var(--wash);border:1px solid var(--washLine);border-radius:12px;padding:16px 18px}
+    .item .achei .t{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:7px}
+    .item .achei p{font-size:15px;line-height:1.65}
+    .item .fonte{margin-top:16px;font-family:'Space Mono',monospace;font-size:13px}
+    .edicoes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:34px}
+    .edicoes a{font-family:'Space Mono',monospace;font-size:12px;color:var(--soft);border:1px solid var(--line);border-radius:100px;padding:6px 14px}
     .edicoes a.ativa{border-color:var(--orange);color:var(--orange)}
-    #edicao h2{font-size:clamp(1.35rem,5vw,2.3rem);font-weight:800;margin:0 0 18px;overflow-wrap:break-word}
-    #edicao blockquote{border-left:3px solid var(--orange);padding:4px 0 4px 18px;margin:0 0 34px;color:var(--bege);font-size:1.12rem;line-height:1.6}
-    .item{border-top:1px solid var(--line);padding:24px 0}
-    .item h3{font-family:'Sora';font-weight:700;font-size:1.18rem;margin-bottom:8px}
-    .item p{color:var(--muted);margin-bottom:8px;line-height:1.6}
-    .item .sig{color:var(--orange-2)}
-    .item .fonte{font-family:'Space Mono',monospace;font-size:12px}
-    .vazio{color:var(--dim);padding:30px 0}
-    .assina{margin:60px 0 0;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;padding:36px 32px}
-    .assina h3{font-family:'Sora';font-size:1.4rem;font-weight:800;margin:0 0 8px}
-    .assina .sub{color:var(--muted);max-width:52ch;margin:0 0 20px;line-height:1.6}
+    .vazio{color:var(--soft);padding:40px 0;text-align:center}
+
+    .assina{background:var(--wash);border:1px solid var(--washLine);border-radius:18px;padding:34px 30px;margin-top:44px}
+    .assina h3{font-size:1.5rem;font-weight:800;margin-bottom:8px}
+    .assina .sub{color:var(--soft);max-width:48ch;margin-bottom:20px;line-height:1.6}
     .assina form{display:flex;gap:10px;flex-wrap:wrap;max-width:470px}
-    .assina input{flex:1;min-width:200px;background:#0f1118;border:1px solid #232634;border-radius:6px;color:var(--bege);font-family:'Lato',sans-serif;font-size:15px;padding:13px 15px;outline:none;transition:border-color .2s}
+    .assina input{flex:1;min-width:200px;background:#fff;border:1px solid var(--line);border-radius:7px;color:var(--ink);font-family:'Lato';font-size:15px;padding:13px 15px;outline:none}
     .assina input:focus{border-color:var(--orange)}
-    .assina button{background:var(--orange);color:#160a02;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:6px;padding:13px 22px;cursor:pointer;white-space:nowrap;transition:background .2s}
-    .assina button:hover{background:var(--orange-2)}
-    .assina button:disabled{opacity:.5;cursor:default}
-    .assina-msg{margin:14px 0 0;font-size:14px;min-height:1px}
-    .assina-msg.ok{color:#3ddc97}.assina-msg.erro{color:#ff6b6b}
+    .assina button{background:var(--orange);color:#160a02;font-family:'Sora';font-weight:700;font-size:15px;border:none;border-radius:7px;padding:13px 24px;cursor:pointer}
+    .assina button:hover{background:var(--orange2)}
+    .assina button:disabled{opacity:.5}
+    .assina-msg{margin-top:14px;font-size:14px}
+    .assina-msg.ok{color:#17864a}.assina-msg.erro{color:#c0392b}
+
+    footer{border-top:1px solid var(--line);padding:30px 0;text-align:center}
+    footer p{font-family:'Space Mono',monospace;font-size:12px;color:var(--soft)}
+
+    @media(max-width:720px){
+      .nav-links{position:fixed;inset:66px 0 auto 0;flex-direction:column;gap:0;background:var(--paper);border-bottom:1px solid var(--line);max-height:0;overflow:hidden;transition:max-height .3s}
+      .nav-links.open{max-height:420px}
+      .nav-links a{padding:16px 24px;width:100%;border-bottom:1px solid var(--line)}
+      .nav-toggle{display:block}
+    }
   </style>
 </head>
 <body>
-<div class="grain"></div><div class="glow"></div>
 
-<header id="hdr">
-  <nav class="wrap">
-    <a href="/" class="brand"><span class="bars"><i></i><i></i><i></i></span>Iago&nbsp;Bald</a>
+<header>
+  <nav>
+    <a href="/" class="brand"><img src="/assets/logo-bald.svg" alt="Iago Bald"></a>
     <div class="nav-links" id="navLinks">
-      <a class="navlink" href="/consultoria">Consultoria</a>
-      <a class="navlink" href="/mentoria">Mentoria</a>
-      <a class="navlink" href="/cursos">Cursos</a>
-      <a class="navlink" href="/recursos">Recursos</a>
-      <a class="navlink active" href="/radar">Radar</a>
-      <a class="navlink" href="/links">Links</a>
-      <a class="btn btn-primary" href="/formulario?tipo=radar">Falar comigo</a>
+      <a href="/consultoria">Consultoria</a>
+      <a href="/mentoria">Mentoria</a>
+      <a href="/cursos">Cursos</a>
+      <a href="/recursos">Recursos</a>
+      <a href="/radar" class="on">Radar</a>
+      <a href="/links">Links</a>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Menu">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
@@ -62,36 +106,23 @@
   </nav>
 </header>
 
-<main>
-  <section class="wrap hero">
-    <div class="eyebrow">Radar da Semana</div>
-    <h1 class="title">O que importa em IA pra negócios</h1>
-    <p class="lead">As notícias que mexem com o seu negócio, toda semana, com a leitura de quem implementa — não de quem só fala sobre.</p>
-  </section>
+<main class="wrap">
+  <nav id="lista" class="edicoes"></nav>
+  <div id="edicao"></div>
 
-  <section class="wrap">
-    <article>
-      <nav id="lista" class="edicoes"></nav>
-      <div id="edicao"></div>
-
-      <div class="assina" id="assina">
-        <h3>Receba o Radar toda semana</h3>
-        <p class="sub">As notícias de IA que mexem com o seu negócio, com a leitura de quem implementa. No seu e-mail, de graça.</p>
-        <form id="assinaForm">
-          <input type="email" id="assinaEmail" placeholder="seu@email.com" autocomplete="email" required>
-          <button type="submit" id="assinaBtn">Quero receber</button>
-        </form>
-        <p class="assina-msg" id="assinaMsg"></p>
-      </div>
-    </article>
-  </section>
+  <div class="assina" id="assina">
+    <h3>Receba o Radar toda semana</h3>
+    <p class="sub">As notícias de IA que mexem com o seu negócio, com a leitura de quem implementa. No seu e-mail, de graça.</p>
+    <form id="assinaForm">
+      <input type="email" id="assinaEmail" placeholder="seu@email.com" autocomplete="email" required>
+      <button type="submit" id="assinaBtn">Quero receber</button>
+    </form>
+    <p class="assina-msg" id="assinaMsg"></p>
+  </div>
 </main>
 
 <footer>
-  <div class="foot">
-    <span>© <span id="yr">2026</span> Iago Bald · Radar da Semana</span>
-    <span><a href="/">Portfólio</a> · <a href="/recursos">Recursos</a></span>
-  </div>
+  <p>Iago Bald · traduzir o complexo em simples · <a href="/" style="color:var(--soft)">iagobald.com.br</a></p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -101,8 +132,15 @@
   var sb = supabase.createClient(SUPA, KEY);
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]; }); };
 
-  // Permalink por hash: /radar/#<slug> abre a edição direto.
-  function slugAtual() { return location.hash.replace(/^#/, '') || null; }
+  // Imagens curadas por item (temporário; vira campo no banco). Igual ao e-mail.
+  var IMAGENS = {
+    'https://www.seudinheiro.com/2026/seu-negocio/inteligencia-artificial-nos-pequenos-negocios-google-lanca-3-novas-ferramentas-no-gemini-para-pmes-giov/': 'https://www.seudinheiro.com/uploads/2026/07/Fotos-Julia-Takeashi-2-715x402.jpg',
+    'https://mixvale.com.br/2026/10/21/pesquisa-aponta-que-so-27-dos-lideres-tem-empresas-prontas-para-a-ia': 'https://www.mixvale.com.br/wp-content/uploads/2026/10/conceito-de-tecnologia-inteligencia-artificial-family-stock-shutterstock-com.jpg',
+    'https://www.unite.ai/google-cloud-adds-openais-gpt-astra-and-gpt-6-models-to-model-garden/': 'https://www.unite.ai/wp-content/uploads/2026/10/google-cloud-adds-openai-gpt-models-to-model-garden.jpg'
+  };
+  var MES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  function dataLonga(iso){ if(!iso) return ''; var d=new Date(iso); return d.getUTCDate()+' de '+MES[d.getUTCMonth()]+' de '+d.getUTCFullYear(); }
+  function slugAtual(){ return location.hash.replace(/^#/, '') || null; }
 
   async function carregar() {
     var res = await sb.from('edicoes').select('*').eq('status', 'publicada').order('numero', { ascending: false });
@@ -111,10 +149,7 @@
     document.getElementById('lista').innerHTML = eds.map(function (e) {
       return '<a href="#' + esc(e.slug) + '" data-slug="' + esc(e.slug) + '">#' + e.numero + ' · ' + esc(e.semana) + '</a>';
     }).join('');
-    function render() {
-      var s = slugAtual();
-      abrir(eds.filter(function (e) { return e.slug === s; })[0] || eds[0]);
-    }
+    function render() { var s = slugAtual(); abrir(eds.filter(function (e) { return e.slug === s; })[0] || eds[0]); }
     render();
     window.addEventListener('hashchange', render);
   }
@@ -122,48 +157,56 @@
   async function abrir(e) {
     if (!e) return;
     document.title = (e.manchete || 'Edição #' + e.numero) + ' · Radar da Semana';
-    Array.from(document.querySelectorAll('#lista a')).forEach(function (a) {
-      a.classList.toggle('ativa', a.dataset.slug === e.slug);
-    });
+    Array.from(document.querySelectorAll('#lista a')).forEach(function (a) { a.classList.toggle('ativa', a.dataset.slug === e.slug); });
     var res = await sb.from('edicao_itens').select('*').eq('edicao_id', e.id).order('ordem', { ascending: true });
     var itens = res.data || [];
-    document.getElementById('edicao').innerHTML =
-      '<h2>' + (esc(e.manchete) || 'Edição #' + e.numero) + '</h2>' +
-      (e.take ? '<blockquote>' + esc(e.take) + '</blockquote>' : '') +
-      itens.map(function (i) {
-        return '<section class="item"><h3>' + esc(i.titulo) + '</h3>' +
-          (i.resumo ? '<p>' + esc(i.resumo) + '</p>' : '') +
-          (i.significado ? '<p class="sig">↳ ' + esc(i.significado) + '</p>' : '') +
-          (i.url ? '<p class="fonte"><a href="' + esc(i.url) + '" target="_blank" rel="noreferrer">fonte →</a></p>' : '') +
-          '</section>';
-      }).join('');
+    var html =
+      '<div class="eyebrow">Edição #' + e.numero + ' · ' + (dataLonga(e.published_at) || esc(e.semana)) + '</div>' +
+      '<h1 class="manchete">' + (esc(e.manchete) || 'Edição #' + e.numero) + '</h1>' +
+      '<div class="byline"><div class="ib">IB</div><div class="who">Por <b>Iago Bald</b></div></div>' +
+      '<div class="rule"></div>';
+    if (e.take) {
+      html += '<p class="intro">Oi, aqui é o Iago. Essa é a leitura da semana, do jeito de quem implementa:</p>' +
+        '<blockquote><p>' + esc(e.take) + '</p><p class="sig">— Iago</p></blockquote><div class="rule"></div>';
+    }
+    html += '<div class="label">No radar essa semana</div>';
+    html += itens.map(function (i, idx) {
+      var img = IMAGENS[i.url];
+      var dataPrefix = (i.resumo && i.resumo.indexOf('·') > -1) ? ' · ' + esc(i.resumo.split('·')[0].trim()) : '';
+      var resumo = i.resumo ? esc(i.resumo.replace(/^.*?·\s*/, '')) : '';
+      return '<article class="item">' +
+        '<div class="n">0' + (idx + 1) + dataPrefix + '</div>' +
+        '<h3>' + esc(i.titulo) + '</h3>' +
+        (img ? '<img src="' + esc(img) + '" alt="">' : '') +
+        (resumo ? '<p class="resumo">' + resumo + '</p>' : '') +
+        (i.significado ? '<div class="achei"><div class="t">O que eu achei</div><p>' + esc(i.significado) + '</p></div>' : '') +
+        (i.url ? '<p class="fonte"><a href="' + esc(i.url) + '" target="_blank" rel="noreferrer">ler a fonte →</a></p>' : '') +
+        '</article>';
+    }).join('');
+    document.getElementById('edicao').innerHTML = html;
   }
   carregar();
 
-  // Assinatura da newsletter (insere em newsletter_assinantes, origem='radar').
+  // Menu mobile
+  (function(){ var tg=document.getElementById('navToggle'), nl=document.getElementById('navLinks');
+    if(tg&&nl){ tg.addEventListener('click',function(){nl.classList.toggle('open');}); nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nl.classList.remove('open');});}); } })();
+
+  // Assinatura
   (function () {
-    var form = document.getElementById('assinaForm');
-    if (!form) return;
-    var msg = document.getElementById('assinaMsg');
-    var btn = document.getElementById('assinaBtn');
+    var form = document.getElementById('assinaForm'); if (!form) return;
+    var msg = document.getElementById('assinaMsg'), btn = document.getElementById('assinaBtn');
     form.addEventListener('submit', async function (ev) {
       ev.preventDefault();
-      var email = (document.getElementById('assinaEmail').value || '').trim();
-      if (!email) return;
+      var email = (document.getElementById('assinaEmail').value || '').trim(); if (!email) return;
       btn.disabled = true; msg.className = 'assina-msg'; msg.textContent = 'Enviando...';
       var id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(36).slice(2);
       var r = await sb.from('newsletter_assinantes').insert({ id: id, email: email, origem: 'radar' });
-      if (!r.error) {
-        msg.className = 'assina-msg ok'; msg.textContent = 'Pronto. Você está na lista do Radar.'; form.reset();
-      } else if (r.error.code === '23505') {
-        msg.className = 'assina-msg ok'; msg.textContent = 'Você já estava inscrito. Tudo certo.'; form.reset();
-      } else {
-        msg.className = 'assina-msg erro'; msg.textContent = 'Deu um erro aqui. Tenta de novo em instantes.';
-      }
+      if (!r.error) { msg.className = 'assina-msg ok'; msg.textContent = 'Pronto. Você está na lista do Radar.'; form.reset(); }
+      else if (r.error.code === '23505') { msg.className = 'assina-msg ok'; msg.textContent = 'Você já estava inscrito. Tudo certo.'; form.reset(); }
+      else { msg.className = 'assina-msg erro'; msg.textContent = 'Deu um erro aqui. Tenta de novo em instantes.'; }
       btn.disabled = false;
     });
   })();
 </script>
-<script src="/assets/site.js"></script>
 </body>
 </html>
