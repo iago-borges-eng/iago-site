@@ -154,7 +154,10 @@
       btn.disabled = true; msg.className = 'assina-msg'; msg.textContent = 'Enviando...';
       var id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(36).slice(2);
       var r = await sb.from('newsletter_assinantes').insert({ id: id, nome: nome, email: email, origem: 'radar' });
-      if (!r.error) { msg.className = 'assina-msg ok'; msg.textContent = 'Pronto. Você está na lista do Radar.'; form.reset(); }
+      if (!r.error) {
+        fetch('https://app.iagobald.com.br/api/boas-vindas', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ to: email, nome: nome }) }).catch(function () {});
+        msg.className = 'assina-msg ok'; msg.textContent = 'Pronto! Você está na lista. Dá uma olhada na sua caixa de entrada.'; form.reset();
+      }
       else if (r.error.code === '23505') { msg.className = 'assina-msg ok'; msg.textContent = 'Você já estava inscrito. Tudo certo.'; form.reset(); }
       else { msg.className = 'assina-msg erro'; msg.textContent = 'Deu um erro aqui. Tenta de novo em instantes.'; }
       btn.disabled = false;
