@@ -4,10 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="canonical" href="https://iagobald.com.br/recursos/" />
-<title>Tutoriais — Iago Bald</title>
-<meta name="description" content="Passo a passos diretos do Iago Bald pra você fazer sozinho — tecnologia, IA e produtividade, sem enrolação." />
-<meta property="og:title" content="Tutoriais — Iago Bald" />
-<meta property="og:description" content="Passo a passos diretos pra você fazer sozinho, sem enrolação." />
+<title>Recursos — Dicas e prompts de IA pra empresários | Iago Bald</title>
+<meta name="description" content="Tutoriais, dicas e prompts prontos de IA pra donos de negócio: marketing, vendas, atendimento, operações e financeiro. Direto, sem enrolação." />
+<meta property="og:title" content="Recursos — Dicas e prompts de IA pra empresários" />
+<meta property="og:description" content="Dicas e prompts prontos de IA pra donos de negócio. Copie e use." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -57,7 +57,40 @@
       <div class="soon">// Mais tutoriais chegando em breve</div>
     </div>
   </section>
+
+  <section class="wrap" id="dicas">
+    <div class="rule"></div>
+    <div class="eyebrow">Dicas &amp; prompts</div>
+    <h2 class="dicas-h">IA na prática pro seu negócio.</h2>
+    <p class="lead">Dicas diretas com <b>prompt pronto pra copiar</b> e a ferramenta certa. Escolha o tema. Tudo que você precisa pra começar hoje, sem equipe técnica.</p>
+    <div class="rchips" id="rchips"></div>
+    <div class="rgrid" id="rgrid"><p class="rload">Carregando dicas…</p></div>
+  </section>
 </main>
+
+<style>
+  .dicas-h{font-family:'Sora';font-weight:800;font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.1;margin:0 0 14px}
+  .rchips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 26px}
+  .rchip{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.04em;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;transition:.15s;white-space:nowrap}
+  .rchip:hover{color:var(--bege);border-color:var(--muted)}
+  .rchip.active{background:var(--orange);border-color:var(--orange);color:#160a02;font-weight:700}
+  .rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .rcard{border:1px solid var(--line);border-radius:16px;padding:20px 20px 18px;background:rgba(255,255,255,.02);display:flex;flex-direction:column;gap:10px}
+  .rcard .rcat{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange)}
+  .rcard h3{font-family:'Sora';font-weight:700;font-size:1.08rem;line-height:1.3;margin:0}
+  .rcard .rpq{font-size:12.5px;color:var(--muted)}
+  .rcard .rres{font-size:14px;line-height:1.55;color:var(--bege);opacity:.92;margin:0}
+  .rcard .rferr{font-family:'Space Mono',monospace;font-size:12px}
+  .rcard .rferr a{color:var(--orange);text-decoration:none}
+  .rprompt{position:relative;background:var(--ink-dot,#0b0d1a);border:1px solid var(--line);border-radius:10px;padding:12px 12px 12px;margin-top:2px}
+  .rprompt pre{font-family:'Space Mono',monospace;font-size:12px;line-height:1.6;color:#e8e9f0;white-space:pre-wrap;margin:0;overflow-wrap:break-word}
+  .rprompt .rcopy{position:absolute;top:8px;right:8px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.08);color:var(--bege);border:none;border-radius:6px;padding:5px 9px;cursor:pointer}
+  .rprompt .rcopy:hover{background:var(--orange);color:#160a02}
+  .rcard .rfoot{margin-top:auto;padding-top:8px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line)}
+  .rcard .rfoot b{color:var(--bege)}
+  .rload{color:var(--muted);font-family:'Space Mono',monospace;font-size:13px}
+  @media(max-width:520px){ .rgrid{grid-template-columns:1fr} }
+</style>
 <footer>
   <div class="foot">
     <span>© 2026 Iago Bald · Recursos</span>
@@ -65,5 +98,41 @@
   </div>
 </footer>
 <script src="/assets/site.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var sb = supabase.createClient('https://rgunvvbtqeugzzxfnvhi.supabase.co','sb_publishable_-NZo96CyCR32RBLum8mEag_Z9yJ0SKX');
+  var grid = document.getElementById('rgrid'), chips = document.getElementById('rchips');
+  var all = [], filtro = 'Todas';
+  var esc = function(s){ return String(s==null?'':s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); };
+  function card(r){
+    var cat = r.nicho ? esc(r.nicho) : esc(r.categoria);
+    var ferr = r.ferramenta ? '<div class="rferr">🛠 '+(r.ferramenta_url?('<a href="'+esc(r.ferramenta_url)+'" target="_blank" rel="noreferrer">'+esc(r.ferramenta)+' ↗</a>'):esc(r.ferramenta))+'</div>' : '';
+    var prompt = r.prompt ? '<div class="rprompt"><button class="rcopy" type="button">copiar</button><pre>'+esc(r.prompt)+'</pre></div>' : '';
+    var pq = r.pra_quem ? '<div class="rpq">Pra: '+esc(r.pra_quem)+'</div>' : '';
+    var res = r.resolve ? '<p class="rres">'+esc(r.resolve)+'</p>' : (r.gancho && !r.prompt ? '<p class="rres">'+esc(r.gancho)+'</p>' : '');
+    var foot = r.palavra_chave ? '<div class="rfoot">📲 No Instagram, comenta <b>'+esc(r.palavra_chave)+'</b> que eu te mando.</div>' : '';
+    return '<div class="rcard"><div class="rcat">'+cat+'</div><h3>'+esc(r.titulo)+'</h3>'+pq+res+ferr+prompt+foot+'</div>';
+  }
+  function render(){
+    var list = filtro==='Todas' ? all : all.filter(function(r){return r.categoria===filtro;});
+    grid.innerHTML = list.map(card).join('') || '<p class="rload">Nada aqui ainda.</p>';
+  }
+  function buildChips(){
+    var cats = ['Todas'].concat(all.map(function(r){return r.categoria;}).filter(function(v,i,a){return a.indexOf(v)===i;}));
+    chips.innerHTML = cats.map(function(c){return '<button class="rchip'+(c===filtro?' active':'')+'" data-c="'+esc(c)+'">'+esc(c)+'</button>';}).join('');
+    chips.querySelectorAll('.rchip').forEach(function(b){ b.onclick=function(){ filtro=b.dataset.c; chips.querySelectorAll('.rchip').forEach(function(x){x.classList.toggle('active',x.dataset.c===filtro);}); render(); }; });
+  }
+  grid.addEventListener('click', function(ev){
+    var b = ev.target.closest('.rcopy'); if(!b) return;
+    var pre = b.parentElement.querySelector('pre');
+    navigator.clipboard && navigator.clipboard.writeText(pre.innerText).then(function(){ b.textContent='copiado ✓'; setTimeout(function(){b.textContent='copiar';},1500); });
+  });
+  sb.from('recursos').select('categoria,nicho,titulo,pra_quem,resolve,ferramenta,ferramenta_url,prompt,gancho,palavra_chave,sort_order').eq('status','ativo').order('sort_order',{ascending:true}).then(function(res){
+    if(res.error || !res.data){ grid.innerHTML='<p class="rload">Não consegui carregar as dicas agora.</p>'; return; }
+    all = res.data; buildChips(); render();
+  });
+})();
+</script>
 </body>
 </html>
