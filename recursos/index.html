@@ -65,6 +65,13 @@
     <p class="lead">Dicas diretas com <b>prompt pronto pra copiar</b> e a ferramenta certa. Escolha o tema. Tudo que você precisa pra começar hoje, sem equipe técnica.</p>
     <div class="rchips" id="rchips"></div>
     <div class="rgrid" id="rgrid"><p class="rload">Carregando dicas…</p></div>
+
+    <div class="rcta">
+      <h3>Quer uma dessas funcionando no seu negócio?</h3>
+      <p>Eu instalo organização e IA sob medida, do jeito que faz sentido pra sua operação. Você para de perder tempo e passa a decidir com o sistema.</p>
+      <a class="btn btn-primary" href="/formulario?tipo=recursos">Falar comigo →</a>
+      <a class="rcta-ig" href="https://www.instagram.com/iago_bald/" target="_blank" rel="noreferrer">Toda semana tem dica nova no @iago_bald ↗</a>
+    </div>
   </section>
 </main>
 
@@ -86,9 +93,13 @@
   .rprompt pre{font-family:'Space Mono',monospace;font-size:12px;line-height:1.6;color:#e8e9f0;white-space:pre-wrap;margin:0;overflow-wrap:break-word}
   .rprompt .rcopy{position:absolute;top:8px;right:8px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.08);color:var(--bege);border:none;border-radius:6px;padding:5px 9px;cursor:pointer}
   .rprompt .rcopy:hover{background:var(--orange);color:#160a02}
-  .rcard .rfoot{margin-top:auto;padding-top:8px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line)}
-  .rcard .rfoot b{color:var(--bege)}
   .rload{color:var(--muted);font-family:'Space Mono',monospace;font-size:13px}
+  .rcard.rhot{outline:2px solid var(--orange);outline-offset:2px;box-shadow:0 0 0 5px rgba(255,103,1,.14)}
+  .rcta{margin:40px 0 8px;border:1px solid var(--line);border-radius:18px;padding:34px 28px;text-align:center;background:rgba(255,103,1,.04)}
+  .rcta h3{font-family:'Sora';font-weight:800;font-size:clamp(1.3rem,3.5vw,1.7rem);margin:0 0 10px}
+  .rcta p{color:var(--muted);font-size:15px;line-height:1.6;max-width:560px;margin:0 auto 22px}
+  .rcta .rcta-ig{display:block;margin-top:16px;font-family:'Space Mono',monospace;font-size:12.5px;color:var(--muted);text-decoration:none}
+  .rcta .rcta-ig:hover{color:var(--orange)}
   @media(max-width:520px){ .rgrid{grid-template-columns:1fr} }
 </style>
 <footer>
@@ -111,8 +122,13 @@
     var prompt = r.prompt ? '<div class="rprompt"><button class="rcopy" type="button">copiar</button><pre>'+esc(r.prompt)+'</pre></div>' : '';
     var pq = r.pra_quem ? '<div class="rpq">Pra: '+esc(r.pra_quem)+'</div>' : '';
     var res = r.resolve ? '<p class="rres">'+esc(r.resolve)+'</p>' : (r.gancho && !r.prompt ? '<p class="rres">'+esc(r.gancho)+'</p>' : '');
-    var foot = r.palavra_chave ? '<div class="rfoot">📲 No Instagram, comenta <b>'+esc(r.palavra_chave)+'</b> que eu te mando.</div>' : '';
-    return '<div class="rcard"><div class="rcat">'+cat+'</div><h3>'+esc(r.titulo)+'</h3>'+pq+res+ferr+prompt+foot+'</div>';
+    var anchor = r.palavra_chave ? ' id="r-'+esc(r.palavra_chave)+'"' : '';
+    return '<div class="rcard"'+anchor+'><div class="rcat">'+cat+'</div><h3>'+esc(r.titulo)+'</h3>'+pq+res+ferr+prompt+'</div>';
+  }
+  function jumpToHash(){
+    if(!location.hash || !/^#r-[\w-]+$/.test(location.hash)) return;
+    var el = document.querySelector(location.hash);
+    if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.add('rhot'); setTimeout(function(){ el.classList.remove('rhot'); }, 2800); }
   }
   function render(){
     var list = filtro==='Todas' ? all : all.filter(function(r){return r.categoria===filtro;});
@@ -130,8 +146,9 @@
   });
   sb.from('recursos').select('categoria,nicho,titulo,pra_quem,resolve,ferramenta,ferramenta_url,prompt,gancho,palavra_chave,sort_order').eq('status','ativo').order('sort_order',{ascending:true}).then(function(res){
     if(res.error || !res.data){ grid.innerHTML='<p class="rload">Não consegui carregar as dicas agora.</p>'; return; }
-    all = res.data; buildChips(); render();
+    all = res.data; buildChips(); render(); setTimeout(jumpToHash, 120);
   });
+  window.addEventListener('hashchange', jumpToHash);
 })();
 </script>
 </body>
