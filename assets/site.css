@@ -106,6 +106,8 @@ article > h2:first-child{margin-top:0}
 .byline .who{font-size:14px;color:var(--muted)}.byline .who b{color:var(--bege)}
 .ed-rule{height:1px;background:var(--line);margin:28px 0}
 .ed-intro{font-size:17px;line-height:1.7;margin-bottom:16px}
+.ed-abertura p{font-size:17px;line-height:1.75;margin-bottom:14px;color:var(--bege)}
+.ed-abertura p:first-child{font-size:18px}
 .ed-take{border-left:3px solid var(--orange);padding:4px 0 4px 20px;margin:0 0 10px}
 .ed-take p{font-size:18px;line-height:1.7;margin-bottom:12px}
 .ed-take .sig{font-family:'Sora';font-weight:700;font-size:14px;color:var(--muted)}

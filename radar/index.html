@@ -103,10 +103,15 @@
       '<h1 class="ed-manchete">' + (esc(e.manchete) || 'Edição #' + e.numero) + '</h1>' +
       '<div class="byline"><div class="ib">IB</div><div class="who">Por <b>Iago Bald</b></div></div>' +
       '<div class="ed-rule"></div>';
-    if (e.take) {
-      html += '<p class="ed-intro">Oi, aqui é o Iago. Essa é a leitura da semana, do jeito de quem implementa:</p>' +
-        '<blockquote class="ed-take"><p>' + esc(e.take) + '</p><p class="sig">— Iago</p></blockquote><div class="ed-rule"></div>';
+    if (e.abertura) {
+      html += '<div class="ed-abertura">' + (e.abertura || '').split(/\n\s*\n/).filter(Boolean).map(function (p) { return '<p>' + esc(p.trim()) + '</p>'; }).join('') + '</div>';
+    } else if (e.take) {
+      html += '<p class="ed-intro">Oi, aqui é o Iago. Essa é a leitura da semana, do jeito de quem implementa:</p>';
     }
+    if (e.take) {
+      html += '<blockquote class="ed-take"><p>' + esc(e.take) + '</p><p class="sig">— Iago</p></blockquote>';
+    }
+    if (e.abertura || e.take) { html += '<div class="ed-rule"></div>'; }
     if (e.insight_titulo) {
       html += '<div class="ed-label">💡 Insight da semana</div>' +
         '<div class="ed-insight"><h2>' + esc(e.insight_titulo) + '</h2>' +
@@ -120,9 +125,10 @@
     html += itens.map(function (i, idx) {
       var img = IMAGENS[i.url];
       var dataPrefix = (i.resumo && i.resumo.indexOf('·') > -1) ? ' · ' + esc(i.resumo.split('·')[0].trim()) : '';
+      var catPrefix = i.categoria ? ' · ' + esc(String(i.categoria).toUpperCase()) : '';
       var resumo = i.resumo ? esc(i.resumo.replace(/^.*?·\s*/, '')) : '';
       return '<article class="ed-item">' +
-        '<div class="n">0' + (idx + 1) + dataPrefix + '</div>' +
+        '<div class="n">0' + (idx + 1) + catPrefix + dataPrefix + '</div>' +
         '<h3>' + esc(i.titulo) + '</h3>' +
         (img ? '<img src="' + esc(img) + '" alt="">' : '') +
         (resumo ? '<p class="resumo">' + resumo + '</p>' : '') +
