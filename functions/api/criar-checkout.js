@@ -3,10 +3,12 @@
 // nunca no código. Recebe POST {descricao, valor, parcelas, nome?, email?} e
 // devolve {init_point} — a URL do checkout pra mandar pro cliente.
 
+// CORS restrito ao próprio domínio (requisições same-origin da mentoria/pagar não
+// dependem de CORS; isto só barra chamada cross-site de outro domínio no navegador).
 const CORS = {
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin': 'https://iagobald.com.br',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Headers': 'Content-Type, x-bald-secret',
 };
 
 // Catálogo com preço TRAVADO no servidor. Botões públicos de compra mandam
@@ -55,7 +57,13 @@ export async function onRequestPost({ request, env }) {
     valor = item.valor;
     parcelas = item.parcelas;
   } else {
-    // Gerador interno /pagar: valor livre informado por mim.
+    // Gerador interno /pagar: valor livre. EXIGE segredo (env PAGAR_SECRET) pra não
+    // ser abusado publicamente. Fail-closed: sem o env configurado, ninguém gera.
+    const segredo = env.PAGAR_SECRET;
+    const enviado = request.headers.get('x-bald-secret') || '';
+    if (!segredo || enviado !== segredo) {
+      return json({ error: 'Gerador protegido: senha ausente ou inválida.' }, 401);
+    }
     descricao = (String(data.descricao || '').trim() || 'Pagamento · Iago Bald').slice(0, 200);
     valor = Number(data.valor);
     parcelas = Math.min(Math.max(parseInt(data.parcelas, 10) || 12, 1), 12);

@@ -40,6 +40,9 @@
       </div>
 
       <form id="payForm" class="p-form" autocomplete="off">
+        <label>Senha do gerador <span class="p-opt">(só você; fica salva neste navegador)</span>
+          <input type="password" name="senha" autocomplete="off" />
+        </label>
         <label>Descrição
           <input type="text" name="descricao" placeholder="Ex.: Consultoria Bald — projeto João" maxlength="200" required />
         </label>
@@ -122,6 +125,8 @@
   var link=document.getElementById('payLink'), waBtn=document.getElementById('waBtn');
   var copyBtn=document.getElementById('copyBtn'), newBtn=document.getElementById('newBtn');
 
+  try{ form.senha.value = localStorage.getItem('bald_pagar_secret')||''; }catch(_){}
+
   document.querySelectorAll('.p-chip').forEach(function(c){
     c.addEventListener('click',function(){
       form.descricao.value=c.dataset.desc||'';
@@ -142,9 +147,11 @@
     };
     var vinc=form.vinculo.value.trim();
     if(vinc){ if(vinc.indexOf('cli-')===0) body.cliente_id=vinc; else body.lead_id=vinc; }
+    var senha=form.senha.value.trim();
+    try{ localStorage.setItem('bald_pagar_secret', senha); }catch(_){}
     btn.disabled=true; btn.textContent='Gerando…';
     fetch('/api/criar-checkout',{
-      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)
+      method:'POST',headers:{'Content-Type':'application/json','x-bald-secret':senha},body:JSON.stringify(body)
     }).then(function(r){return r.json().then(function(j){return {okr:r.ok,j:j};});})
       .then(function(res){
         btn.disabled=false; btn.textContent='Gerar link →';
