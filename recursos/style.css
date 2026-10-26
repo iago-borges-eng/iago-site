@@ -1,7 +1,8 @@
 /* ===== Tutoriais Iago Bald — design system compartilhado ===== */
 :root{
-  --bg:#08090f;--panel:#0f1120;--line:rgba(255,255,255,.10);
-  --bege:#F4F4F6;--muted:#9a9ec0;--dim:#666a86;--orange:#FF6701;--orange2:#ff8a3d;
+  /* tokens alinhados ao tema escuro do site.css (fonte primária). Mantido --orange2 (nome local). */
+  --bg:#08090f;--panel:#0f1120;--line:rgba(255,255,255,.09);
+  --bege:#F4F4F6;--muted:#9599b0;--dim:#61647e;--orange:#FF6701;--orange2:#ff853a;
   --tip:#3ddc97;--warn:#ffb547;--max:760px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
