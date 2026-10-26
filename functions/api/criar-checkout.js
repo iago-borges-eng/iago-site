@@ -9,6 +9,16 @@ const CORS = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
+// Catálogo com preço TRAVADO no servidor. Botões públicos de compra mandam
+// só {produto:"<slug>"} — nunca o valor — pra ninguém adulterar o preço.
+const CATALOG = {
+  'mentoria-fundadora': {
+    descricao: 'Mentoria O Dono Livre — turma fundadora',
+    valor: 291,
+    parcelas: 3,
+  },
+};
+
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
@@ -33,9 +43,21 @@ export async function onRequestPost({ request, env }) {
     return json({ error: 'JSON inválido.' }, 400);
   }
 
-  const descricao = (String(data.descricao || '').trim() || 'Pagamento · Iago Bald').slice(0, 200);
-  const valor = Number(data.valor);
-  const parcelas = Math.min(Math.max(parseInt(data.parcelas, 10) || 12, 1), 12);
+  let descricao, valor, parcelas;
+
+  if (data.produto !== undefined && data.produto !== null && data.produto !== '') {
+    // Botão público de compra: preço vem do catálogo, nunca do navegador.
+    const item = CATALOG[String(data.produto)];
+    if (!item) return json({ error: 'Produto desconhecido.' }, 400);
+    descricao = item.descricao;
+    valor = item.valor;
+    parcelas = item.parcelas;
+  } else {
+    // Gerador interno /pagar: valor livre informado por mim.
+    descricao = (String(data.descricao || '').trim() || 'Pagamento · Iago Bald').slice(0, 200);
+    valor = Number(data.valor);
+    parcelas = Math.min(Math.max(parseInt(data.parcelas, 10) || 12, 1), 12);
+  }
 
   if (!Number.isFinite(valor) || valor < 5 || valor > 100000) {
     return json({ error: 'Valor inválido. Use um número entre R$5 e R$100.000.' }, 400);

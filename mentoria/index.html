@@ -139,7 +139,10 @@
           <span class="m-price-new">3x R$97 <em>na turma fundadora</em></span>
         </div>
         <p>A primeira turma tem preço de fundador em troca do seu compromisso de aplicar e contar o resultado. São <b>5 vagas</b> e a turma começa <b>10 de novembro</b>.</p>
-        <a href="#inscricao" class="m-btn">Quero uma das 5 vagas →</a>
+        <div class="m-buy-row">
+          <button type="button" class="m-btn js-checkout" data-produto="mentoria-fundadora">Garantir vaga e pagar →</button>
+          <a href="#inscricao" class="m-btn-ghost">Prefiro saber mais antes</a>
+        </div>
       </div>
 
       <div class="m-guarantee rv">
@@ -264,6 +267,10 @@
   .m-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;background:var(--orange,#FF6701);color:#160a02;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;padding:14px 26px;border-radius:10px;text-decoration:none;transition:filter .18s}
   .m-btn:hover{filter:brightness(1.08)}
   .m-btn-full{width:100%;margin-top:4px;border:none;cursor:pointer}
+  .m-btn.js-checkout{border:none;cursor:pointer}
+  .m-btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;background:transparent;color:var(--bege);font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:14px 26px;border:1px solid var(--line);border-radius:10px;text-decoration:none;transition:border-color .18s}
+  .m-btn-ghost:hover{border-color:var(--orange)}
+  .m-buy-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 
   /* FAQ accordion */
   .m-faq{display:flex;flex-direction:column;gap:12px}
@@ -344,6 +351,30 @@
       body:JSON.stringify({id:id,tipo:'mentoria',nome:nome,telefone:telefone,email:email,respostas:{origem:'landing-mentoria',turma:'fundadora-10-11',negocio:negocio}})
     }).then(function(r){ if(!r.ok) throw 0; form.style.display='none'; ok.classList.add('show'); })
       .catch(function(){ btn.disabled=false; btn.textContent='Quero garantir minha vaga →'; alert('Ops, não consegui enviar. Tenta de novo em instantes.'); });
+  });
+})();
+</script>
+<script>
+/* Botão "comprar": pede o link ao /api/criar-checkout (preço vem do catálogo
+   no servidor) e manda a pessoa direto pro checkout do Mercado Pago. */
+(function(){
+  document.querySelectorAll('.js-checkout').forEach(function(b){
+    b.addEventListener('click',function(){
+      var orig=b.textContent; b.disabled=true; b.textContent='Abrindo checkout…';
+      fetch('/api/criar-checkout',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({produto:b.dataset.produto})
+      }).then(function(r){return r.json();})
+        .then(function(j){
+          var url=j.init_point||j.sandbox_init_point;
+          if(url){ window.location.href=url; return; }
+          b.disabled=false; b.textContent=orig;
+          alert(j.error||'Não consegui abrir o checkout agora. Tenta de novo.');
+        }).catch(function(){
+          b.disabled=false; b.textContent=orig;
+          alert('Falha de conexão. Tenta de novo em instantes.');
+        });
+    });
   });
 })();
 </script>
