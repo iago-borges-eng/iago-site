@@ -66,6 +66,7 @@ export async function onRequestPost({ request, env }) {
   const payer = {};
   if (data.email) payer.email = String(data.email).trim().slice(0, 120);
   if (data.nome) payer.name = String(data.nome).trim().slice(0, 80);
+  const whats = data.whats ? String(data.whats).replace(/\D/g, '').slice(0, 20) : null;
 
   const ref = 'bald-' + Date.now();
 
@@ -85,6 +86,14 @@ export async function onRequestPost({ request, env }) {
     auto_return: 'approved',
     statement_descriptor: 'IAGOBALD',
     external_reference: ref,
+    // Lido pelo webhook (Fase 2) pra criar o cliente no CRM com dados reais.
+    metadata: {
+      produto: data.produto ? String(data.produto) : null,
+      nome: payer.name || null,
+      email: payer.email || null,
+      whats: whats,
+      origem: 'site',
+    },
   };
   if (payer.email || payer.name) pref.payer = payer;
 

@@ -139,10 +139,7 @@
           <span class="m-price-new">3x R$97 <em>na turma fundadora</em></span>
         </div>
         <p>A primeira turma tem preço de fundador em troca do seu compromisso de aplicar e contar o resultado. São <b>5 vagas</b> e a turma começa <b>10 de novembro</b>.</p>
-        <div class="m-buy-row">
-          <button type="button" class="m-btn js-checkout" data-produto="mentoria-fundadora">Garantir vaga e pagar →</button>
-          <a href="#inscricao" class="m-btn-ghost">Prefiro saber mais antes</a>
-        </div>
+        <a href="#inscricao" class="m-btn">Garantir uma das 5 vagas →</a>
       </div>
 
       <div class="m-guarantee rv">
@@ -165,7 +162,7 @@
         <div class="m-enroll-head">
           <div class="m-tag">Candidatura · turma fundadora</div>
           <h3>Garanta uma das 5 vagas.</h3>
-          <p>Deixa seu contato e me conta rapidinho do seu negócio. <b>Eu te chamo no WhatsApp</b> pra alinhar e te mandar o link de pagamento. Começa 10/11, 3x R$97, garantia de 1 semana.</p>
+          <p>Deixa teu contato e me conta rapidinho do teu negócio. Aí você escolhe: <b>já garante a vaga pagando agora</b> ou <b>tira uma dúvida antes</b> que eu te chamo no WhatsApp. Começa 10/11, 3x R$97, garantia de 1 semana.</p>
         </div>
 
         <form id="enrollForm" class="m-form" novalidate>
@@ -176,14 +173,14 @@
           <input type="text" name="nome" placeholder="Como te chamo?" autocomplete="name" />
           <textarea name="negocio" rows="3" placeholder="Qual seu negócio e a maior dor hoje? (me ajuda a ver se faz sentido pra você)"></textarea>
           <input type="text" name="website" class="m-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
-          <button type="submit" id="enrollBtn" class="m-btn m-btn-full">Quero garantir minha vaga →</button>
-          <p class="m-form-foot">Só quer tirar uma dúvida antes? <a href="/formulario?tipo=mentoria">Me manda uma mensagem</a>.</p>
+          <button type="submit" id="payBtn" class="m-btn m-btn-full">Garantir vaga e pagar →</button>
+          <button type="button" id="duvidaBtn" class="m-btn-ghost m-btn-full-ghost">Só quero tirar uma dúvida antes</button>
         </form>
 
         <div class="m-form-ok" id="enrollOk">
           <div class="m-form-ok-ic">✓</div>
-          <h3>Recebi sua candidatura!</h3>
-          <p>Te chamo no WhatsApp pra alinhar e garantir sua vaga na turma fundadora. 🧡</p>
+          <h3>Recebi seu contato!</h3>
+          <p>Te chamo no WhatsApp pra tirar tua dúvida e, se fizer sentido, garantir tua vaga na turma fundadora. 🧡</p>
         </div>
       </div>
     </article>
@@ -267,10 +264,9 @@
   .m-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;background:var(--orange,#FF6701);color:#160a02;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;padding:14px 26px;border-radius:10px;text-decoration:none;transition:filter .18s}
   .m-btn:hover{filter:brightness(1.08)}
   .m-btn-full{width:100%;margin-top:4px;border:none;cursor:pointer}
-  .m-btn.js-checkout{border:none;cursor:pointer}
   .m-btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;background:transparent;color:var(--bege);font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:14px 26px;border:1px solid var(--line);border-radius:10px;text-decoration:none;transition:border-color .18s}
   .m-btn-ghost:hover{border-color:var(--orange)}
-  .m-buy-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .m-btn-full-ghost{width:100%;margin-top:10px}
 
   /* FAQ accordion */
   .m-faq{display:flex;flex-direction:column;gap:12px}
@@ -332,48 +328,70 @@
   var SUPA = 'https://rgunvvbtqeugzzxfnvhi.supabase.co';
   var KEY  = 'sb_publishable_-NZo96CyCR32RBLum8mEag_Z9yJ0SKX';
   var form = document.getElementById('enrollForm');
-  var btn  = document.getElementById('enrollBtn');
-  var ok   = document.getElementById('enrollOk');
+  var payBtn = document.getElementById('payBtn');
+  var duvidaBtn = document.getElementById('duvidaBtn');
+  var ok = document.getElementById('enrollOk');
   if(!form) return;
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    if(form.querySelector('[name="website"]').value){ form.style.display='none'; ok.classList.add('show'); return; }
-    var telefone=(form.querySelector('[name="telefone"]').value||'').trim();
-    var email=(form.querySelector('[name="email"]').value||'').trim();
-    var nome=(form.querySelector('[name="nome"]').value||'').trim()||null;
-    var negocio=(form.querySelector('[name="negocio"]').value||'').trim()||null;
-    if(!telefone||!email){ (telefone?form.querySelector('[name="email"]'):form.querySelector('[name="telefone"]')).focus(); return; }
-    btn.disabled=true; btn.textContent='Enviando…';
+
+  function campos(){
+    return {
+      telefone:(form.querySelector('[name="telefone"]').value||'').trim(),
+      email:(form.querySelector('[name="email"]').value||'').trim(),
+      nome:(form.querySelector('[name="nome"]').value||'').trim(),
+      negocio:(form.querySelector('[name="negocio"]').value||'').trim(),
+      hp:form.querySelector('[name="website"]').value
+    };
+  }
+  function valida(c){
+    if(!c.telefone||!c.email){
+      (c.telefone?form.querySelector('[name="email"]'):form.querySelector('[name="telefone"]')).focus();
+      return false;
+    }
+    return true;
+  }
+  // salva o lead (best-effort) — nunca trava o pagamento se o Supabase falhar
+  function salvaLead(c, intencao){
+    if(c.hp) return Promise.resolve();
     var id='ment-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);
-    fetch(SUPA+'/rest/v1/leads_formulario',{
+    return fetch(SUPA+'/rest/v1/leads_formulario',{
       method:'POST',
       headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
-      body:JSON.stringify({id:id,tipo:'mentoria',nome:nome,telefone:telefone,email:email,respostas:{origem:'landing-mentoria',turma:'fundadora-10-11',negocio:negocio}})
-    }).then(function(r){ if(!r.ok) throw 0; form.style.display='none'; ok.classList.add('show'); })
-      .catch(function(){ btn.disabled=false; btn.textContent='Quero garantir minha vaga →'; alert('Ops, não consegui enviar. Tenta de novo em instantes.'); });
-  });
-})();
-</script>
-<script>
-/* Botão "comprar": pede o link ao /api/criar-checkout (preço vem do catálogo
-   no servidor) e manda a pessoa direto pro checkout do Mercado Pago. */
-(function(){
-  document.querySelectorAll('.js-checkout').forEach(function(b){
-    b.addEventListener('click',function(){
-      var orig=b.textContent; b.disabled=true; b.textContent='Abrindo checkout…';
-      fetch('/api/criar-checkout',{
+      body:JSON.stringify({id:id,tipo:'mentoria',nome:c.nome||null,telefone:c.telefone,email:c.email,respostas:{origem:'landing-mentoria',turma:'fundadora-10-11',negocio:c.negocio||null,intencao:intencao}})
+    }).catch(function(){});
+  }
+
+  // CAMINHO 1 — garantir vaga pagando: salva lead + abre o checkout já com os dados
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var c=campos();
+    if(c.hp){ form.style.display='none'; ok.classList.add('show'); return; }
+    if(!valida(c)) return;
+    payBtn.disabled=true; duvidaBtn.disabled=true; payBtn.textContent='Abrindo pagamento…';
+    salvaLead(c,'pagar').then(function(){
+      return fetch('/api/criar-checkout',{
         method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({produto:b.dataset.produto})
-      }).then(function(r){return r.json();})
-        .then(function(j){
-          var url=j.init_point||j.sandbox_init_point;
-          if(url){ window.location.href=url; return; }
-          b.disabled=false; b.textContent=orig;
-          alert(j.error||'Não consegui abrir o checkout agora. Tenta de novo.');
-        }).catch(function(){
-          b.disabled=false; b.textContent=orig;
-          alert('Falha de conexão. Tenta de novo em instantes.');
-        });
+        body:JSON.stringify({produto:'mentoria-fundadora',nome:c.nome,email:c.email,whats:c.telefone})
+      });
+    }).then(function(r){return r.json();})
+      .then(function(j){
+        var url=j.init_point||j.sandbox_init_point;
+        if(url){ window.location.href=url; return; }
+        payBtn.disabled=false; duvidaBtn.disabled=false; payBtn.textContent='Garantir vaga e pagar →';
+        alert(j.error||'Não consegui abrir o pagamento agora. Tenta de novo.');
+      }).catch(function(){
+        payBtn.disabled=false; duvidaBtn.disabled=false; payBtn.textContent='Garantir vaga e pagar →';
+        alert('Falha de conexão. Tenta de novo em instantes.');
+      });
+  });
+
+  // CAMINHO 2 — tirar dúvida: salva lead + confirma (eu chamo no WhatsApp)
+  duvidaBtn.addEventListener('click', function(){
+    var c=campos();
+    if(c.hp){ form.style.display='none'; ok.classList.add('show'); return; }
+    if(!valida(c)) return;
+    payBtn.disabled=true; duvidaBtn.disabled=true; duvidaBtn.textContent='Enviando…';
+    salvaLead(c,'duvida').then(function(){
+      form.style.display='none'; ok.classList.add('show');
     });
   });
 })();
