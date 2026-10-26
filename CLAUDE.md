@@ -31,8 +31,9 @@ IMPORTANTE: rodar git só aqui no Claude Code (nativo). Não deixar outra ferram
 - Prévia renderizada: tutorial multi-arquivo não abre estilizado sozinho (CSS/imagens relativos). Pra revisar num visualizador, gerar versão self-contained com CSS inline + imagens em base64.
 
 ## Captura de lead (peça crítica)
-- O form existe na **home** (`index.html`, seção contato) e nas páginas de oferta **consultoria** e **mentoria** (bloco `.cta`, feito 2026-09-23). Faz `POST` direto pra `leads_site` no Supabase do **iago-bald** (mesma base do CRM), com a **chave publishable** (anon) e honeypot anti-bot. O lead cai no funil com `origem:'site'` (a RLS exige `origem='site'`; a página de origem vai anotada no `motivo`, ex.: "(via página consultoria)").
-- **Segurança (auditada 2026-09-23):** RLS OK. O `anon` só tem policy de **INSERT** com `with_check (origem='site')`; **não há SELECT** pro anon, então a chave pública no HTML NÃO lê a lista de leads. Não afrouxar essa policy.
+- A captura fica embutida em **consultoria**, **mentoria** e na página **/formulario** (a home só tem CTA pra /formulario, sem form). Faz `POST` direto pra **`leads_formulario`** no Supabase do **iago-bald** (mesma base do CRM), com a **chave publishable** (anon) e honeypot anti-bot. `respostas.origem` varia (`formulario`/`landing-consultoria`/`landing-mentoria`); um gatilho (`leads_formulario_to_funil`) cria o card no funil (col-lead). O **Radar** usa outra tabela (`newsletter_assinantes`). *(Corrigido 2026-10-26; antes dizia `leads_site`, que está dormente.)*
+- **Segurança:** RLS OK. O `anon` só tem policy de **INSERT** em `leads_formulario` (`with check true`); **não há SELECT** pro anon, então a chave pública no HTML NÃO lê a lista de leads. Não afrouxar.
+- ⚠️ A seção "Estrutura" acima ainda cita `/tutoriais` — hoje é **/recursos** (renomeado; `_redirects` tem o 301).
 - Limitação: se o POST falhar, o lead se perde (só `alert`). Melhoria futura: fallback (e-mail/Formspree) ou retry.
 
 ## SEO (feito 2026-09-23)
