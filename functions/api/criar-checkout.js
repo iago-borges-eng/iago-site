@@ -11,10 +11,12 @@ const CORS = {
 
 // Catálogo com preço TRAVADO no servidor. Botões públicos de compra mandam
 // só {produto:"<slug>"} — nunca o valor — pra ninguém adulterar o preço.
+// FONTE ÚNICA do que se cobra. Ao mudar aqui, atualizar a vitrine em
+// mentoria/index.html (o "3x R$97" é só display; quem cobra é este valor).
 const CATALOG = {
   'mentoria-fundadora': {
     descricao: 'Mentoria O Dono Livre — turma fundadora',
-    valor: 291,
+    valor: 291,       // 3x R$97 (precço de fundador) — espelhar em mentoria/index.html
     parcelas: 3,
   },
 };
