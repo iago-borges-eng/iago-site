@@ -94,6 +94,22 @@
         </ul>
       </div>
 
+      <h2 class="rv">A jornada das 12 semanas</h2>
+      <div class="m-jornada">
+        <div class="m-fase rv">
+          <div class="m-fase-tag"><span class="m-fase-num">Fase 1</span><span class="m-fase-wk">Semanas 1 a 3</span></div>
+          <div class="m-fase-body"><h3>Organizar</h3><p>A gente mapeia onde seu tempo vaza e bota <b>ordem</b> no que mais importa. IA em cima de bagunça só acelera a bagunça. Você já sai desta fase com <b>1 processo no automático</b> (o primeiro resultado).</p></div>
+        </div>
+        <div class="m-fase rv">
+          <div class="m-fase-tag"><span class="m-fase-num">Fase 2</span><span class="m-fase-wk">Semanas 4 a 9</span></div>
+          <div class="m-fase-body"><h3>Automatizar</h3><p>As frentes de verdade, ao vivo, no seu negócio: atendimento no WhatsApp, organização de dados, cobrança, conteúdo. Você coloca <b>2 a 3 processos rodando</b> e abre <b>vários caminhos</b> de IA, não um truque só.</p></div>
+        </div>
+        <div class="m-fase rv">
+          <div class="m-fase-tag"><span class="m-fase-num">Fase 3</span><span class="m-fase-wk">Semanas 10 a 12</span></div>
+          <div class="m-fase-body"><h3>Autonomia</h3><p>Cadeira quente com o caso de cada um e o <b>seu método</b> pra olhar qualquer processo e automatizar sozinho depois. Você sai <b>sem depender de mim</b>, com a empresa operando.</p></div>
+        </div>
+      </div>
+
       <h2 class="rv">Como funciona</h2>
       <div class="step rv"><div class="num">01</div><div class="step-body"><h3>Primeiro organiza, depois automatiza</h3><p>IA em cima de bagunça só acelera a bagunça. A gente começa botando <b>ordem</b> no que mais importa.</p></div></div>
       <div class="step rv"><div class="num">02</div><div class="step-body"><h3>Você aplica desde a 1ª semana</h3><p>Nada de teoria parada. Já na primeira semana tem <b>coisa sua rodando</b>. Resultado em dias, não em meses.</p></div></div>
@@ -181,6 +197,17 @@
   .m-vs-ok .m-vs-k{color:var(--orange)}
   .m-vs-ok p{color:var(--bege)}
 
+  /* jornada 12 semanas */
+  .m-jornada{display:flex;flex-direction:column;gap:14px;margin:4px 0 8px}
+  .m-fase{display:grid;grid-template-columns:150px 1fr;gap:28px;border:1px solid var(--line);border-left:4px solid rgba(255,103,1,.5);border-radius:14px;padding:22px 26px;background:rgba(255,255,255,.02);transition:border-left-color .2s}
+  .m-fase:hover{border-left-color:var(--orange)}
+  .m-fase-tag{display:flex;flex-direction:column;gap:4px;padding-top:2px}
+  .m-fase-num{font-family:'Sora',sans-serif;font-weight:800;font-size:1.05rem;color:var(--orange)}
+  .m-fase-wk{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+  .m-fase-body h3{font-size:1.1rem;margin:0 0 7px}
+  .m-fase-body p{margin:0;color:var(--muted);line-height:1.6}
+  .m-fase-body b{color:var(--bege)}
+
   /* pra quem */
   .m-fit{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .m-fit-card{display:flex;gap:14px;border:1px solid var(--line);border-radius:14px;padding:20px 22px;background:rgba(255,255,255,.02)}
@@ -222,6 +249,8 @@
     .m-hero-img img{height:340px;object-position:50% 18%}
     .m-stats{grid-template-columns:1fr;gap:12px}
     .m-vs{grid-template-columns:1fr}
+    .m-fase{grid-template-columns:1fr;gap:10px}
+    .m-fase-tag{flex-direction:row;align-items:baseline;gap:10px}
     .m-fit{grid-template-columns:1fr}
   }
   @media(max-width:480px){
