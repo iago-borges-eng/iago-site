@@ -64,6 +64,9 @@
         <label>WhatsApp do cliente <span class="p-opt">(opcional, só dígitos)</span>
           <input type="tel" name="whats" placeholder="Ex.: 71999998888" inputmode="numeric" />
         </label>
+        <label>Vincular a algo que já existe <span class="p-opt">(opcional, ID — evita duplicar)</span>
+          <input type="text" name="vinculo" placeholder="cli-… (cliente existente) ou id do lead do funil — vazio = cria novo" maxlength="60" />
+        </label>
         <button type="submit" id="genBtn" class="btn btn-primary" style="width:100%;justify-content:center;padding:15px">Gerar link →</button>
         <p id="payErr" class="p-err"></p>
       </form>
@@ -137,6 +140,8 @@
       parcelas:parseInt(form.parcelas.value,10),
       nome:form.nome.value.trim()||undefined
     };
+    var vinc=form.vinculo.value.trim();
+    if(vinc){ if(vinc.indexOf('cli-')===0) body.cliente_id=vinc; else body.lead_id=vinc; }
     btn.disabled=true; btn.textContent='Gerando…';
     fetch('/api/criar-checkout',{
       method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)

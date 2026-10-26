@@ -92,6 +92,10 @@ export async function onRequestPost({ request, env }) {
       nome: payer.name || null,
       email: payer.email || null,
       whats: whats,
+      // Vínculo pro webhook não duplicar: converte o lead do funil, ou fatura
+      // num cliente que já existe, em vez de criar um segundo registro.
+      lead_id: data.lead_id ? String(data.lead_id).slice(0, 60) : null,
+      cliente_id: data.cliente_id ? String(data.cliente_id).slice(0, 60) : null,
       origem: 'site',
     },
   };

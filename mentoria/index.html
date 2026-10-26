@@ -350,9 +350,9 @@
     return true;
   }
   // salva o lead (best-effort) — nunca trava o pagamento se o Supabase falhar
-  function salvaLead(c, intencao){
+  function novoLeadId(){ return 'ment-'+Date.now()+'-'+Math.random().toString(36).slice(2,7); }
+  function salvaLead(c, intencao, id){
     if(c.hp) return Promise.resolve();
-    var id='ment-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);
     return fetch(SUPA+'/rest/v1/leads_formulario',{
       method:'POST',
       headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
@@ -367,10 +367,11 @@
     if(c.hp){ form.style.display='none'; ok.classList.add('show'); return; }
     if(!valida(c)) return;
     payBtn.disabled=true; duvidaBtn.disabled=true; payBtn.textContent='Abrindo pagamento…';
-    salvaLead(c,'pagar').then(function(){
+    var leadId=novoLeadId();
+    salvaLead(c,'pagar',leadId).then(function(){
       return fetch('/api/criar-checkout',{
         method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({produto:'mentoria-fundadora',nome:c.nome,email:c.email,whats:c.telefone})
+        body:JSON.stringify({produto:'mentoria-fundadora',nome:c.nome,email:c.email,whats:c.telefone,lead_id:leadId})
       });
     }).then(function(r){return r.json();})
       .then(function(j){
@@ -390,7 +391,7 @@
     if(c.hp){ form.style.display='none'; ok.classList.add('show'); return; }
     if(!valida(c)) return;
     payBtn.disabled=true; duvidaBtn.disabled=true; duvidaBtn.textContent='Enviando…';
-    salvaLead(c,'duvida').then(function(){
+    salvaLead(c,'duvida',novoLeadId()).then(function(){
       form.style.display='none'; ok.classList.add('show');
     });
   });
