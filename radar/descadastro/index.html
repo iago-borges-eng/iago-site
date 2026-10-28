@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Descadastro · Radar da Semana · Iago Bald</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/site.css" />
+  <style>
+    .uns-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .uns-card { width: 100%; max-width: 520px; background: var(--card-bg, #fff); border: 1px solid var(--line, #e7e7ea);
+      border-radius: 20px; padding: 48px 40px; text-align: center; }
+    .uns-mark { font-family: 'Sora'; font-weight: 800; font-size: 22px; letter-spacing: -.01em; color: var(--bege, #15151c); }
+    .uns-mark b { color: var(--orange, #FF6701); }
+    .uns-title { font-family: 'Sora'; font-weight: 800; font-size: 30px; line-height: 1.12; margin: 26px 0 10px;
+      color: var(--bege, #15151c); letter-spacing: -.02em; }
+    .uns-msg { font-family: 'Lato'; font-size: 17px; color: var(--muted, #5b5f72); line-height: 1.6; }
+    .uns-dot { width: 54px; height: 54px; border-radius: 50%; margin: 0 auto 4px; display: flex; align-items: center; justify-content: center;
+      font-size: 28px; }
+    .uns-ok { background: rgba(111,150,131,.15); color: #2f6f4e; }
+    .uns-err { background: rgba(193,81,122,.12); color: #c1517a; }
+    .uns-wait { background: var(--wash, #FFF4EC); color: var(--orange, #FF6701); }
+    .uns-foot { margin-top: 28px; font-family: 'Lato'; font-size: 14px; }
+    .uns-foot a { color: var(--orange, #FF6701); text-decoration: none; font-weight: 700; }
+    .uns-foot a:hover { text-decoration: underline; }
+    .spin { animation: sp 1s linear infinite; } @keyframes sp { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="uns-wrap">
+    <div class="uns-card">
+      <div class="uns-mark">Iago <b>Bald</b> · Radar da Semana</div>
+      <div id="state">
+        <div class="uns-dot uns-wait"><span class="spin">◐</span></div>
+        <h1 class="uns-title">Saindo da lista…</h1>
+        <p class="uns-msg">Só um instante.</p>
+      </div>
+      <div class="uns-foot"><a href="https://iagobald.com.br/radar">← Voltar ao Radar</a></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+    const SUPABASE_URL = 'https://rgunvvbtqeugzzxfnvhi.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_-NZo96CyCR32RBLum8mEag_Z9yJ0SKX';
+
+    const el = document.getElementById('state');
+    const token = new URLSearchParams(location.search).get('t');
+
+    function render(kind, title, msg) {
+      const dot = kind === 'ok' ? '<div class="uns-dot uns-ok">✓</div>'
+                : kind === 'err' ? '<div class="uns-dot uns-err">!</div>' : '';
+      el.innerHTML = `${dot}<h1 class="uns-title">${title}</h1><p class="uns-msg">${msg}</p>`;
+    }
+
+    if (!token || token.length < 10) {
+      render('err', 'Link inválido', 'Esse link de descadastro não está completo. Use o botão "descadastrar" no rodapé de um e-mail do Radar.');
+    } else {
+      try {
+        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+        const { data, error } = await supabase.rpc('descadastrar_newsletter', { p_token: token });
+        if (error || data !== true) {
+          render('err', 'Não encontramos seu cadastro', 'Pode ser que o link já tenha sido usado. Se continuar recebendo, me responde o e-mail que eu tiro na mão.');
+        } else {
+          render('ok', 'Pronto, você saiu.', 'Você não vai mais receber o Radar da Semana. Sem ressentimentos — a porta fica aberta se mudar de ideia.');
+        }
+      } catch {
+        render('err', 'Deu um problema', 'Tenta de novo em alguns minutos. Se persistir, me responde o e-mail do Radar que eu resolvo.');
+      }
+    }
+  </script>
+</body>
+</html>
