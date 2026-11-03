@@ -76,7 +76,7 @@
         <form id="leadForm" novalidate>
           <div class="f-fields">
             <div class="f-row">
-              <input type="tel" name="telefone" placeholder="Seu WhatsApp *" required autocomplete="tel" />
+              <input type="tel" name="telefone" placeholder="+55 (DD) 9XXXX-XXXX" required autocomplete="tel" maxlength="19" />
               <input type="email" name="email" placeholder="Seu e-mail *" required autocomplete="email" />
             </div>
             <input type="text" name="nome" placeholder="Como posso te chamar? (opcional)" autocomplete="name" />
@@ -148,17 +148,51 @@
   var btn=document.getElementById('submitBtn');
   var wrap=document.getElementById('formWrap');
   var ok=document.getElementById('successMsg');
+  var telInput=form.querySelector('[name="telefone"]');
+
+  // --- Telefone celular BR: máscara + validação (função pura) ---
+  // Mantém só dígitos nacionais (sem o 55) e formata como +55 (DD) 9XXXX-XXXX.
+  function digitosNacionais(raw){
+    var d=(raw||'').replace(/\D/g,'');
+    if(d.length>11 && d.slice(0,2)==='55') d=d.slice(2); // tira DDI se a pessoa digitou o 55
+    return d.slice(0,11); // DDD(2) + 9 + 8 = 11
+  }
+  function formatarTelBR(raw){
+    var d=digitosNacionais(raw);
+    if(!d) return '';
+    var out='+55 ';
+    out+='('+d.slice(0,2);
+    if(d.length<2) return out; // ainda digitando o DDD
+    out+=') ';
+    out+=d.slice(2,7);
+    if(d.length>7) out+='-'+d.slice(7,11);
+    return out;
+  }
+  function telBRValido(raw){
+    var d=digitosNacionais(raw);
+    if(d.length!==11) return false;
+    var ddd=parseInt(d.slice(0,2),10);
+    if(ddd<11||ddd>99) return false;      // DDD 11–99
+    if(d.charAt(2)!=='9') return false;    // celular começa com 9
+    return true;
+  }
+
+  telInput.addEventListener('input', function(){
+    this.value=formatarTelBR(this.value);
+  });
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
     if(form.querySelector('[name="website"]').value){ wrap.style.display='none'; ok.classList.add('show'); return; }
-    var telefone=(form.querySelector('[name="telefone"]').value||'').trim();
+    var telefoneRaw=(telInput.value||'').trim();
     var email=(form.querySelector('[name="email"]').value||'').trim();
     var nome=(form.querySelector('[name="nome"]').value||'').trim()||null;
     var mensagem=(form.querySelector('[name="mensagem"]').value||'').trim()||null;
     var tipoEl=document.querySelector('input[name="tipo"]:checked');
     var tipo=tipoEl?tipoEl.value:null;
-    if(!telefone||!email){ (telefone?form.querySelector('[name="email"]'):form.querySelector('[name="telefone"]')).focus(); return; }
+    if(!telefoneRaw||!email){ (telefoneRaw?form.querySelector('[name="email"]'):telInput).focus(); return; }
+    if(!telBRValido(telefoneRaw)){ telInput.focus(); alert('Digite um WhatsApp válido: +55 (DD) 9XXXX-XXXX'); return; }
+    var telefone='+55'+digitosNacionais(telefoneRaw); // valor limpo, ex.: +5571991204511
     btn.disabled=true; btn.textContent='Enviando…';
     var id='form-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);
     fetch(SUPA+'/rest/v1/leads_formulario',{
