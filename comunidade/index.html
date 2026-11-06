@@ -33,9 +33,13 @@
   .bl-manifesto b{color:var(--orange)}
 
   /* ── ferramentas (logos) ── */
-  .bl-tools{display:flex;align-items:center;gap:clamp(22px,5vw,52px);flex-wrap:wrap;margin-top:18px}
-  .bl-tools img{height:30px;width:auto;opacity:.82;filter:grayscale(1);transition:opacity .2s,filter .2s}
-  .bl-tools img:hover{opacity:1;filter:none}
+  .bl-tools{display:flex;align-items:center;gap:clamp(24px,5vw,54px);flex-wrap:wrap;margin-top:20px}
+  /* monocromático que adapta ao tema; cor no hover */
+  .bl-tools img{height:34px;width:auto;filter:brightness(0) opacity(.5);transition:filter .22s,opacity .22s,transform .22s}
+  [data-theme="dark"] .bl-tools img{filter:brightness(0) invert(1) opacity(.62)}
+  .bl-tools img:hover{filter:none;opacity:1;transform:translateY(-2px)}
+  /* ícone dos pilares */
+  .bl-pill-ic{width:30px;height:30px;color:var(--orange);margin-bottom:14px;stroke-width:1.6}
 
   /* ── pilares (caixas com borda + número) ── */
   .bl-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:10px}
@@ -136,9 +140,10 @@
       <div class="bl-tools">
         <img src="/assets/logos-tools/claude.svg" alt="Claude" />
         <img src="/assets/logos-tools/openai.svg" alt="ChatGPT" />
+        <img src="/assets/logos-tools/gemini.svg" alt="Gemini" />
         <img src="/assets/logos-tools/lovable.svg" alt="Lovable" />
-        <img src="/assets/logos-tools/n8n.svg" alt="n8n" />
         <img src="/assets/logos-tools/cursor.svg" alt="Cursor" />
+        <img src="/assets/logos-tools/n8n.svg" alt="n8n" />
         <img src="/assets/logos-tools/notion.svg" alt="Notion" />
       </div>
     </div>
@@ -150,16 +155,19 @@
     <div class="eyebrow rv">Os 3 pilares</div>
     <div class="bl-pillars">
       <div class="bl-pill rv">
+        <svg class="bl-pill-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.2V17h6v-1.3c0-.8.4-1.6 1-2.2A6 6 0 0 0 12 3Z"/></svg>
         <div class="n">01 · Aprender</div>
         <h3>Entender de verdade</h3>
         <p>O que a IA faz (e o que não faz), as ferramentas, as boas práticas. Direto ao ponto, sem tecniquês e sem promessa mágica.</p>
       </div>
       <div class="bl-pill rv" style="transition-delay:.08s">
+        <svg class="bl-pill-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg>
         <div class="n">02 · Aplicar</div>
         <h3>Sair da teoria</h3>
         <p>Criar assistentes, automatizar tarefa repetitiva, organizar informação, analisar os dados do seu negócio e apoiar a decisão.</p>
       </div>
       <div class="bl-pill rv" style="transition-delay:.16s">
+        <svg class="bl-pill-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         <div class="n">03 · Compartilhar</div>
         <h3>Construir junto</h3>
         <p>O conhecimento não fica só comigo. Você pergunta, mostra o que fez, ajuda e é ajudado. Talvez sua dúvida seja a de mais gente.</p>
