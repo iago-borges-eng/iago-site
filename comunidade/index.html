@@ -21,6 +21,12 @@
   /* ── hero ── */
   .bl-hero-cta{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:30px}
   .bl-mini{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--muted)}
+  /* ── imagens ── */
+  .bl-hero{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,56px);align-items:center}
+  .bl-hero-img img{width:100%;border-radius:22px;border:1px solid var(--line);box-shadow:0 30px 70px rgba(0,0,0,.4);display:block}
+  .bl-band img{width:100%;border-radius:22px;border:1px solid var(--line);box-shadow:0 24px 60px rgba(0,0,0,.35);display:block;aspect-ratio:16/7;object-fit:cover}
+  @media(max-width:820px){.bl-hero{grid-template-columns:1fr}.bl-hero-img{max-width:440px;margin:8px auto 0}}
+  @media(max-width:560px){.bl-hero-img{display:none}}
 
   /* ── manifesto ── */
   .bl-manifesto{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(1.25rem,3.2vw,2rem);line-height:1.32;letter-spacing:-.02em;max-width:900px}
@@ -96,13 +102,18 @@
 <main>
   <!-- HERO -->
   <section class="wrap hero">
-    <div class="rv">
-      <div class="eyebrow">Bald Lab · comunidade · Salvador</div>
-      <h1 class="title" style="margin-top:16px">Menos palestra sobre IA.<br>Mais IA rodando no seu negócio.</h1>
-      <p class="lead">O <b>Bald Lab</b> é uma comunidade gratuita de empresários e gestores de Salvador cansados de só <i>ouvir falar</i> de inteligência artificial. Aqui a gente coloca a mão na massa: aprende, aplica no próprio negócio e compartilha o que funcionou. Junto.</p>
-      <div class="bl-hero-cta">
-        <a class="btn btn-primary" data-wpp href="#entrar">Entrar no grupo do WhatsApp →</a>
-        <span class="bl-mini">Grátis. É só entrar e se apresentar.</span>
+    <div class="bl-hero">
+      <div class="rv">
+        <div class="eyebrow">Bald Lab · comunidade · Salvador</div>
+        <h1 class="title" style="margin-top:16px">Menos palestra sobre IA.<br>Mais IA rodando no seu negócio.</h1>
+        <p class="lead">O <b>Bald Lab</b> é uma comunidade gratuita de empresários e gestores de Salvador cansados de só <i>ouvir falar</i> de inteligência artificial. Aqui a gente coloca a mão na massa: aprende, aplica no próprio negócio e compartilha o que funcionou. Junto.</p>
+        <div class="bl-hero-cta">
+          <a class="btn btn-primary" data-wpp href="#entrar">Entrar no grupo do WhatsApp →</a>
+          <span class="bl-mini">Grátis. É só entrar e se apresentar.</span>
+        </div>
+      </div>
+      <div class="bl-hero-img rv" style="transition-delay:.12s">
+        <img src="/assets/comunidade/sala-tall.jpg" alt="Empresários trabalhando com inteligência artificial no Bald Lab" />
       </div>
     </div>
     <div class="rule"></div>
@@ -178,6 +189,11 @@
       </div>
     </div>
     <div class="rule"></div>
+  </section>
+
+  <!-- BANNER -->
+  <section class="wrap sec">
+    <div class="bl-band rv"><img src="/assets/comunidade/sala-wide.jpg" alt="Comunidade Bald Lab — empresários aplicando IA nos negócios em Salvador" loading="lazy" /></div>
   </section>
 
   <!-- TRILHAS POSSÍVEIS (sem hard-sell) -->
