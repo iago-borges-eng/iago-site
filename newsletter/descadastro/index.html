@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Descadastro · Radar da Semana · Iago Bald</title>
+  <title>Descadastro · Newsletter · Iago Bald</title>
   <meta name="robots" content="noindex" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,13 +33,13 @@
 <body>
   <div class="uns-wrap">
     <div class="uns-card">
-      <div class="uns-mark">Iago <b>Bald</b> · Radar da Semana</div>
+      <div class="uns-mark">Iago <b>Bald</b> · Newsletter</div>
       <div id="state">
         <div class="uns-dot uns-wait"><span class="spin">◐</span></div>
         <h1 class="uns-title">Saindo da lista…</h1>
         <p class="uns-msg">Só um instante.</p>
       </div>
-      <div class="uns-foot"><a href="https://iagobald.com.br/radar">← Voltar ao Radar</a></div>
+      <div class="uns-foot"><a href="https://iagobald.com.br/newsletter">← Voltar à Newsletter</a></div>
     </div>
   </div>
 
@@ -59,7 +59,7 @@
     }
 
     if (!token || token.length < 10) {
-      render('err', 'Link inválido', 'Esse link de descadastro não está completo. Use o botão "descadastrar" no rodapé de um e-mail do Radar.');
+      render('err', 'Link inválido', 'Esse link de descadastro não está completo. Use o botão "descadastrar" no rodapé de um e-mail da Newsletter.');
     } else {
       try {
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -67,10 +67,10 @@
         if (error || data !== true) {
           render('err', 'Não encontramos seu cadastro', 'Pode ser que o link já tenha sido usado. Se continuar recebendo, me responde o e-mail que eu tiro na mão.');
         } else {
-          render('ok', 'Pronto, você saiu.', 'Você não vai mais receber o Radar da Semana. Sem ressentimentos — a porta fica aberta se mudar de ideia.');
+          render('ok', 'Pronto, você saiu.', 'Você não vai mais receber a Newsletter. Sem ressentimentos — a porta fica aberta se mudar de ideia.');
         }
       } catch {
-        render('err', 'Deu um problema', 'Tenta de novo em alguns minutos. Se persistir, me responde o e-mail do Radar que eu resolvo.');
+        render('err', 'Deu um problema', 'Tenta de novo em alguns minutos. Se persistir, me responde o e-mail da Newsletter que eu resolvo.');
       }
     }
   </script>

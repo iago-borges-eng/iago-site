@@ -1,6 +1,6 @@
 /* ───────────────────────────────────────────────────────────────────────────
    site.css — PADRÃO das páginas-vitrine do iagobald.com.br.
-   Usado por: consultoria, mentoria, cursos, recursos, radar.
+   Usado por: consultoria, mentoria, cursos, recursos, newsletter.
    TEMÁVEL: claro (padrão) + escuro via [data-theme="dark"] no <html> (toggle no site.js).
    Fundação + componentes de conteúdo (.outcome/.step/.cta/.tut-card) + revista (.ed-*).
    ─────────────────────────────────────────────────────────────────────────── */
@@ -98,7 +98,7 @@ article > h2:first-child{margin-top:0}
 .soon{grid-column:1/-1;border:1px dashed var(--line);border-radius:16px;padding:22px 26px;color:var(--dim);font-family:'Space Mono',monospace;font-size:13px;text-align:center}
 @media(max-width:720px){.tut-list{grid-template-columns:1fr}}
 
-/* ── REVISTA (/radar) ── */
+/* ── REVISTA (/newsletter) ── */
 .ed-meta{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
 .ed-manchete{font-size:clamp(1.9rem,5vw,2.9rem);font-weight:800;line-height:1.15;margin-bottom:20px;overflow-wrap:break-word}
 .byline{display:flex;align-items:center;gap:11px;margin-bottom:28px}
