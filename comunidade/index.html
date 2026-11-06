@@ -234,10 +234,9 @@
     if (form.querySelector('[name="website"]').value) { document.getElementById('blOk').style.display='block'; form.style.display='none'; return; }
     const nome = document.getElementById('blNome').value.trim();
     const email = document.getElementById('blEmail').value.trim().toLowerCase();
-    const id = 'bl-' + Date.now() + '-' + Math.random().toString(36).slice(2,8);
     try {
-      const r = await sb.from('baldlab_membros').insert({ id, nome, email, origem: 'bald-lab' });
-      if (r.error && r.error.code !== '23505') throw r.error;
+      const r = await sb.rpc('entrar_comunidade', { p_nome: nome, p_email: email });
+      if (r.error) throw r.error;
     } catch (err) { /* não bloqueia; o importante é o grupo */ }
     form.style.display = 'none';
     document.getElementById('blOk').style.display = 'block';
