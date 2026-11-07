@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inscrição · Bald Lab · Iago Bald</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/site.css" />
+  <style>
+    .ins-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .ins-card { width: 100%; max-width: 520px; background: var(--card-bg, #fff); border: 1px solid var(--line, #e7e7ea);
+      border-radius: 20px; padding: 44px 40px; }
+    .ins-mark { font-family: 'Sora'; font-weight: 800; font-size: 15px; letter-spacing: .02em; color: var(--muted, #5b5f72); text-align: center; }
+    .ins-mark b { color: var(--orange, #FF6701); }
+    .ins-kicker { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--orange, #FF6701); text-align: center; margin-top: 22px; }
+    .ins-title { font-family: 'Sora'; font-weight: 800; font-size: 27px; line-height: 1.15; margin: 8px 0 6px;
+      color: var(--bege, #15151c); letter-spacing: -.02em; text-align: center; }
+    .ins-sub { font-family: 'Lato'; font-size: 15px; color: var(--muted, #5b5f72); line-height: 1.55; text-align: center; margin-bottom: 26px; }
+    .ins-field { margin-bottom: 14px; }
+    .ins-field label { display: block; font-family: 'Lato'; font-weight: 700; font-size: 13px; color: var(--bege, #15151c); margin-bottom: 6px; }
+    .ins-field input { width: 100%; font-family: 'Lato'; font-size: 16px; padding: 12px 14px; border-radius: 12px;
+      border: 1px solid var(--line, #e7e7ea); background: var(--wash, #fafafa); color: var(--bege, #15151c); }
+    .ins-field input:focus { outline: none; border-color: var(--orange, #FF6701); }
+    .ins-btn { width: 100%; font-family: 'Sora'; font-weight: 700; font-size: 16px; padding: 14px; border-radius: 12px; border: 0;
+      background: var(--orange, #FF6701); color: #fff; cursor: pointer; margin-top: 8px; transition: transform .1s, background .2s; }
+    .ins-btn:hover { background: #ff8a3d; } .ins-btn:active { transform: scale(.985); }
+    .ins-btn:disabled { opacity: .6; cursor: default; }
+    .ins-hp { position: absolute; left: -9999px; }
+    .ins-msg { font-family: 'Lato'; font-size: 14px; margin-top: 14px; text-align: center; min-height: 20px; }
+    .ins-msg.err { color: #c1517a; } .ins-msg.ok { color: #2f6f4e; }
+    .ins-dot { width: 54px; height: 54px; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 28px; background: rgba(111,150,131,.15); color: #2f6f4e; }
+    .ins-foot { margin-top: 24px; font-family: 'Lato'; font-size: 13px; text-align: center; color: var(--muted, #5b5f72); }
+    .ins-foot a { color: var(--orange, #FF6701); text-decoration: none; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="ins-wrap">
+    <div class="ins-card">
+      <div class="ins-mark">Iago <b>Bald</b> · Bald Lab</div>
+      <div id="view"></div>
+      <div class="ins-foot"><a href="https://iagobald.com.br">← iagobald.com.br</a></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+    const SUPABASE_URL = 'https://rgunvvbtqeugzzxfnvhi.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_-NZo96CyCR32RBLum8mEag_Z9yJ0SKX';
+
+    // slug -> título (estável; evita depender de leitura da tabela)
+    const AULAS = {
+      '01-qual-ia-usar': 'Qual IA usar pra quê',
+      '02-prompt-que-presta': 'O prompt que presta',
+      '03-projetos-contexto': 'Projetos e contexto',
+      '04-documentos': 'Documentos viram resposta',
+      '05-assistentes-sob-medida': 'Assistentes sob medida',
+      '06-instrucoes-padrao': 'Instruções que viram padrão',
+      '07-conectores': 'Conectar a IA às suas ferramentas',
+      '08-primeira-automacao': 'Sua primeira automação',
+      'ia-na-pratica': 'IA na prática',
+    };
+    const slug = (new URLSearchParams(location.search).get('aula') || 'ia-na-pratica').trim();
+    const titulo = AULAS[slug] || 'Comunidade';
+    const view = document.getElementById('view');
+
+    function form() {
+      view.innerHTML = `
+        <div class="ins-kicker">Inscrição · Bald Lab</div>
+        <h1 class="ins-title">${titulo}</h1>
+        <p class="ins-sub">Preencha pra garantir sua vaga. É grátis e leva 20 segundos.</p>
+        <form id="f" autocomplete="on">
+          <div class="ins-field"><label for="nome">Nome</label><input id="nome" name="nome" type="text" required placeholder="Seu nome" /></div>
+          <div class="ins-field"><label for="email">E-mail</label><input id="email" name="email" type="email" required placeholder="voce@email.com" /></div>
+          <div class="ins-field"><label for="tel">WhatsApp <span style="font-weight:400;color:#9a9aa5">(opcional)</span></label><input id="tel" name="tel" type="tel" placeholder="(71) 9...." /></div>
+          <input class="ins-hp" tabindex="-1" autocomplete="off" id="hp" name="empresa_site" />
+          <button class="ins-btn" id="btn" type="submit">Garantir minha vaga</button>
+          <p class="ins-msg" id="msg"></p>
+        </form>`;
+      document.getElementById('f').addEventListener('submit', enviar);
+    }
+
+    async function enviar(e) {
+      e.preventDefault();
+      const hp = document.getElementById('hp').value;
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const tel = document.getElementById('tel').value.trim();
+      const btn = document.getElementById('btn');
+      const msg = document.getElementById('msg');
+      msg.className = 'ins-msg';
+      if (hp) return;                       // honeypot: bot preencheu, ignora em silêncio
+      if (!nome || !email) { msg.className = 'ins-msg err'; msg.textContent = 'Preencha nome e e-mail.'; return; }
+      btn.disabled = true; btn.textContent = 'Enviando…';
+      try {
+        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+        const { error } = await supabase.rpc('inscrever', { p_slug: slug, p_nome: nome, p_email: email, p_telefone: tel || null });
+        if (error) throw error;
+        view.innerHTML = `
+          <div class="ins-dot">✓</div>
+          <h1 class="ins-title">Vaga garantida!</h1>
+          <p class="ins-sub">Você está inscrito em <b>${titulo}</b>. Vou te mandar os detalhes por e-mail${tel ? ' e WhatsApp' : ''}. Até lá.</p>
+          <a class="ins-btn" style="display:block;text-align:center;text-decoration:none;box-sizing:border-box" href="https://iagobald.com.br">Voltar ao site</a>`;
+      } catch (err) {
+        btn.disabled = false; btn.textContent = 'Garantir minha vaga';
+        msg.className = 'ins-msg err';
+        msg.textContent = 'Deu um problema ao inscrever. Tenta de novo em alguns segundos.';
+      }
+    }
+
+    form();
+  </script>
+</body>
+</html>
