@@ -11,8 +11,8 @@ IMPORTANTE: rodar git só aqui no Claude Code (nativo). Não deixar outra ferram
 ## Estrutura
 - `index.html`            → iagobald.com.br            (portfólio, one-page)
 - `links.html`            → iagobald.com.br/links       (linktree)
-- `tutoriais/`
-  - `index.html`          → /tutoriais                  (hub — lista os cards de tutorial)
+- `recursos/`  (antes `tutoriais/`; `_redirects` tem o 301)
+  - `index.html`          → /recursos                   (hub — lista os cards de tutorial)
   - `style.css`           design system compartilhado dos tutoriais (largura máx. 760px)
   - `site-linktree-do-zero/index.html`   Tutorial 1: "Site + Linktree com o Claude"
   - `sistema-no-lovable/index.html`      Tutorial 2: "Sistema no Lovable"
@@ -33,7 +33,6 @@ IMPORTANTE: rodar git só aqui no Claude Code (nativo). Não deixar outra ferram
 ## Captura de lead (peça crítica)
 - A captura fica embutida em **consultoria**, **mentoria** e na página **/formulario** (a home só tem CTA pra /formulario, sem form). Faz `POST` direto pra **`leads_formulario`** no Supabase do **iago-bald** (mesma base do CRM), com a **chave publishable** (anon) e honeypot anti-bot. `respostas.origem` varia (`formulario`/`landing-consultoria`/`landing-mentoria`); um gatilho (`leads_formulario_to_funil`) cria o card no funil (col-lead). A **Newsletter** usa outra tabela (`newsletter_assinantes`). *(Corrigido 2026-10-26; antes dizia `leads_site`, que está dormente.)*
 - **Segurança:** RLS OK. O `anon` só tem policy de **INSERT** em `leads_formulario` (`with check true`); **não há SELECT** pro anon, então a chave pública no HTML NÃO lê a lista de leads. Não afrouxar.
-- ⚠️ A seção "Estrutura" acima ainda cita `/tutoriais` — hoje é **/recursos** (renomeado; `_redirects` tem o 301).
 - Limitação: se o POST falhar, o lead se perde (só `alert`). Melhoria futura: fallback (e-mail/Formspree) ou retry.
 
 ## SEO (feito 2026-09-23)
