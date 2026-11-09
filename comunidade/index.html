@@ -95,7 +95,9 @@
       <a class="navlink" href="/consultoria">Consultoria</a>
       <a class="navlink" href="/mentoria">Mentoria</a>
       <a class="navlink active" href="/comunidade">Comunidade</a>
+      <a class="navlink" href="/recursos">Recursos</a>
       <a class="navlink" href="/newsletter">Newsletter</a>
+      <a class="navlink" href="/links">Links</a>
       <a class="btn btn-primary" data-wpp href="#entrar">Entrar no grupo</a>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -228,14 +230,6 @@
       <div class="bl-hero-cta" style="justify-content:center;margin-top:26px">
         <a class="btn btn-primary" data-wpp href="#">Entrar no grupo do WhatsApp →</a>
       </div>
-      <form id="blForm" class="bl-cap">
-        <input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
-        <input type="text" id="blNome" placeholder="Seu nome" required />
-        <input type="email" id="blEmail" placeholder="Seu melhor e-mail" required />
-        <button type="submit">Receber os avisos</button>
-      </form>
-      <p class="bl-mini" style="margin-top:8px">Opcional, pra receber os avisos das aulas por e-mail também.</p>
-      <p class="bl-ok" id="blOk">Pronto! Você vai receber os avisos das próximas trilhas. 🚀</p>
     </div>
   </section>
 </main>
@@ -253,7 +247,7 @@
   import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
   const sb = createClient('https://rgunvvbtqeugzzxfnvhi.supabase.co','sb_publishable_-NZo96CyCR32RBLum8mEag_Z9yJ0SKX');
   const form = document.getElementById('blForm');
-  form.addEventListener('submit', async (e) => {
+  if (form) form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (form.querySelector('[name="website"]').value) { document.getElementById('blOk').style.display='block'; form.style.display='none'; return; }
     const nome = document.getElementById('blNome').value.trim();

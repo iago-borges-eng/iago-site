@@ -46,10 +46,10 @@
         <h1 class="title">Acho onde teu negócio perde dinheiro, e tapo o furo.</h1>
         <p class="lead">Sigo o dinheiro de ponta a ponta, <b>construo o sistema que resolve</b> e meço quanto volta. Não é pacote fixo, é o que para de perder dinheiro. E eu não mando PDF: <b>entrego a coisa rodando</b>.</p>
         <div class="c-cta-row">
-          <a class="btn btn-primary" href="#diagnostico">Agendar meu diagnóstico →</a>
+          <a class="btn btn-primary" href="#diagnostico">Agendar um papo →</a>
           <a class="btn" href="/diagnostico" style="background:transparent;border:1px solid var(--line);color:var(--bege)">Teste rápido de IA (2 min)</a>
         </div>
-        <span class="c-mini">1ª conversa de 30 min · sem custo · ou faça o teste e já veja seu nível</span>
+        <span class="c-mini">1ª conversa de 30 min · sem custo · sem compromisso</span>
       </div>
       <div class="c-hero-img rv" style="transition-delay:.12s">
         <img src="/assets/home-1.jpg" alt="Iago Bald" />
@@ -59,7 +59,7 @@
     <div class="c-stats rv">
       <div class="c-stat"><span class="n">+10</span><span class="l">sistemas construídos<br><em>empresas reais</em></span></div>
       <div class="c-stat"><span class="n">100%</span><span class="l">sob medida<br><em>sem pacote fixo</em></span></div>
-      <div class="c-stat"><span class="n">30min</span><span class="l">diagnóstico<br><em>sem compromisso</em></span></div>
+      <div class="c-stat"><span class="n">30min</span><span class="l">papo<br><em>sem compromisso</em></span></div>
     </div>
     <div class="rule"></div>
   </section>
@@ -128,7 +128,7 @@
 
       <div class="c-reassure rv">
         <div class="c-reassure-ic">🛡️</div>
-        <div><h3>A primeira conversa é por minha conta.</h3><p>30 minutos, <b>sem custo e sem compromisso</b>. Você sai dela já sabendo onde está perdendo dinheiro, mesmo que a gente não feche nada. E não tem pacote fixo: depois do diagnóstico você vê o furo, o que custa tapar e o quanto volta. <b>Só avança se o número fizer sentido.</b></p></div>
+        <div><h3>A primeira conversa é por minha conta.</h3><p>30 minutos, <b>sem custo e sem compromisso</b>. A gente conversa sobre o teu negócio e eu já te dou uma direção. Se fizer sentido seguir, aí sim eu mergulho de verdade — e não tem pacote fixo: você só avança se o número fizer sentido.</p></div>
       </div>
 
       <h2 class="rv">Perguntas rápidas</h2>
@@ -143,9 +143,9 @@
       <!-- DIAGNÓSTICO (form embedado) -->
       <div class="c-enroll rv" id="diagnostico">
         <div class="c-enroll-head">
-          <div class="c-tag">Diagnóstico · sem custo</div>
-          <h3>Vamos achar teu primeiro furo?</h3>
-          <p>Deixa teu contato e me conta rapidinho do teu negócio. <b>Eu te chamo no WhatsApp</b> pra marcar os 30 minutos de diagnóstico, sem custo e sem compromisso.</p>
+          <div class="c-tag">Papo · sem custo</div>
+          <h3>Bora trocar uma ideia?</h3>
+          <p>Deixa teu contato e me conta rapidinho do teu negócio. <b>Eu te chamo no WhatsApp</b> pra marcar um papo de 30 minutos, sem custo e sem compromisso. Se quiser já chegar sabendo teu nível, faz o <a href="/diagnostico" style="color:var(--orange)">teste de IA</a> antes.</p>
         </div>
 
         <form id="leadForm" class="c-form" novalidate>
@@ -156,13 +156,13 @@
           <input type="text" name="nome" placeholder="Como te chamo?" autocomplete="name" />
           <textarea name="negocio" rows="3" placeholder="Qual seu negócio e onde você sente que perde dinheiro/tempo hoje?"></textarea>
           <input type="text" name="website" class="c-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
-          <button type="submit" id="leadBtn" class="c-btn c-btn-full">Agendar meu diagnóstico →</button>
+          <button type="submit" id="leadBtn" class="c-btn c-btn-full">Quero conversar →</button>
         </form>
 
         <div class="c-form-ok" id="leadOk">
           <div class="c-form-ok-ic">✓</div>
           <h3>Recebi seu contato!</h3>
-          <p>Te chamo no WhatsApp pra marcar os 30 minutos de diagnóstico. 🧡</p>
+          <p>Te chamo no WhatsApp pra marcar nosso papo de 30 minutos. 🧡</p>
         </div>
       </div>
     </article>
@@ -313,7 +313,7 @@
       headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
       body:JSON.stringify({id:id,tipo:'consultoria',nome:nome,telefone:telefone,email:email,respostas:{origem:'landing-consultoria',negocio:negocio}})
     }).then(function(r){ if(!r.ok) throw 0; form.style.display='none'; ok.classList.add('show'); })
-      .catch(function(){ btn.disabled=false; btn.textContent='Agendar meu diagnóstico →'; alert('Ops, não consegui enviar. Tenta de novo em instantes.'); });
+      .catch(function(){ btn.disabled=false; btn.textContent='Quero conversar →'; alert('Ops, não consegui enviar. Tenta de novo em instantes.'); });
   });
 })();
 </script>
