@@ -253,8 +253,7 @@
   .cw{display:flex;flex-direction:column;align-items:center;gap:10px}
   .cw .plate{background:#fff;border-radius:12px;height:78px;min-width:158px;width:100%;display:flex;align-items:center;justify-content:center;padding:15px 20px;transition:transform .22s,box-shadow .22s}
   .cw:hover .plate{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.45)}
-  .cw img{max-height:40px;max-width:150px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.8;transition:filter .25s,opacity .25s}
-  .cw:hover img{filter:none;opacity:1}
+  .cw img{max-height:40px;max-width:150px;width:auto;object-fit:contain}
   .cw .ds{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;color:var(--dim);text-align:center}
   @media(max-width:640px){.cw{flex:1 1 42%}.cw .plate{min-width:0;height:66px;padding:12px}.cw img{max-height:32px}}
 
@@ -262,23 +261,27 @@
   .stat .sic{color:var(--orange);opacity:.85;margin-bottom:14px;display:block}
   .stat .sic svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 
-  /* offer ladder (image + tag + cta) */
+  /* escada de ofertas — cards de texto (badge + título + kicker + pills + CTA), estilo da Bruna */
   .ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
-  .lcard{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:rgba(255,255,255,.02);transition:transform .22s,border-color .22s}
+  .lcard{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:20px;padding:26px;background:linear-gradient(162deg,rgba(255,255,255,.04),rgba(255,255,255,.01));overflow:hidden;transition:transform .22s,border-color .22s}
   .lcard:hover{transform:translateY(-5px);border-color:rgba(255,103,1,.42)}
-  .lcard .ph{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--panel)}
-  .lcard .ph img{width:100%;height:100%;object-fit:cover;object-position:top left;transition:transform .5s}
-  .lcard:hover .ph img{transform:scale(1.045)}
-  .lcard .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(8,9,15,.5))}
-  .lcard .tag{position:absolute;top:12px;left:12px;z-index:2;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:rgba(8,9,15,.74);border:1px solid var(--line);color:var(--bege)}
-  .lcard .tag.free{background:var(--orange);color:#160a02;border-color:var(--orange)}
-  .lcard .body{padding:22px;display:flex;flex-direction:column;flex:1}
-  .lcard h3{font-family:'Sora';font-weight:700;font-size:1.2rem;margin-bottom:8px}
-  .lcard p{color:var(--muted);font-size:.95rem;line-height:1.55;flex:1}
-  .lcard .go{margin-top:16px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--orange);display:inline-flex;align-items:center;gap:7px;transition:gap .2s}
-  .lcard:hover .go{gap:11px}
+  .lcard.feat{border-color:rgba(255,103,1,.4)}
+  .lcard.feat::before{content:"";position:absolute;inset:0 0 auto auto;width:230px;height:230px;background:radial-gradient(circle at 80% 0,rgba(255,103,1,.12),transparent 60%);pointer-events:none}
+  .lbadge{position:relative;align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-bottom:18px}
+  .lbadge.free{background:var(--orange);color:#160a02;border-color:var(--orange)}
+  .lbadge .d{width:6px;height:6px;border-radius:50%;background:currentColor}
+  .lcard .kick{position:relative;font-family:'Sora';font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.05em;color:var(--orange);margin-bottom:5px}
+  .lcard h3{position:relative;font-family:'Sora';font-weight:800;font-size:1.5rem;line-height:1.08;letter-spacing:-.01em;margin-bottom:11px}
+  .lcard h3 em{font-style:normal;color:var(--orange)}
+  .lcard p{position:relative;color:var(--muted);font-size:.98rem;line-height:1.55;flex:1}
+  .lcard p b{color:var(--bege);font-weight:700}
+  .lpills{position:relative;display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+  .lpills i{font-style:normal;font-family:'Space Mono',monospace;font-size:11px;color:var(--bege);opacity:.8;border:1px solid var(--line);border-radius:999px;padding:6px 11px}
+  .lcta{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px;padding:14px 18px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-family:'Sora';font-weight:700;font-size:.98rem;color:var(--bege);transition:background .2s,color .2s,border-color .2s}
+  .lcard:hover .lcta,.lcard.feat .lcta{background:var(--orange);color:#160a02;border-color:var(--orange)}
+  .lcta svg{width:17px;height:17px;flex:none}
   @media(max-width:960px){.ladder{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:640px){.ladder{grid-template-columns:1fr}.annc .inner{font-size:11px;gap:10px;padding:8px 40px 8px 16px}.annc .ap.alt{display:none}}
+  @media(max-width:640px){.ladder{grid-template-columns:1fr}.lcard h3{font-size:1.35rem}}
 
   /* credential chips */
   .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
@@ -316,15 +319,7 @@
   }
 </style>
 </head>
-<body class="has-annc">
-<div class="annc" id="annc">
-  <div class="inner">
-    <span>Comece grátis:</span>
-    <a class="ap hot" href="/comunidade">● Bald Lab · comunidade de IA</a>
-    <a class="ap alt" href="/newsletter">Newsletter toda sexta</a>
-  </div>
-  <button class="x" id="anncX" aria-label="Fechar aviso">×</button>
-</div>
+<body>
 <div class="nodes">
   <svg viewBox="0 0 600 600" fill="none" stroke="rgba(255,103,1,0.5)" stroke-width="1">
     <circle cx="120" cy="90" r="34"/><circle cx="120" cy="90" r="12" fill="rgba(255,103,1,.5)" stroke="none"/>
@@ -488,24 +483,44 @@
       <p class="lead rv">Pra você, pro seu time ou pra sua operação inteira. Escolhe o degrau certo pro seu momento.</p>
       <div class="ladder">
         <a class="lcard rv" href="/comunidade">
-          <div class="ph"><span class="tag free">Grátis</span><img loading="lazy" decoding="async" src="/assets/home-2.jpg" alt="Bald Lab" /></div>
-          <div class="body"><h3>Bald Lab</h3><p>A comunidade de IA aplicada a negócios, em Salvador. Trilhas, aulas e troca real. O jeito mais fácil de começar comigo.</p><span class="go">Entrar grátis →</span></div>
+          <span class="lbadge free"><span class="d"></span>Grátis</span>
+          <div class="kick">Comunidade</div>
+          <h3>Bald Lab</h3>
+          <p>A comunidade de IA aplicada a negócios, em Salvador. Trilhas, encontros e troca real com outros donos. O jeito mais fácil de começar comigo.</p>
+          <div class="lpills"><i>Grátis</i><i>Salvador</i><i>Trilhas</i></div>
+          <span class="lcta">Entrar grátis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </a>
         <a class="lcard rv" href="/diagnostico">
-          <div class="ph"><span class="tag free">Grátis</span><img loading="lazy" decoding="async" src="/assets/systems/assessor-financeiro.png" alt="Diagnóstico de IA" /></div>
-          <div class="body"><h3>Diagnóstico AI-First</h3><p>7 perguntas, 1 minuto, resultado na hora: descobre o nível de IA da sua empresa e o próximo passo certo pra você.</p><span class="go">Fazer o teste →</span></div>
+          <span class="lbadge free"><span class="d"></span>Grátis</span>
+          <div class="kick">Teste rápido</div>
+          <h3>Diagnóstico <em>AI-First</em></h3>
+          <p>7 perguntas, 1 minuto, <b>resultado na hora</b>. Descobre o nível de IA da sua empresa e o próximo passo certo pro seu momento.</p>
+          <div class="lpills"><i>7 perguntas</i><i>1 minuto</i><i>Resultado na hora</i></div>
+          <span class="lcta">Fazer o teste <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </a>
         <a class="lcard rv" href="/cursos">
-          <div class="ph"><span class="tag">Pro seu time</span><img loading="lazy" decoding="async" src="/assets/home-1.jpg" alt="Workshops e treinamentos" /></div>
-          <div class="body"><h3>Workshops e palestras</h3><p>Seu time saindo da aula já fazendo, não anotando. Treinamentos de IA na prática, com os casos reais da sua empresa.</p><span class="go">Levar pra minha empresa →</span></div>
+          <span class="lbadge">Pro seu time</span>
+          <div class="kick">Treinamento</div>
+          <h3>Workshops e palestras</h3>
+          <p>Seu time sai da aula <b>já fazendo</b>, não anotando. Treinamento de IA com os casos reais da sua empresa, presencial ou online.</p>
+          <div class="lpills"><i>Presencial · online</i><i>Palestra</i><i>Workshop</i></div>
+          <span class="lcta">Levar pra minha empresa <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </a>
-        <a class="lcard rv" href="/consultoria">
-          <div class="ph"><span class="tag">Feito pra você</span><img loading="lazy" decoding="async" src="/assets/systems/clinica.png" alt="Consultoria e sistemas" /></div>
-          <div class="body"><h3>Consultoria + sistemas</h3><p>Meu carro-chefe. Organizo a operação e construo o sistema ou a automação que resolve a dor nº1 do negócio.</p><span class="go">Conhecer a consultoria →</span></div>
+        <a class="lcard feat rv" href="/consultoria">
+          <span class="lbadge">Feito pra você</span>
+          <div class="kick">Carro-chefe</div>
+          <h3>Consultoria <em>+ sistemas</em></h3>
+          <p>Organizo a operação e construo o sistema ou a automação que resolve a dor nº1 do negócio — <b>em semanas, não meses</b>.</p>
+          <div class="lpills"><i>Diagnóstico</i><i>Organização</i><i>Sistema sob medida</i></div>
+          <span class="lcta">Conhecer a consultoria <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </a>
         <a class="lcard rv" href="/mentoria">
-          <div class="ph"><span class="tag">Por aplicação</span><img loading="lazy" decoding="async" src="/assets/home-3.jpg" alt="Mentoria individual" /></div>
-          <div class="body"><h3>Mentoria individual</h3><p>Eu do seu lado, 1:1, do seu problema real a um protótipo que roda. Por aplicação, pra quem quer aprender fazendo.</p><span class="go">Quero aplicar →</span></div>
+          <span class="lbadge">Por aplicação</span>
+          <div class="kick">1 a 1</div>
+          <h3>Mentoria individual</h3>
+          <p>Eu do seu lado, 1:1, do seu problema real a <b>um protótipo que roda</b>. Pra quem quer aprender fazendo.</p>
+          <div class="lpills"><i>1:1</i><i>Mensal</i><i>Por aplicação</i></div>
+          <span class="lcta">Quero aplicar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </a>
       </div>
     </div>
