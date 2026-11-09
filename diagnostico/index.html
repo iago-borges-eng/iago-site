@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta property="og:image" content="https://iagobald.com.br/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<title>Diagnóstico de IA — qual o nível da sua empresa? · Iago Bald</title>
+<meta name="description" content="12 perguntas, 2 minutos, resultado na hora. Descubra o nível de IA e organização da sua empresa e o próximo passo certo pra você." />
+<meta property="og:title" content="Diagnóstico de IA — qual o nível da sua empresa?" />
+<meta property="og:description" content="12 perguntas, 2 minutos, resultado na hora. Descubra o nível de IA da sua empresa." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Lato:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg:#08090f;--bg2:#0C0E23;--bege:#F4F4F6;--muted:#9599b0;--dim:#61647e;--line:rgba(255,255,255,.1);--orange:#FF6701;--orange2:#ff853a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--bege);font-family:'Lato',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--orange);color:#12070a}
+  .glow{position:fixed;top:-20%;right:-10%;width:60vw;height:60vw;max-width:760px;max-height:760px;z-index:0;pointer-events:none;background:radial-gradient(circle,rgba(255,103,1,.1),transparent 60%);filter:blur(40px)}
+  .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:40px 22px 60px;min-height:100vh;display:flex;flex-direction:column}
+
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px}
+  .top img{height:22px}
+  .top .eye{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange)}
+
+  /* progresso */
+  .bar{height:3px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin-bottom:8px}
+  .bar i{display:block;height:100%;background:var(--orange);border-radius:3px;transition:width .3s cubic-bezier(.2,.7,.2,1)}
+  .meta{display:flex;align-items:center;justify-content:space-between;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:30px}
+  .meta button{background:none;border:none;color:var(--muted);cursor:pointer;font-family:inherit;font-size:11px}
+  .meta button:hover{color:var(--bege)}
+
+  .mid{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:16px}
+  h1{font-family:'Sora';font-weight:800;font-size:clamp(1.9rem,6vw,2.9rem);line-height:1.08;letter-spacing:-.02em}
+  h1 em{font-style:normal;color:var(--orange)}
+  .lead{color:var(--muted);font-size:1.08rem;line-height:1.6;margin-top:18px;max-width:46ch}
+  .lead b{color:var(--bege)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .chips span{font-family:'Space Mono',monospace;font-size:12px;color:var(--bege);opacity:.85;border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+
+  .q{font-family:'Sora';font-weight:700;font-size:clamp(1.4rem,4.5vw,2rem);line-height:1.18;letter-spacing:-.01em;margin-bottom:24px}
+  .opts{display:flex;flex-direction:column;gap:11px}
+  .opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:17px 18px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.02);color:var(--bege);font-family:'Lato';font-size:1.04rem;cursor:pointer;transition:border-color .18s,background .18s,transform .12s}
+  .opt:hover{border-color:rgba(255,103,1,.55);background:rgba(255,103,1,.05)}
+  .opt:active{transform:scale(.99)}
+  .opt .k{flex:none;width:30px;height:30px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;font-family:'Space Mono',monospace;font-size:13px;color:var(--orange)}
+  .opt.sel{border-color:var(--orange);background:rgba(255,103,1,.08)}
+  .opt.sel .k{background:var(--orange);color:#160a02;border-color:var(--orange)}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:17px 26px;border:none;border-radius:14px;background:var(--orange);color:#fff;font-family:'Sora';font-weight:700;font-size:1.05rem;cursor:pointer;transition:transform .18s,filter .18s}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+  .btn.full{width:100%}
+  .btn.ghost{background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--bege)}
+  .btn.ghost:hover{border-color:rgba(255,103,1,.5);color:var(--orange);filter:none}
+
+  /* gate (captura) */
+  .form{display:flex;flex-direction:column;gap:12px;margin-top:26px}
+  .form input{width:100%;padding:16px 18px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.25);color:var(--bege);font-family:'Lato';font-size:1.02rem;outline:none;transition:border-color .2s}
+  .form input::placeholder{color:var(--dim)}
+  .form input:focus{border-color:rgba(255,103,1,.55)}
+  .fine{font-size:12px;color:var(--dim);margin-top:4px}
+
+  /* resultado */
+  .res-nivel{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange)}
+  .radarwrap{display:flex;justify-content:center;margin:20px 0 6px}
+  .geral{text-align:center;font-family:'Sora';font-weight:800;font-size:2.4rem;color:var(--orange)}
+  .geral span{font-size:1rem;color:var(--muted);font-weight:400}
+  .diag{color:var(--muted);font-size:1.06rem;line-height:1.65;margin-top:10px}
+  .diag b{color:var(--bege)}
+  .eixos{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:22px}
+  .eixos .e{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid var(--line);border-radius:12px;padding:11px 14px;font-size:14px}
+  .eixos .e b{font-family:'Sora';font-weight:700;color:var(--orange);font-variant-numeric:tabular-nums}
+  .next{margin-top:28px;border-top:1px solid var(--line);padding-top:24px}
+  .next h3{font-family:'Sora';font-weight:800;font-size:1.35rem;margin-bottom:6px}
+  .next p{color:var(--muted);line-height:1.6;margin-bottom:18px}
+  .cta-row{display:flex;flex-direction:column;gap:10px}
+  .refazer{display:block;text-align:center;margin-top:22px;font-family:'Space Mono',monospace;font-size:12px;color:var(--dim)}
+  .refazer:hover{color:var(--orange)}
+
+  @media(min-width:640px){.cta-row{flex-direction:row}.cta-row .btn{flex:1}}
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<main class="wrap" id="app"></main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var SUPA='https://rgunvvbtqeugzzxfnvhi.supabase.co';
+  var KEY='sb_publishable_-NZo96CyCR32RBLum8mEag_Z9yJ0SKX';
+  var sb = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPA,KEY) : null;
+
+  var EIXOS = ["Uso de IA","Automação","Dados","Conteúdo","Atendimento","Gestão"];
+  // 12 perguntas, 2 por eixo (na ordem dos eixos). Opções valem 0/3/6/10.
+  var Q = [
+    {e:0,t:"Hoje, como a IA entra no seu dia a dia?",o:[["Quase não uso",0],["Uso o ChatGPT pra uma coisa ou outra",3],["Uso todo dia, pra várias tarefas",6],["Tenho IA fazendo trabalho sozinha pra mim",10]]},
+    {e:0,t:"E a sua equipe, usa IA?",o:[["Só eu, de vez em quando",0],["Alguns usam por conta própria",3],["O time usa no trabalho do dia a dia",6],["Temos IA no fluxo da empresa, não só nas pessoas",10]]},
+    {e:1,t:"Quantos processos rodam sem alguém empurrar na mão?",o:[["Nenhum, é tudo manual",0],["Um ou outro",3],["Vários já automatizados",6],["O essencial roda sozinho e me avisa",10]]},
+    {e:1,t:"Tarefa repetitiva (orçamento, cobrança, lembrete)…",o:[["Faço na mão toda vez",0],["Tenho um modelo pronto que eu copio",3],["Alguma coisa já dispara sozinha",6],["O sistema faz e eu só aprovo",10]]},
+    {e:2,t:"Pra saber quanto você vendeu esse mês, você…",o:[["Pergunta pra alguém / não sei de cabeça",0],["Abre uma planilha e soma",3],["Tem uma planilha que já mostra",6],["Abre um painel e vê na hora",10]]},
+    {e:2,t:"A informação do negócio (clientes, vendas, caixa) está…",o:[["Na minha cabeça e em vários lugares",0],["Em planilhas espalhadas",3],["Organizada num lugar só",6],["Num sistema que conecta tudo",10]]},
+    {e:3,t:"Seu conteúdo (posts, newsletter, proposta) sai…",o:[["Quase não produzo",0],["Na correria, quando dá",3],["Com um processo, mas me toma tempo",6],["Com ajuda de IA, rápido e no meu tom",10]]},
+    {e:3,t:"Pra atrair cliente novo você depende de…",o:[["Indicação e sorte",0],["Postar de vez em quando",3],["Uma presença constante",6],["Um funil que gera lead sozinho",10]]},
+    {e:4,t:"Um lead te chama no WhatsApp fora do horário. O que acontece?",o:[["Fica esperando eu ver",0],["Alguém responde quando dá",3],["Tenho mensagem/fluxo pronto",6],["Um agente responde e qualifica sozinho",10]]},
+    {e:4,t:"O follow-up de quem não fechou…",o:[["Acabo esquecendo",0],["Lembro de alguns",3],["Anoto pra não perder",6],["O sistema me avisa quem esfriou",10]]},
+    {e:5,t:"Se você sumir por 15 dias, a empresa…",o:[["Para — eu sou o sistema dela",0],["Trava em várias coisas",3],["Anda com esforço do time",6],["Roda tranquila sem mim",10]]},
+    {e:5,t:"Pra decidir (preço, contratar, investir) você olha…",o:[["O que dá na cabeça",0],["Pergunto pro time",3],["Minhas planilhas",6],["Os números num painel e decido",10]]},
+  ];
+  var LETRAS = ["A","B","C","D"];
+
+  var NIVEIS = [
+    {max:3.0, nome:"Tudo na mão", txt:"Sua empresa depende de você pra quase tudo, e a informação mora na sua cabeça. A boa notícia: é exatamente aqui que organizar dá o <b>maior salto</b>. O primeiro passo não é IA — é tirar o negócio da sua cabeça e botar num lugar só."},
+    {max:5.5, nome:"Começando", txt:"Você já usa IA pra tarefas soltas, mas ainda não virou sistema. O próximo passo é <b>organizar o que está espalhado</b> antes de automatizar — IA em cima de bagunça só acelera a bagunça."},
+    {max:7.5, nome:"Organizado", txt:"Você tem processo e já enxerga o negócio. Falta colocar a <b>IA pra trabalhar sozinha</b> nos pontos certos: atendimento, proposta, follow-up, conteúdo."},
+    {max:10.1, nome:"Alavancado", txt:"Você já tem sistema rodando e enxerga tudo. O jogo agora é <b>escalar e aprofundar</b> — agentes e automação no que ainda sobra de manual."},
+  ];
+
+  var app = document.getElementById("app");
+  var idx = -1;              // -1 intro · 0..11 perguntas · 12 captura · 13 resultado
+  var ans = new Array(12).fill(null);
+  var lead = {nome:"",email:"",tel:""};
+
+  function topo(){ return '<div class="top"><img src="/marca/logo-escuro.svg" alt="Iago Bald" /><span class="eye">Diagnóstico de IA</span></div>'; }
+
+  function render(){
+    window.scrollTo(0,0);
+    if(idx===-1) return intro();
+    if(idx>=0 && idx<12) return pergunta();
+    if(idx===12) return captura();
+    return resultado();
+  }
+
+  function intro(){
+    app.innerHTML = topo() +
+      '<div class="mid">'+
+        '<div class="eyebrow">Diagnóstico gratuito</div>'+
+        '<h1>Qual é o nível de <em>IA</em> da sua empresa?</h1>'+
+        '<p class="lead"><b>Quase todo dono acha que está mais avançado do que está.</b> São 12 perguntas rápidas pra descobrir onde você está de verdade — e qual o próximo passo certo pro seu momento.</p>'+
+        '<div class="chips"><span>12 perguntas</span><span>2 minutos</span><span>Resultado na hora</span></div>'+
+        '<div style="margin-top:34px"><button class="btn" id="go">Começar o diagnóstico →</button></div>'+
+      '</div>';
+    document.getElementById("go").onclick = function(){ idx=0; render(); };
+  }
+
+  function pergunta(){
+    var q = Q[idx];
+    var pct = Math.round((idx/12)*100);
+    app.innerHTML = topo() +
+      '<div class="bar"><i style="width:'+pct+'%"></i></div>'+
+      '<div class="meta"><button id="back">'+(idx>0?'← voltar':'')+'</button><span>Pergunta '+(idx+1)+' de 12 · '+EIXOS[q.e]+'</span></div>'+
+      '<div class="mid">'+
+        '<div class="q">'+q.t+'</div>'+
+        '<div class="opts">'+ q.o.map(function(op,i){
+          var sel = ans[idx]===i ? ' sel':'';
+          return '<button class="opt'+sel+'" data-i="'+i+'"><span class="k">'+LETRAS[i]+'</span><span>'+op[0]+'</span></button>';
+        }).join('') +'</div>'+
+      '</div>';
+    document.getElementById("back").onclick = function(){ if(idx>0){ idx--; render(); } };
+    Array.prototype.forEach.call(app.querySelectorAll(".opt"), function(b){
+      b.onclick = function(){ ans[idx]=Number(b.dataset.i); setTimeout(function(){ idx++; render(); }, 160); };
+    });
+  }
+
+  function captura(){
+    app.innerHTML = topo() +
+      '<div class="bar"><i style="width:100%"></i></div>'+
+      '<div class="meta"><button id="back">← voltar</button><span>Última etapa</span></div>'+
+      '<div class="mid">'+
+        '<div class="eyebrow">Seu diagnóstico está pronto</div>'+
+        '<h1>Pra onde eu mando o <em>resultado</em>?</h1>'+
+        '<p class="lead">Seu radar completo + o próximo passo. Sem spam, sem lista de e-mails. Só o Iago.</p>'+
+        '<form class="form" id="f" novalidate>'+
+          '<input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />'+
+          '<input id="nome" type="text" placeholder="Seu nome" required />'+
+          '<input id="email" type="email" placeholder="Seu melhor e-mail" required />'+
+          '<input id="tel" type="tel" placeholder="WhatsApp (opcional)" />'+
+          '<button class="btn full" type="submit" id="ver">Ver meu resultado →</button>'+
+          '<p class="fine" id="erro"></p>'+
+        '</form>'+
+      '</div>';
+    document.getElementById("back").onclick = function(){ idx=11; render(); };
+    document.getElementById("f").addEventListener("submit", function(e){
+      e.preventDefault();
+      if(document.querySelector('[name="website"]').value) { idx=13; render(); return; }
+      lead.nome = document.getElementById("nome").value.trim();
+      lead.email = document.getElementById("email").value.trim();
+      lead.tel = document.getElementById("tel").value.trim();
+      if(!lead.nome || lead.email.indexOf("@")<1){ document.getElementById("erro").textContent = "Preenche o nome e um e-mail válido."; return; }
+      salvar();
+      idx=13; render();
+    });
+  }
+
+  function scores(){
+    var s = [0,0,0,0,0,0], c = [0,0,0,0,0,0];
+    for(var i=0;i<12;i++){ var q=Q[i]; var v=(ans[i]!=null)?q.o[ans[i]][1]:0; s[q.e]+=v; c[q.e]++; }
+    return s.map(function(x,i){ return Math.round((x/(c[i]||1))*10)/10; });
+  }
+  function nivelDe(geral){ for(var i=0;i<NIVEIS.length;i++){ if(geral<NIVEIS[i].max) return i; } return 3; }
+
+  function radarSVG(sc){
+    var S=300, cx=S/2, cy=S/2, R=108, n=6;
+    function pt(i,r){ var a=(-90+i*60)*Math.PI/180; return [cx+Math.cos(a)*r, cy+Math.sin(a)*r]; }
+    var g='';
+    [0.25,0.5,0.75,1].forEach(function(k){
+      var pts=[]; for(var i=0;i<n;i++){ pts.push(pt(i,R*k).map(Math.round).join(",")); }
+      g+='<polygon points="'+pts.join(" ")+'" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>';
+    });
+    for(var i=0;i<n;i++){ var p=pt(i,R); g+='<line x1="'+cx+'" y1="'+cy+'" x2="'+Math.round(p[0])+'" y2="'+Math.round(p[1])+'" stroke="rgba(255,255,255,0.08)"/>'; }
+    var dp=[]; for(var i=0;i<n;i++){ dp.push(pt(i,R*(sc[i]/10)).map(Math.round).join(",")); }
+    g+='<polygon points="'+dp.join(" ")+'" fill="rgba(255,103,1,0.22)" stroke="#FF6701" stroke-width="2.5" stroke-linejoin="round"/>';
+    for(var i=0;i<n;i++){ var p=pt(i,R*(sc[i]/10)); g+='<circle cx="'+Math.round(p[0])+'" cy="'+Math.round(p[1])+'" r="3.5" fill="#FF6701"/>'; }
+    var labels='';
+    for(var i=0;i<n;i++){ var p=pt(i,R+22); var anchor=(Math.abs(p[0]-cx)<6)?"middle":(p[0]>cx?"start":"end");
+      labels+='<text x="'+Math.round(p[0])+'" y="'+Math.round(p[1]+4)+'" fill="#9599b0" font-family="Space Mono, monospace" font-size="11" text-anchor="'+anchor+'">'+EIXOS[i]+'</text>'; }
+    return '<svg width="300" height="300" viewBox="0 0 300 300" style="max-width:100%">'+g+labels+'</svg>';
+  }
+
+  function resultado(){
+    var sc = scores();
+    var geral = Math.round((sc.reduce(function(a,b){return a+b;},0)/6)*10)/10;
+    var ni = nivelDe(geral), nv = NIVEIS[ni];
+    app.innerHTML = topo() +
+      '<div style="text-align:center">'+
+        '<div class="res-nivel">Nível '+(ni+1)+' de 4</div>'+
+        '<h1 style="margin-top:8px">'+nv.nome+'</h1>'+
+      '</div>'+
+      '<div class="radarwrap">'+radarSVG(sc)+'</div>'+
+      '<div class="geral">'+geral.toFixed(1)+'<span> / 10 no geral</span></div>'+
+      '<p class="diag">'+nv.txt+'</p>'+
+      '<div class="eixos">'+ EIXOS.map(function(e,i){ return '<div class="e"><span>'+e+'</span><b>'+sc[i].toFixed(1)+'</b></div>'; }).join('') +'</div>'+
+      '<div class="next">'+
+        '<h3>Seu próximo passo</h3>'+
+        '<p>Quer que eu olhe isso com você e monte um plano? Numa conversa de 30 minutos eu aponto onde o seu negócio perde mais tempo e dinheiro — e o que dá pra resolver primeiro.</p>'+
+        '<div class="cta-row">'+
+          '<a class="btn" href="/formulario?src=diagnostico">Falar com o Iago</a>'+
+          '<a class="btn ghost" href="/consultoria">Ver a consultoria</a>'+
+        '</div>'+
+        '<a class="btn ghost full" href="/comunidade" style="margin-top:10px">Entrar no Bald Lab (comunidade grátis)</a>'+
+      '</div>'+
+      '<a class="refazer" href="#" id="re">↻ refazer o teste</a>';
+    document.getElementById("re").onclick = function(e){ e.preventDefault(); idx=-1; ans=new Array(12).fill(null); render(); };
+  }
+
+  function salvar(){
+    if(!sb) return;
+    var sc = scores();
+    var geral = Math.round((sc.reduce(function(a,b){return a+b;},0)/6)*10)/10;
+    var ni = nivelDe(geral);
+    var eixos = {}; EIXOS.forEach(function(e,i){ eixos[e]=sc[i]; });
+    var id='diag-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);
+    sb.from('leads_formulario').insert({
+      id:id, tipo:'diagnostico',
+      nome:lead.nome, email:lead.email, telefone:lead.tel||null,
+      pontuacao:geral,
+      respostas:{ origem:'diagnostico', src:'diagnostico', nivel:(ni+1), nivel_label:NIVEIS[ni].nome, eixos:eixos }
+    }).then(function(){}, function(){});
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

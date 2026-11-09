@@ -3,6 +3,3 @@
 
 /radar /newsletter 301
 /radar/* /newsletter/:splat 301
-
-# interino: /diagnostico aponta pro Teste das Férias (CRM) até a página dedicada nascer (Fase 3)
-/diagnostico https://app.iagobald.com.br/f/ferias 302
