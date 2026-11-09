@@ -228,6 +228,53 @@
   footer{border-top:1px solid var(--line);padding:40px 0;position:relative;z-index:3}
   .foot-bot{display:flex;justify-content:center;text-align:center;font-family:'Space Mono',monospace;font-size:12px;color:var(--dim)}
 
+  /* ═══ camada de conversão (v2) ═══ */
+  /* announcement bar */
+  .annc{position:fixed;top:0;left:0;right:0;z-index:61;background:var(--bg-2);border-bottom:1px solid var(--line);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.03em}
+  .annc .inner{display:flex;align-items:center;justify-content:center;gap:16px;padding:9px 46px 9px 20px;flex-wrap:wrap;color:var(--muted)}
+  .annc b{color:var(--bege)}
+  .annc .ap{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--bege);transition:.2s}
+  .annc .ap.hot{background:var(--orange);color:#160a02;border-color:var(--orange)}
+  .annc .ap:hover{border-color:var(--orange);color:var(--orange)}
+  .annc .ap.hot:hover{color:#160a02;filter:brightness(1.07)}
+  .annc .x{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--dim);cursor:pointer;font-size:17px;line-height:1}
+  .annc .x:hover{color:var(--bege)}
+  body.has-annc header{top:39px}
+  body.annc-off .annc{display:none}
+  body.annc-off header{top:0}
+
+  /* brand pill */
+  .brand-pill{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);border:1px solid rgba(255,103,1,.42);border-radius:999px;padding:4px 9px;line-height:1}
+
+  /* institutions proof strip */
+  .insti{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px 0;position:relative;z-index:3}
+  .insti .wrap{display:flex;align-items:center;justify-content:center;gap:22px 38px;flex-wrap:wrap}
+  .insti .lab{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+  .insti .name{font-family:'Sora';font-weight:800;font-size:1.08rem;text-transform:uppercase;letter-spacing:.01em;color:var(--muted);opacity:.72;transition:.2s;white-space:nowrap}
+  .insti .name:hover{opacity:1;color:var(--bege)}
+
+  /* offer ladder (image + tag + cta) */
+  .ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+  .lcard{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:rgba(255,255,255,.02);transition:transform .22s,border-color .22s}
+  .lcard:hover{transform:translateY(-5px);border-color:rgba(255,103,1,.42)}
+  .lcard .ph{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--panel)}
+  .lcard .ph img{width:100%;height:100%;object-fit:cover;object-position:top left;transition:transform .5s}
+  .lcard:hover .ph img{transform:scale(1.045)}
+  .lcard .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(8,9,15,.5))}
+  .lcard .tag{position:absolute;top:12px;left:12px;z-index:2;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:rgba(8,9,15,.74);border:1px solid var(--line);color:var(--bege)}
+  .lcard .tag.free{background:var(--orange);color:#160a02;border-color:var(--orange)}
+  .lcard .body{padding:22px;display:flex;flex-direction:column;flex:1}
+  .lcard h3{font-family:'Sora';font-weight:700;font-size:1.2rem;margin-bottom:8px}
+  .lcard p{color:var(--muted);font-size:.95rem;line-height:1.55;flex:1}
+  .lcard .go{margin-top:16px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--orange);display:inline-flex;align-items:center;gap:7px;transition:gap .2s}
+  .lcard:hover .go{gap:11px}
+  @media(max-width:960px){.ladder{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:640px){.ladder{grid-template-columns:1fr}.annc .inner{font-size:11px;gap:10px;padding:8px 40px 8px 16px}.annc .ap.alt{display:none}}
+
+  /* credential chips */
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+  .chips span{font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 13px}
+
   /* reveal */
   .rv{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
   .rv.in{opacity:1;transform:none}
@@ -260,7 +307,15 @@
   }
 </style>
 </head>
-<body>
+<body class="has-annc">
+<div class="annc" id="annc">
+  <div class="inner">
+    <span>Comece grátis:</span>
+    <a class="ap hot" href="/diagnostico">● Diagnóstico de IA · resultado na hora</a>
+    <a class="ap alt" href="/comunidade">Bald Lab · comunidade grátis</a>
+  </div>
+  <button class="x" id="anncX" aria-label="Fechar aviso">×</button>
+</div>
 <div class="nodes">
   <svg viewBox="0 0 600 600" fill="none" stroke="rgba(255,103,1,0.5)" stroke-width="1">
     <circle cx="120" cy="90" r="34"/><circle cx="120" cy="90" r="12" fill="rgba(255,103,1,.5)" stroke="none"/>
@@ -273,14 +328,13 @@
 
 <header id="hdr">
   <nav class="wrap">
-    <a href="#top" class="brand"><img src="/assets/logo-bald-dark.svg" alt="Iago Bald" style="height:22px;display:block" /></a>
+    <a href="#top" class="brand"><img src="/assets/logo-bald-dark.svg" alt="Iago Bald" style="height:22px;display:block" /><span class="brand-pill">Bald Tech</span></a>
     <div class="nav-links" id="navLinks">
+      <a class="navlink" href="/diagnostico">Diagnóstico</a>
       <a class="navlink" href="/consultoria">Consultoria</a>
       <a class="navlink" href="/mentoria">Mentoria</a>
       <a class="navlink" href="/comunidade">Comunidade</a>
       <a class="navlink" href="/recursos">Recursos</a>
-      <a class="navlink" href="/newsletter">Newsletter</a>
-      <a class="navlink" href="/links">Links</a>
       <a class="btn btn-primary" href="/formulario">Falar comigo</a>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -296,7 +350,14 @@
       <div class="hero-copy">
         <div class="hero-eye rv">Builder · Engenheiro · Consultor de IA</div>
         <h1 class="rv">Eu <span class="thin">construo</span> sistemas que vão contra o <em>caos</em>, pra você focar no que <span class="thin">só você pode fazer.</span></h1>
-        <p class="hero-sub rv">Sou <b>Iago Borges</b> — o Iago Bald. Todo negócio tende ao caos. Eu instalo sistemas que resistem a isso.</p>
+        <p class="hero-sub rv"><b>Todo negócio escorrega pro caos.</b> Eu organizo a sua operação e instalo a IA que resolve, pra você recuperar tempo de vida.</p>
+        <div class="hero-cta rv">
+          <a class="btn btn-primary" href="/diagnostico">Fazer o diagnóstico grátis
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="/consultoria">Ver a consultoria</a>
+        </div>
+        <p class="rv mono" style="margin-top:22px;font-size:12px;color:var(--dim);letter-spacing:.04em">Professor de MBA no SENAI CIMATEC · 7 anos de consultoria · engenheiro</p>
       </div>
       <div class="hero-photo rv">
         <div class="frame"><img loading="lazy" decoding="async" id="heroImg" src="/assets/home-1.jpg" alt="Iago Borges" /></div>
@@ -306,21 +367,24 @@
     <div class="scrollcue"><span class="dot"></span>SCROLL</div>
   </section>
 
-  <!-- MARQUEE -->
-  <div class="marquee" aria-hidden="true">
-    <div class="track">
-      <span>Builder</span><span>Sistemas sob medida</span><span>IA aplicada</span><span>Organização</span><span>Entropia zero</span><span>Resultado</span>
-      <span>Builder</span><span>Sistemas sob medida</span><span>IA aplicada</span><span>Organização</span><span>Entropia zero</span><span>Resultado</span>
+  <!-- FAIXA DE INSTITUIÇÕES (prova) -->
+  <div class="insti">
+    <div class="wrap">
+      <span class="lab">Passei por</span>
+      <span class="name">Banco BV</span>
+      <span class="name">Cartão Elo</span>
+      <span class="name">SENAI CIMATEC</span>
+      <span class="name">+18 anos de consultoria</span>
     </div>
   </div>
 
   <!-- STATS -->
   <section class="wrap" style="padding:60px 0">
     <div class="stats rv">
-      <div class="stat"><div class="n" data-count="8">0<em>+</em></div><div class="l">Anos de experiência</div></div>
-      <div class="stat"><div class="n" data-count="10">0<em>+</em></div><div class="l">Times liderados</div></div>
-      <div class="stat"><div class="n" data-count="12">0<em>+</em></div><div class="l">Sistemas entregues</div></div>
-      <div class="stat"><div class="n" data-count="10">0<em>+</em></div><div class="l">Empresas impactadas</div></div>
+      <div class="stat"><div class="n" data-count="7">0<em>+</em></div><div class="l">Anos de consultoria e dados</div></div>
+      <div class="stat"><div class="n" data-count="6">0<em>+</em></div><div class="l">Nichos com sistema em produção</div></div>
+      <div class="stat"><div class="n"><em>MBA</em></div><div class="l">Professor no SENAI CIMATEC</div></div>
+      <div class="stat"><div class="n"><em>BR</em></div><div class="l">Salvador · atende o Brasil</div></div>
     </div>
   </section>
 
@@ -403,35 +467,32 @@
     </div>
   </section>
 
-  <!-- COMO POSSO TE AJUDAR -->
+  <!-- ESCADA DE OFERTAS -->
   <section class="block" id="ajuda" style="padding-top:20px">
     <div class="wrap">
-      <span class="kicker rv" data-n="→">Como posso te ajudar</span>
-      <h2 class="h2 rv">Quatro formas de trabalhar comigo.</h2>
-      <div class="atu-gallery rv" style="margin-top:44px">
-        <a class="atu-card" href="/consultoria" style="text-decoration:none;color:inherit">
-          <span class="idx">01</span>
-          <div class="atu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
-          <h3>Consultoria para PMEs <span style="color:var(--orange)">→</span></h3>
-          <p>Acho onde o negócio perde dinheiro, construo o que resolve e meço o quanto volta. Pra empresas.</p>
+      <span class="kicker rv" data-n="→">Por onde começar</span>
+      <h2 class="h2 rv">Do grátis ao sob medida.</h2>
+      <p class="lead rv">Pra você, pro seu time ou pra sua operação inteira. Escolhe o degrau certo pro seu momento.</p>
+      <div class="ladder">
+        <a class="lcard rv" href="/comunidade">
+          <div class="ph"><span class="tag free">Grátis</span><img loading="lazy" decoding="async" src="/assets/home-2.jpg" alt="Bald Lab" /></div>
+          <div class="body"><h3>Bald Lab</h3><p>A comunidade de IA aplicada a negócios, em Salvador. Trilhas, aulas e troca real. O jeito mais fácil de começar comigo.</p><span class="go">Entrar grátis →</span></div>
         </a>
-        <a class="atu-card" href="/mentoria" style="text-decoration:none;color:inherit">
-          <span class="idx">02</span>
-          <div class="atu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h3>Mentoria para Empresários <span style="color:var(--orange)">→</span></h3>
-          <p>Aprenda a usar IA com as próprias mãos: do teu problema real a um protótipo que funciona.</p>
+        <a class="lcard rv" href="/diagnostico">
+          <div class="ph"><span class="tag free">Grátis</span><img loading="lazy" decoding="async" src="/assets/systems/assessor-financeiro.png" alt="Diagnóstico de IA" /></div>
+          <div class="body"><h3>Diagnóstico AI-First</h3><p>7 perguntas, 1 minuto, resultado na hora: descobre o nível de IA da sua empresa e o próximo passo certo pra você.</p><span class="go">Fazer o teste →</span></div>
         </a>
-        <a class="atu-card" href="/cursos" style="text-decoration:none;color:inherit">
-          <span class="idx">03</span>
-          <div class="atu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-          <h3>Cursos <span style="color:var(--orange)">→</span></h3>
-          <p>Workshop e aulas práticas de IA aplicada ao negócio. Pra quem quer aprender a usar — e sair fazendo.</p>
+        <a class="lcard rv" href="/cursos">
+          <div class="ph"><span class="tag">Pro seu time</span><img loading="lazy" decoding="async" src="/assets/home-1.jpg" alt="Workshops e treinamentos" /></div>
+          <div class="body"><h3>Workshops e palestras</h3><p>Seu time saindo da aula já fazendo, não anotando. Treinamentos de IA na prática, com os casos reais da sua empresa.</p><span class="go">Levar pra minha empresa →</span></div>
         </a>
-        <a class="atu-card" href="/comunidade" style="text-decoration:none;color:inherit">
-          <span class="idx">04</span>
-          <div class="atu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h3>Comunidade (Bald Lab) <span style="color:var(--orange)">→</span></h3>
-          <p>Grátis: grupo de IA aplicada a negócios, com trilhas e aulas. O jeito mais fácil de começar comigo.</p>
+        <a class="lcard rv" href="/consultoria">
+          <div class="ph"><span class="tag">Feito pra você</span><img loading="lazy" decoding="async" src="/assets/systems/clinica.png" alt="Consultoria e sistemas" /></div>
+          <div class="body"><h3>Consultoria + sistemas</h3><p>Meu carro-chefe. Organizo a operação e construo o sistema ou a automação que resolve a dor nº1 do negócio.</p><span class="go">Conhecer a consultoria →</span></div>
+        </a>
+        <a class="lcard rv" href="/mentoria">
+          <div class="ph"><span class="tag">Por aplicação</span><img loading="lazy" decoding="async" src="/assets/home-3.jpg" alt="Mentoria individual" /></div>
+          <div class="body"><h3>Mentoria individual</h3><p>Eu do seu lado, 1:1, do seu problema real a um protótipo que roda. Por aplicação, pra quem quer aprender fazendo.</p><span class="go">Quero aplicar →</span></div>
         </a>
       </div>
     </div>
@@ -475,9 +536,12 @@
         </div>
         <div class="about-body rv">
           <h2 class="h2">Na interseção entre quem constrói e quem organiza.</h2>
-          <p>8 anos construindo sistemas em <b>Cartão Elo</b>, <b>Banco BV</b>, <b>SENAI CIMATEC</b> e <b>DNA de Vendas</b>. Aprendi que tecnologia sem organização é só bagunça mais rápida.</p>
-          <p>Consultor de IA independente — uso IA para construir sistemas sob medida para pequenos e médios negócios em semanas, não meses.</p>
-          <p>Meu trabalho é pegar complexidade e transformar em sistema simples que o dono consegue usar. <b>Building is my love language.</b></p>
+          <p><b>Eu não entrego slide. Eu construo o sistema.</b> Enquanto muita consultoria para no diagnóstico, eu saio da conversa com a automação ou o app rodando.</p>
+          <p>Passei por <b>Cartão Elo</b>, <b>Banco BV</b>, <b>SENAI CIMATEC</b> e uma consultoria de vendas com 18 anos de mercado. Aprendi que tecnologia sem organização é só bagunça mais rápida.</p>
+          <p>Hoje uso IA pra construir sistemas sob medida para pequenos e médios negócios em semanas, não meses. Pego complexidade e transformo em sistema simples que o dono consegue usar.</p>
+          <div class="chips">
+            <span>Engenheiro</span><span>Professor de MBA · SENAI CIMATEC</span><span>7 anos de consultoria</span><span>Builder</span>
+          </div>
         </div>
       </div>
     </div>
@@ -541,6 +605,13 @@
   var tg=document.getElementById('navToggle'), nl=document.getElementById('navLinks');
   tg.addEventListener('click',function(){ nl.classList.toggle('open'); });
   nl.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ nl.classList.remove('open'); }); });
+
+  // announcement bar — fecha e lembra
+  var annc=document.getElementById('annc'), anncX=document.getElementById('anncX');
+  if(annc){
+    if(localStorage.getItem('annc-off')==='1'){ document.body.classList.remove('has-annc'); document.body.classList.add('annc-off'); }
+    if(anncX) anncX.addEventListener('click',function(){ document.body.classList.remove('has-annc'); document.body.classList.add('annc-off'); localStorage.setItem('annc-off','1'); });
+  }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
