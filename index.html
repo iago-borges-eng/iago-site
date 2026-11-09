@@ -249,16 +249,14 @@
   /* parede de credenciais (instituições) */
   .credwall-wrap{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0;position:relative;z-index:3}
   .credwall-wrap .lab{display:block;text-align:center;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:20px}
-  .credwall{display:flex;align-items:stretch;justify-content:center;gap:12px;flex-wrap:wrap}
-  .cw{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:154px;padding:16px 22px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.015);transition:border-color .25s,background .25s}
-  .cw:hover{border-color:rgba(255,103,1,.42);background:rgba(255,103,1,.04)}
-  .cw .nm{font-family:'Sora';font-weight:800;font-size:1.04rem;text-transform:uppercase;letter-spacing:.01em;color:var(--muted);transition:color .25s;line-height:1;white-space:nowrap}
-  .cw:hover .nm{color:var(--bege)}
-  .cw .ds{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;color:var(--dim)}
-  .cw-dfki .nm{text-transform:lowercase;letter-spacing:-.03em;font-size:1.4rem}
-  .cw-dfki .nm i{font-style:normal;color:transparent;-webkit-text-stroke:1.3px var(--muted);transition:-webkit-text-stroke-color .25s}
-  .cw-dfki:hover .nm i{-webkit-text-stroke-color:var(--bege)}
-  @media(max-width:640px){.cw{min-width:0;flex:1 1 40%;padding:14px 10px}.cw .nm{font-size:.92rem;white-space:normal;text-align:center}}
+  .credwall{display:flex;align-items:stretch;justify-content:center;gap:14px;flex-wrap:wrap}
+  .cw{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .cw .plate{background:#fff;border-radius:12px;height:78px;min-width:158px;width:100%;display:flex;align-items:center;justify-content:center;padding:15px 20px;transition:transform .22s,box-shadow .22s}
+  .cw:hover .plate{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.45)}
+  .cw img{max-height:40px;max-width:150px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.8;transition:filter .25s,opacity .25s}
+  .cw:hover img{filter:none;opacity:1}
+  .cw .ds{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;color:var(--dim);text-align:center}
+  @media(max-width:640px){.cw{flex:1 1 42%}.cw .plate{min-width:0;height:66px;padding:12px}.cw img{max-height:32px}}
 
   /* ícone nos stats (dá vida) */
   .stat .sic{color:var(--orange);opacity:.85;margin-bottom:14px;display:block}
@@ -384,11 +382,11 @@
     <div class="wrap">
       <span class="lab">Onde eu passei</span>
       <div class="credwall">
-        <span class="cw"><span class="nm">Banco BV</span><span class="ds">Dados &amp; IA</span></span>
-        <span class="cw"><span class="nm">Cartão Elo</span><span class="ds">Consultoria ágil</span></span>
-        <span class="cw cw-dfki"><span class="nm">dfki<i>ai</i></span><span class="ds">Instituto de IA · Alemanha</span></span>
-        <span class="cw"><span class="nm">SENAI CIMATEC</span><span class="ds">Professor de MBA</span></span>
-        <span class="cw"><span class="nm">DNA de Vendas</span><span class="ds">Projetos &amp; IA</span></span>
+        <span class="cw"><span class="plate"><img loading="lazy" decoding="async" src="/assets/logos-inst/banco-bv.png" alt="Banco BV" /></span><span class="ds">Dados &amp; IA</span></span>
+        <span class="cw"><span class="plate"><img loading="lazy" decoding="async" src="/assets/logos-inst/elo.png" alt="Cartão Elo" /></span><span class="ds">Consultoria ágil</span></span>
+        <span class="cw"><span class="plate"><img loading="lazy" decoding="async" src="/assets/logos-inst/dfki.png" alt="DFKI — Instituto de IA da Alemanha" /></span><span class="ds">Instituto de IA · Alemanha</span></span>
+        <span class="cw"><span class="plate"><img loading="lazy" decoding="async" src="/assets/logos-inst/senai-cimatec.png" alt="SENAI CIMATEC" /></span><span class="ds">Professor de MBA</span></span>
+        <span class="cw"><span class="plate"><img loading="lazy" decoding="async" src="/assets/logos-inst/dna-de-vendas.png" alt="DNA de Vendas" /></span><span class="ds">Projetos &amp; IA</span></span>
       </div>
     </div>
   </div>
