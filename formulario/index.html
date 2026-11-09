@@ -192,7 +192,7 @@
     var tipo=tipoEl?tipoEl.value:null;
     if(!telefoneRaw||!email){ (telefoneRaw?form.querySelector('[name="email"]'):telInput).focus(); return; }
     if(!telBRValido(telefoneRaw)){ telInput.focus(); alert('Digite um WhatsApp válido: +55 (DD) 9XXXX-XXXX'); return; }
-    var telefone='+55'+digitosNacionais(telefoneRaw); // valor limpo, ex.: +5571991204511
+    var telefone='+55'+digitosNacionais(telefoneRaw); // valor limpo, ex.: +5571999960809
     btn.disabled=true; btn.textContent='Enviando…';
     var id='form-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);
     fetch(SUPA+'/rest/v1/leads_formulario',{
