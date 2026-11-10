@@ -166,7 +166,7 @@
             <input type="tel" name="telefone" placeholder="Seu WhatsApp *" required autocomplete="tel" />
             <input type="email" name="email" placeholder="Seu e-mail *" required autocomplete="email" />
           </div>
-          <input type="text" name="nome" placeholder="Como te chamo?" autocomplete="name" />
+          <input type="text" name="nome" placeholder="Seu nome *" required autocomplete="name" />
           <textarea name="negocio" rows="3" placeholder="Qual seu negócio e a maior dor hoje? (me ajuda a ver se faz sentido pra você)"></textarea>
           <input type="text" name="website" class="m-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <button type="submit" id="payBtn" class="m-btn m-btn-full">Garantir vaga e pagar →</button>
@@ -339,8 +339,8 @@
     };
   }
   function valida(c){
-    if(!c.telefone||!c.email){
-      (c.telefone?form.querySelector('[name="email"]'):form.querySelector('[name="telefone"]')).focus();
+    if(!c.nome||!c.telefone||!c.email){
+      form.querySelector(!c.nome?'[name="nome"]':(!c.telefone?'[name="telefone"]':'[name="email"]')).focus();
       return false;
     }
     return true;

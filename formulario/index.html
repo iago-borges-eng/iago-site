@@ -79,7 +79,7 @@
               <input type="tel" name="telefone" placeholder="+55 (DD) 9XXXX-XXXX" required autocomplete="tel" maxlength="19" />
               <input type="email" name="email" placeholder="Seu e-mail *" required autocomplete="email" />
             </div>
-            <input type="text" name="nome" placeholder="Como posso te chamar? (opcional)" autocomplete="name" />
+            <input type="text" name="nome" placeholder="Seu nome *" required autocomplete="name" />
             <textarea name="mensagem" rows="3" placeholder="Algo que queira me contar antes? (opcional)"></textarea>
           </div>
           <input type="text" name="website" class="f-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
@@ -186,11 +186,11 @@
     if(form.querySelector('[name="website"]').value){ wrap.style.display='none'; ok.classList.add('show'); return; }
     var telefoneRaw=(telInput.value||'').trim();
     var email=(form.querySelector('[name="email"]').value||'').trim();
-    var nome=(form.querySelector('[name="nome"]').value||'').trim()||null;
+    var nome=(form.querySelector('[name="nome"]').value||'').trim();
     var mensagem=(form.querySelector('[name="mensagem"]').value||'').trim()||null;
     var tipoEl=document.querySelector('input[name="tipo"]:checked');
     var tipo=tipoEl?tipoEl.value:null;
-    if(!telefoneRaw||!email){ (telefoneRaw?form.querySelector('[name="email"]'):telInput).focus(); return; }
+    if(!nome||!telefoneRaw||!email){ form.querySelector(!nome?'[name="nome"]':(!telefoneRaw?'[name="telefone"]':'[name="email"]')).focus(); return; }
     if(!telBRValido(telefoneRaw)){ telInput.focus(); alert('Digite um WhatsApp válido: +55 (DD) 9XXXX-XXXX'); return; }
     var telefone='+55'+digitosNacionais(telefoneRaw); // valor limpo, ex.: +5571999960809
     btn.disabled=true; btn.textContent='Enviando…';
