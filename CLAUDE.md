@@ -33,6 +33,7 @@ IMPORTANTE: rodar git só aqui no Claude Code (nativo). Não deixar outra ferram
 ## Captura de lead (peça crítica)
 - A captura fica embutida em **consultoria**, **mentoria** e na página **/formulario** (a home só tem CTA pra /formulario, sem form). Faz `POST` direto pra **`leads_formulario`** no Supabase do **iago-bald** (mesma base do CRM), com a **chave publishable** (anon) e honeypot anti-bot. `respostas.origem` varia (`formulario`/`landing-consultoria`/`landing-mentoria`); um gatilho (`leads_formulario_to_funil`) cria o card no funil (col-lead). A **Newsletter** usa outra tabela (`newsletter_assinantes`). *(Corrigido 2026-10-26; antes dizia `leads_site`, que está dormente.)*
 - **Segurança:** RLS OK. O `anon` só tem policy de **INSERT** em `leads_formulario` (`with check true`); **não há SELECT** pro anon, então a chave pública no HTML NÃO lê a lista de leads. Não afrouxar.
+- **`nome` é OPCIONAL (coluna nullable) — NÃO re-adicionar `NOT NULL` em `leads_formulario.nome`.** O campo "Como te chamo?" é opcional (só telefone+email são obrigatórios) e o trigger `leads_formulario_to_funil` é null-safe (cai pra telefone/'Lead'). *Bug corrigido 2026-11-10: `nome` tinha virado NOT NULL (regressão) e derrubava TODO envio com nome em branco, em todos os forms (consultoria/mentoria/formulario) — erro `23502` → "Ops, não consegui enviar". Fix: `ALTER COLUMN nome DROP NOT NULL`.*
 - Limitação: se o POST falhar, o lead se perde (só `alert`). Melhoria futura: fallback (e-mail/Formspree) ou retry.
 
 ## SEO (feito 2026-09-23)
