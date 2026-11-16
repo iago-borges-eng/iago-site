@@ -3,3 +3,5 @@
 
 /radar /newsletter 301
 /radar/* /newsletter/:splat 301
+
+/agenda https://calendar.app.google/3Hn8dGnt4YX3zM418 302
