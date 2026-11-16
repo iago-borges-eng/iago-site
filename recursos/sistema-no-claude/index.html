@@ -85,10 +85,10 @@
         </div>
       </div>
       <div class="alt-card">
-        <div class="alt-head"><h4>Sistema sob medida, feito por especialista</h4></div>
+        <div class="alt-head"><h4>Sistema sob medida, feito comigo</h4><span class="tag">o completo</span></div>
         <div class="proscons">
-          <div class="pc pros"><h5>Prós</h5><ul><li>Faz tudo: site, cliente acessando, integrações</li><li>Teu endereço e teu login</li></ul></div>
-          <div class="pc cons"><h5>Contras</h5><ul><li>Mais caro e mais demorado</li><li>Depende de quem desenvolve</li></ul></div>
+          <div class="pc pros"><h5>Prós</h5><ul><li>Faz tudo que o Claude não faz: cliente acessando, WhatsApp, nota fiscal, teu login e teu endereço</li><li>Aguenta escala e tem segurança de verdade</li><li>Pensado pra tua operação, com acompanhamento</li></ul></div>
+          <div class="pc cons"><h5>Contras</h5><ul><li>Investimento maior</li><li>Leva mais que uma hora pra ficar pronto</li></ul></div>
         </div>
       </div>
     </div>
@@ -96,11 +96,12 @@
     <h2><svg class="hic" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 5 5v13c3-.5 5.5 0 7 1.5M12 6.5C13.5 5 16 4.5 19 5v13c-3-.5-5.5 0-7 1.5M12 6.5V20"/></svg>Os termos, rapidinho</h2>
     <div class="gloss"><b>Sistema</b><span>uma ferramenta com telas onde tu cadastra e acompanha as coisas da empresa. Pensa numa planilha que se organiza sozinha e te avisa das coisas.</span></div>
     <div class="gloss"><b>Banco de dados</b><span>o "arquivo" onde o sistema guarda tudo de forma permanente. É o que faz teu cadastro continuar lá amanhã.</span></div>
-    <div class="gloss"><b>Artefato</b><span>o nome que o Claude dá ao que ele cria fora da conversa: uma página, um documento, um sistema. Ele abre num link próprio.</span></div>
+    <div class="gloss"><b>Artefato</b><span>o nome que o Claude dá ao que ele cria fora da conversa. No menu <b>Criar</b> ele tem vários tipos (Documentos, Apresentações, Planilha, Design, Dados, Quadro branco); cada um abre num link próprio.</span></div>
+    <div class="gloss"><b>Dados</b><span>é o tipo de artefato que a gente usa aqui. Diferente dos outros, ele monta um <b>app de verdade com banco de dados</b> — por isso o cadastro não some. Começa por ele.</span></div>
     <div class="gloss"><b>Dados fictícios</b><span>clientes e números inventados, só pra testar. Tu vê o sistema funcionando sem arriscar informação de cliente de verdade.</span></div>
 
     <h2><svg class="hic" viewBox="0 0 24 24"><path d="M9 4L3 7v13l6-3 6 3 6-3V4l-6 3-6-3z"/><path d="M9 4v13M15 7v13"/></svg>O caminho, em uma olhada</h2>
-    <div class="diagram">
+    <div class="diagram four">
       <div class="dbox"><div class="di">💬</div><h4>Tu descreve</h4><p>o que precisa, em português</p></div>
       <div class="darrow">→</div>
       <div class="dbox"><div class="di">🤖</div><h4>O Claude cria</h4><p>o sistema, com dados de teste</p></div>
@@ -131,8 +132,16 @@
     <div class="step">
       <div class="num">2<small>PEDIR</small></div>
       <div class="step-body">
-        <h3 class="h3-ic"><svg class="hic" viewBox="0 0 24 24"><path d="M20 4H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h4v4l4-4h8a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1z"/></svg>Abra o Claude e cole o pedido</h3>
-        <p>Entra em <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> (ou no app), começa uma conversa nova e cola o modelo abaixo, trocando o que está entre [colchetes] pelas tuas respostas do passo 1.</p>
+        <h3 class="h3-ic"><svg class="hic" viewBox="0 0 24 24"><path d="M20 4H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h4v4l4-4h8a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1z"/></svg>No Claude, escolha "Dados" e cole o pedido</h3>
+        <p>Entra em <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> (ou no app). No menu <b>Criar</b>, do lado esquerdo, escolhe <b>Dados</b>. É a opção nova que monta um <b>app de verdade, com banco de dados</b> — é ela que faz o cadastro ficar guardado. Depois cola o modelo abaixo, trocando o que está entre [colchetes] pelas tuas respostas do passo 1.</p>
+        <figure class="shot" style="max-width:360px;margin-left:auto;margin-right:auto">
+          <img src="../assets/shots/claude-criar-dados.jpg" alt="Menu Criar do Claude com a opção Dados" loading="lazy" />
+          <figcaption>No menu <b>Criar</b> do Claude, escolhe <b>Dados</b> — é o tipo que vem com banco de dados.</figcaption>
+        </figure>
+        <div class="callout note">
+          <div class="ct"><svg class="cic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.1V16h6v-.4c0-.8.4-1.5 1-2.1A6 6 0 0 0 12 3z"/></svg> Não acha o "Dados"?</div>
+          <p>Esses tipos de criação (Dados, Design, Planilha…) são novos e o Claude vai liberando aos poucos. Se ainda não apareceu pra ti, começa uma conversa normal e pede o sistema assim mesmo com o modelo abaixo; ele cria o artefato do mesmo jeito.</p>
+        </div>
         <div class="promptbox">
           <div class="ph">📋 MODELO — copie e troque os [colchetes]</div>
           <pre><code>Sou [quem você é] na [nome da empresa], que [o que a empresa faz].
@@ -243,16 +252,21 @@ Por que estamos perdendo vendas? Que padrão você vê?</code></pre>
         <li><b>Volume muito grande</b>: ele vai bem com centenas ou poucos milhares de cadastros, não com centenas de milhares.</li>
       </ul>
     </div>
-    <p>Quando chegar nesse ponto, o caminho é um sistema sob medida. E tudo que tu testou aqui vira o rascunho perfeito dele: tu já sabe exatamente o que precisa.</p>
+    <p>Quando chegar nesse ponto, o caminho é um sistema sob medida. E não se perde nada: tudo que tu montou aqui vira o rascunho perfeito dele, porque tu já sabe exatamente o que precisa.</p>
 
-    <div class="callout note" style="margin-top:34px">
+    <div class="outcome" style="margin-top:30px">
+      <h3>🚀 O jeito completo é comigo</h3>
+      <p>Esse caminho com o Claude é o <b>atalho prático</b>: rápido, barato e ótimo pra testar a ideia. O que eu construo pra empresa é outro nível, <b>com tudo de melhor</b>: teu endereço e teu login, teu cliente acessando de fora, integração com WhatsApp e nota fiscal, feito pra escalar, com segurança de verdade e acompanhamento de perto. Tu começa no Claude pra sentir o gosto. Quando quiser o de verdade, instalado na tua operação, é comigo.</p>
+    </div>
+
+    <div class="callout note">
       <div class="ct"><svg class="cic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg> Até onde isso vai?</div>
-      <p>Foi com <b>esse mesmo método</b> que eu criei, em menos de uma hora, um sistema de vendas completo pra uma empresa de energia solar fictícia: funil, metas, análise de cada cliente pela IA e registro de ligação por voz. Tu começa com uma planilha que dói; o limite é o que tu consegue descrever.</p>
+      <p>Foi com esse mesmo método que eu criei, em menos de uma hora, um sistema de vendas completo pra uma empresa de energia solar fictícia: funil, metas, análise de cada cliente pela IA e registro de ligação por voz. É o aperitivo. O prato principal, feito sob medida pra tua empresa, vai muito além disso.</p>
     </div>
 
     <div class="cta">
-      <h3>É isso. Tu acabou de criar um sistema de verdade.</h3>
-      <p>Travou em algum passo, ou quer ajuda pra levar isso pra tua empresa? Me chama.</p>
+      <h3>Gostou? Imagina do jeito completo.</h3>
+      <p>Esse foi o atalho. Quando quiser um sistema de verdade instalado na tua empresa, com tudo de melhor, é comigo. Me chama.</p>
       <div class="cta-actions">
         <a class="btn wa-btn" href="https://wa.me/5571999960809?text=Oi+Iago%2C+vi+o+seu+manual+de+criar+sistema+com+o+Claude+no+site" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.8-.9-2.1-1-.28-.1-.48-.15-.68.15s-.78 1-.96 1.2c-.18.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.53.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.58-.5-.5-.68-.5l-.58-.01c-.2 0-.53.07-.8.37s-1.05 1.02-1.05 2.5 1.08 2.9 1.23 3.1c.15.2 2.12 3.24 5.14 4.54.72.3 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.8-.74 2.05-1.44.25-.7.25-1.3.18-1.44-.07-.13-.27-.2-.57-.35zM12 2a10 10 0 0 0-8.6 15.06L2 22l5.06-1.33A10 10 0 1 0 12 2z"/></svg>WhatsApp</a>
         <a class="btn ghost" href="/recursos">← Recursos</a>

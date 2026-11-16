@@ -129,6 +129,17 @@ footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index
 .dbox h4{font-family:'Sora';font-size:1rem;color:var(--bege);margin-bottom:5px}
 .dbox p{font-size:.84rem;color:var(--muted);margin:0}
 .darrow{display:flex;align-items:center;color:var(--orange);font-size:1.4rem;padding:0 12px}
+/* variante de 4 passos: cabe tudo numa linha no desktop */
+.diagram.four{flex-wrap:nowrap}
+.diagram.four .dbox{min-width:0;padding:16px 10px}
+.diagram.four .dbox .di{font-size:1.5rem}
+.diagram.four .dbox h4{font-size:.95rem}
+.diagram.four .dbox p{font-size:.8rem}
+.diagram.four .darrow{padding:0 7px;font-size:1.1rem}
+@media(max-width:560px){
+  .diagram.four{flex-wrap:wrap}
+  .diagram.four .dbox{min-width:100%}
+}
 
 /* glossário */
 .gloss{padding:15px 0;border-top:1px solid var(--line)}
