@@ -46,6 +46,15 @@ Fluxo único de "falar comigo", com **duas portas de mesmo peso** espalhadas pel
 - **WhatsApp saiu do fluxo** mas está **comentado (não deletado)** em `links.html`, `diagnostico/`, e nos 3 tutoriais de `recursos/` — reusar no futuro. Mantidos: suporte do curso, grupo da Comunidade, follow-up pós-form, webhook do `/pagar`.
 - **CRM:** o agendamento do Google **não** preenche o CRM pelo iframe (cross-origin). O caminho é o **evento no Google Calendar** → bald-ops já lê via `calendar-feed`. Fase 2 (no bald-ops): virar card no CRM + foco no dashboard. Não feito ainda.
 
+## Hierarquia de ofertas + CTAs (modelo intermediário — feito 2026-11-19)
+Remodelado pra clareza/foco (audit interno 7.5 → ~9.3). **Regras canônicas, NÃO reverter sem motivo:**
+- **Par primário = Consultoria + Mentoria 1:1**, MESMO peso (done-for-you vs done-with-you) — as 2 coisas que vendem. Home: 2 cards grandes laranja (`.ladder.pair`); /links: 2 `.prod`.
+- **Consultoria falada por RESULTADO, não por "sistema":** "resolvo a dor nº1 com a ferramenta certa (automação, IA, Claude configurado ou sistema sob medida)". Construção de sistema é UM entregável, não o rótulo (contexto Accelera 360 — memória `accelera-360-virada-modelo`).
+- **Secundário (peso baixo):** Bald Lab (grátis), Workshops/palestras (pagos, "sob demanda", NÃO card grande — no /links é `.lk`), e o **Diagnóstico/quiz vira LINHA FINA**, nunca hero. Diagnóstico fica em **1–2 lugares só** (/links "comece por aqui" + linha no contato), NÃO em todo nav/página.
+- **2 portas de contato, mesmo peso:** "Agendar um papo" (`/papo`) + "Enviar uma mensagem" (`/formulario`) — juntas no hero e no contato da home e no topo do /links.
+- **Sistema de CTA:** nav "Falar comigo" → **`/papo`** em TODAS as páginas (era patchwork: consultoria ia pro form, cursos/recursos/newsletter pro /formulario). Mentoria = **1:1** por ora (formato ainda não decidido).
+- **Fora de escopo até o Accelera definir o nicho:** página de produto, repricing, landing por nicho. Não bater nisso antes da Fase 1 do Accelera.
+
 ## SEO (feito 2026-09-23)
 - `robots.txt` + `sitemap.xml` na raiz; JSON-LD (Person + ProfessionalService) no `index.html`; `canonical` em index, consultoria, mentoria e tutoriais.
 - Ao criar página nova: adicionar a URL no `sitemap.xml` e um `<link rel="canonical">` no head.
