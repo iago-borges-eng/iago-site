@@ -283,6 +283,17 @@
   .lcta svg{width:17px;height:17px;flex:none}
   @media(max-width:960px){.ladder{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:640px){.ladder{grid-template-columns:1fr}.lcard h3{font-size:1.35rem}}
+  /* par primário (Consultoria + Mentoria) + secundário (grátis/sob demanda) */
+  .ladder.pair{grid-template-columns:repeat(2,1fr);margin-top:44px}
+  .lsub{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px}
+  .lcard.sm{padding:22px;background:linear-gradient(162deg,rgba(255,255,255,.025),rgba(255,255,255,.005))}
+  .lcard.sm h3{font-size:1.2rem;margin-bottom:7px}
+  .lcard.sm p{font-size:.92rem}
+  .lcard.sm .lcta{margin-top:16px;padding:11px 15px;font-size:.9rem;background:transparent}
+  .ldiag{margin-top:18px;text-align:center;font-family:'Space Mono',monospace;font-size:13px;color:var(--muted)}
+  .ldiag a{color:var(--orange);text-decoration:none}
+  .ldiag a:hover{text-decoration:underline}
+  @media(max-width:640px){.ladder.pair,.lsub{grid-template-columns:1fr}}
 
   /* credential chips */
   .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
@@ -490,51 +501,48 @@
   <!-- ESCADA DE OFERTAS -->
   <section class="block" id="ajuda" style="padding-top:20px">
     <div class="wrap">
-      <span class="kicker rv" data-n="→">Por onde começar</span>
-      <h2 class="h2 rv">Do grátis ao sob medida.</h2>
-      <p class="lead rv">Pra você, pro seu time ou pra sua operação inteira. Escolhe o degrau certo pro seu momento.</p>
-      <div class="ladder">
-        <a class="lcard rv" href="/comunidade">
+      <span class="kicker rv" data-n="→">Trabalhe comigo</span>
+      <h2 class="h2 rv">Eu faço pra você, ou te ensino a fazer.</h2>
+      <p class="lead rv">As duas formas de trabalhar comigo de perto. Mais abaixo, os jeitos de começar leve e sem custo.</p>
+      <!-- PAR PRIMÁRIO: Consultoria (faço pra você) + Mentoria (aprende fazendo) — mesmo peso -->
+      <div class="ladder pair">
+        <a class="lcard feat rv" href="/consultoria">
+          <span class="lbadge">Feito pra você</span>
+          <div class="kick">Consultoria</div>
+          <h3>Eu resolvo <em>pra você</em></h3>
+          <p>Organizo a operação e instalo o que tira a dor nº1 do negócio: automação, IA, o teu Claude configurado ou um sistema sob medida. <b>Em semanas, não meses.</b></p>
+          <div class="lpills"><i>Diagnóstico</i><i>Organização</i><i>A solução que a dor pede</i></div>
+          <span class="lcta">Ver a consultoria <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="lcard feat rv" href="/mentoria">
+          <span class="lbadge">Lado a lado</span>
+          <div class="kick">Mentoria 1:1</div>
+          <h3>Você aprende <em>fazendo</em></h3>
+          <p>Eu do teu lado, 1:1, do teu problema real a <b>um protótipo que roda</b>. Pra quem quer botar a mão e sair sabendo.</p>
+          <div class="lpills"><i>1:1</i><i>Mão na massa</i><i>Mensal</i></div>
+          <span class="lcta">Ver a mentoria <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+
+      <!-- SECUNDÁRIO: começar grátis / sob demanda — peso menor -->
+      <div class="lsub">
+        <a class="lcard sm rv" href="/comunidade">
           <span class="lbadge free"><span class="d"></span>Grátis</span>
           <div class="kick">Comunidade</div>
           <h3>Bald Lab</h3>
-          <p>A comunidade de IA aplicada a negócios, em Salvador. Trilhas, encontros e troca real com outros donos. O jeito mais fácil de começar comigo.</p>
-          <div class="lpills"><i>Grátis</i><i>Salvador</i><i>Trilhas</i></div>
+          <p>A comunidade de IA aplicada a negócios, em Salvador. O jeito mais fácil de começar comigo.</p>
           <span class="lcta">Entrar grátis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </a>
-        <a class="lcard rv" href="/diagnostico">
-          <span class="lbadge free"><span class="d"></span>Grátis</span>
-          <div class="kick">Teste rápido</div>
-          <h3>Diagnóstico <em>AI-First</em></h3>
-          <p>12 perguntas, 2 minutos, <b>resultado na hora</b>. Descobre o nível de IA da sua empresa e o próximo passo certo pro seu momento.</p>
-          <div class="lpills"><i>12 perguntas</i><i>Radar na hora</i><i>Grátis</i></div>
-          <span class="lcta">Fazer o teste <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </a>
-        <a class="lcard rv" href="/cursos">
-          <span class="lbadge">Pro seu time</span>
-          <div class="kick">Treinamento</div>
+        <a class="lcard sm rv" href="/cursos">
+          <span class="lbadge">Sob demanda</span>
+          <div class="kick">Pro seu time</div>
           <h3>Workshops e palestras</h3>
-          <p>Seu time sai da aula <b>já fazendo</b>, não anotando. Treinamento de IA com os casos reais da sua empresa, presencial ou online.</p>
-          <div class="lpills"><i>Presencial · online</i><i>Palestra</i><i>Workshop</i></div>
+          <p>Seu time sai da aula já fazendo, não anotando. Com os casos reais da empresa, presencial ou online.</p>
           <span class="lcta">Levar pra minha empresa <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </a>
-        <a class="lcard feat rv" href="/consultoria">
-          <span class="lbadge">Feito pra você</span>
-          <div class="kick">Carro-chefe</div>
-          <h3>Consultoria <em>+ sistemas</em></h3>
-          <p>Organizo a operação e construo o sistema ou a automação que resolve a dor nº1 do negócio — <b>em semanas, não meses</b>.</p>
-          <div class="lpills"><i>Diagnóstico</i><i>Organização</i><i>Sistema sob medida</i></div>
-          <span class="lcta">Conhecer a consultoria <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </a>
-        <a class="lcard rv" href="/mentoria">
-          <span class="lbadge">Por aplicação</span>
-          <div class="kick">1 a 1</div>
-          <h3>Mentoria individual</h3>
-          <p>Eu do seu lado, 1:1, do seu problema real a <b>um protótipo que roda</b>. Pra quem quer aprender fazendo.</p>
-          <div class="lpills"><i>1:1</i><i>Mensal</i><i>Por aplicação</i></div>
-          <span class="lcta">Quero aplicar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </a>
       </div>
+
+      <p class="ldiag rv">Só explorando? <a href="/diagnostico">Descubra o nível de IA da sua empresa em 2 min →</a></p>
     </div>
   </section>
 
@@ -607,12 +615,18 @@
         </div>
         <div class="contact-right rv" style="display:flex;flex-direction:column;justify-content:center;gap:24px">
           <p class="lead">Uma conversa de 1 hora é suficiente para diagnosticar onde o negócio perde dinheiro e tempo.</p>
-          <p style="color:var(--muted);font-size:1rem;line-height:1.6">Você escolhe o assunto — consultoria, mentoria, curso ou só uma dúvida. Eu retorno pessoalmente.</p>
-          <a href="/papo" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:10px;padding:16px 28px;font-size:1rem;width:fit-content">
-            Agendar um papo
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-          </a>
-          <a href="/diagnostico" style="font-family:'Space Mono',monospace;font-size:13px;color:var(--muted);text-decoration:none">Não quer conversar ainda? <span style="color:var(--orange)">Descubra seu nível de IA em 2 min →</span></a>
+          <p style="color:var(--muted);font-size:1rem;line-height:1.6">Você escolhe o assunto: consultoria, mentoria, curso ou só uma dúvida. Eu retorno pessoalmente.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="/papo" class="btn" style="background:rgba(255,103,1,.1);border:1px solid rgba(255,103,1,.32);color:var(--bege);gap:10px;padding:16px 26px;font-size:1rem">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF6701" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg>
+              Agendar um papo
+            </a>
+            <a href="/formulario" class="btn" style="background:rgba(255,103,1,.1);border:1px solid rgba(255,103,1,.32);color:var(--bege);gap:10px;padding:16px 26px;font-size:1rem">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF6701" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              Enviar uma mensagem
+            </a>
+          </div>
+          <a href="/diagnostico" style="font-family:'Space Mono',monospace;font-size:13px;color:var(--muted);text-decoration:none">Só explorando? <span style="color:var(--orange)">Descubra seu nível de IA em 2 min →</span></a>
         </div>
       </div>
     </div>
