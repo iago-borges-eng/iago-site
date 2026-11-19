@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta property="og:image" content="https://iagobald.com.br/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="canonical" href="https://iagobald.com.br/papo/" />
+<title>Agendar um papo — escolhe um horário comigo | Iago Bald</title>
+<meta name="description" content="Escolhe um horário e a gente marca um papo de 1 hora, sem custo e sem compromisso. A gente conversa sobre o teu negócio e eu já te dou uma direção." />
+<meta property="og:title" content="Agendar um papo — Iago Bald" />
+<meta property="og:description" content="Escolhe um horário e a gente marca um papo de 1 hora, sem custo e sem compromisso. A gente conversa sobre o teu negócio e eu já te dou uma direção." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+<div class="grain"></div><div class="glow"></div>
+<header id="hdr">
+  <nav class="wrap">
+    <a href="/" class="brand"><span class="bars"><i></i><i></i><i></i></span>Iago&nbsp;Bald</a>
+    <div class="nav-links" id="navLinks">
+      <a class="navlink" href="/consultoria">Consultoria</a>
+      <a class="navlink" href="/mentoria">Mentoria</a>
+      <a class="navlink" href="/comunidade">Comunidade</a>
+      <a class="navlink" href="/recursos">Recursos</a>
+      <a class="navlink" href="/newsletter">Newsletter</a>
+      <a class="navlink" href="/links">Links</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
+  </nav>
+</header>
+<main>
+  <section class="wrap p-wrap">
+    <div class="p-head rv">
+      <h1 class="p-title">Bora marcar um papo?</h1>
+      <p class="p-sub"><b>1 hora, sem custo.</b> Escolhe um horário abaixo — a gente conversa por vídeo e eu já te dou uma direção pro teu negócio.</p>
+    </div>
+
+    <!-- AGENDADOR GOOGLE -->
+    <div class="p-cal rv" id="book">
+      <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2RerFVc0hnD9d8jWEQPr0P_7LHm_0sttnOTpbC80dASQB_n1vUv990bo2B7WFPnmbKS_r9pkeH?gv=true" style="border:0" width="100%" height="720" frameborder="0" title="Agendar um papo com Iago Bald" loading="eager"></iframe>
+    </div>
+  </section>
+</main>
+
+<style>
+  main{padding:102px 0 56px}
+  .p-wrap{max-width:820px;width:100%;margin:0 auto}
+  .p-head{text-align:center;max-width:620px;margin:0 auto 20px}
+  .p-title{font-family:'Sora',sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.04;font-size:clamp(1.9rem,6.4vw,3rem);margin:0 0 12px;overflow-wrap:break-word}
+  .p-sub{color:var(--muted);line-height:1.55;font-size:clamp(14.5px,3.6vw,16.5px);margin:0 auto;max-width:52ch}
+  .p-sub b{color:var(--bege)}
+
+  .p-cal{background:#fff;border:1px solid var(--line);border-radius:18px;padding:8px;box-shadow:0 20px 50px rgba(0,0,0,.12);scroll-margin-top:84px}
+  .p-cal iframe{display:block;border-radius:12px;min-height:720px;width:100%}
+
+  @media(max-width:600px){
+    main{padding:88px 0 40px}
+    .p-head{margin-bottom:16px}
+    .p-cal{padding:5px;border-radius:14px}
+    .p-cal iframe{min-height:640px}
+  }
+</style>
+<script src="/assets/site.js"></script>
+</body>
+</html>

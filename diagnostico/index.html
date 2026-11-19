@@ -227,7 +227,9 @@
     var sc = scores();
     var geral = Math.round((sc.reduce(function(a,b){return a+b;},0)/6)*10)/10;
     var ni = nivelDe(geral), nv = NIVEIS[ni];
+    /* WhatsApp desativado — fluxo agora é agendar um papo em /papo. Mantido pra reuso futuro:
     var wa = 'https://wa.me/5571999960809?text=' + encodeURIComponent('Oi Iago! Fiz o diagnóstico de IA e deu nível ' + (ni+1) + ' (' + nv.nome + '), nota ' + geral.toFixed(1) + '/10. Quero conversar sobre o próximo passo.');
+    */
     app.innerHTML = topo() +
       '<div style="text-align:center">'+
         '<div class="res-nivel">Nível '+(ni+1)+' de 4</div>'+
@@ -239,9 +241,9 @@
       '<div class="eixos">'+ EIXOS.map(function(e,i){ return '<div class="e"><span>'+e+'</span><b>'+sc[i].toFixed(1)+'</b></div>'; }).join('') +'</div>'+
       '<div class="next">'+
         '<h3>Seu próximo passo</h3>'+
-        '<p>Já anotei seu diagnóstico. Me chama no WhatsApp que a gente marca 30 minutos: eu aponto onde o seu negócio perde mais tempo e dinheiro, e o que dá pra resolver primeiro.</p>'+
+        '<p>Já anotei seu diagnóstico. Agenda um papo de 1 hora comigo: eu aponto onde o seu negócio perde mais tempo e dinheiro, e o que dá pra resolver primeiro.</p>'+
         '<div class="cta-row">'+
-          '<a class="btn" href="'+wa+'" target="_blank" rel="noopener">Falar comigo no WhatsApp</a>'+
+          '<a class="btn" href="/papo">Agendar um papo</a>'+
           '<a class="btn ghost" href="/consultoria">Ver a consultoria</a>'+
         '</div>'+
       '</div>'+

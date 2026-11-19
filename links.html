@@ -69,6 +69,16 @@
   .quiz .qar{flex:none;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,103,1,.4);display:grid;place-items:center;color:var(--orange);transition:transform .2s,background .2s}
   .quiz:hover .qar{transform:translateX(3px);background:rgba(255,103,1,.1)}
 
+  /* duas portas iguais — agendar + mensagem */
+  .doors{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .door{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:18px 18px 16px;border:1px solid rgba(255,103,1,.3);border-radius:18px;background:linear-gradient(118deg,rgba(255,103,1,.1),rgba(255,255,255,.02));transition:transform .18s,border-color .2s,box-shadow .2s}
+  .door:hover{transform:translateY(-2px);border-color:rgba(255,103,1,.6);box-shadow:0 12px 34px rgba(255,103,1,.1)}
+  .door .di{width:46px;height:46px;border-radius:13px;background:var(--orange);color:#fff;display:grid;place-items:center}
+  .door .di svg{width:23px;height:23px}
+  .door b{font-family:'Sora';font-weight:700;font-size:1.04rem;line-height:1.18}
+  .door em{font-style:normal;font-family:'Space Mono',monospace;font-size:10.5px;color:var(--muted);letter-spacing:.02em}
+  @media(max-width:430px){.doors{grid-template-columns:1fr}.door{flex-direction:row;align-items:center}.door b{font-size:1.06rem}}
+
   /* product card (consultoria / mentoria) */
   .prod{position:relative;border:1px solid var(--line);border-radius:22px;padding:22px;background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,.015));margin-bottom:14px;overflow:hidden}
   .prod:before{content:"";position:absolute;inset:0 0 auto auto;width:220px;height:220px;background:radial-gradient(circle at 80% 0,rgba(255,103,1,.1),transparent 60%);pointer-events:none}
@@ -174,6 +184,21 @@
     <span class="qar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
   </a>
 
+  <!-- FALAR COMIGO -->
+  <div class="sec rv" style="--d:.225s"><span>Falar comigo</span></div>
+  <div class="doors rv" style="--d:.23s">
+    <a class="door" href="/papo">
+      <span class="di"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/><path d="m9.5 14 1.8 1.8 3.5-3.6"/></svg></span>
+      <b>Agendar um papo</b>
+      <em>1 hora · sem custo</em>
+    </a>
+    <a class="door" href="/formulario">
+      <span class="di"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+      <b>Enviar uma mensagem</b>
+      <em>Deixa teu contato</em>
+    </a>
+  </div>
+
   <!-- TRABALHE COMIGO -->
   <div class="sec rv" style="--d:.24s"><span>Trabalhe comigo</span></div>
 
@@ -205,7 +230,10 @@
     <div class="kicker">IA na prática, pro seu time</div>
     <p>Levo seu time pra usar IA de verdade no dia a dia. Palestra que engaja ou workshop mão na massa, com os <b>casos reais da sua empresa</b>.</p>
     <div class="pills"><i>Palestra</i><i>Workshop</i><i>Pro seu time</i></div>
-    <a class="cta" href="https://wa.me/5571999960809?text=Oi%20Iago!%20Quero%20falar%20sobre%20uma%20palestra%2Fworkshop%20pra%20minha%20empresa." target="_blank" rel="noopener">Quero levar pra minha empresa
+    <!-- WhatsApp desativado — fluxo agora é /papo. Mantido pra reuso futuro:
+    <a class="cta" href="https://wa.me/5571999960809?text=Oi%20Iago!%20Quero%20falar%20sobre%20uma%20palestra%2Fworkshop%20pra%20minha%20empresa." target="_blank" rel="noopener">Quero levar pra minha empresa</a>
+    -->
+    <a class="cta" href="/papo">Quero levar pra minha empresa
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
     </a>
   </div>

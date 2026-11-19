@@ -31,10 +31,20 @@ IMPORTANTE: rodar git só aqui no Claude Code (nativo). Não deixar outra ferram
 - Prévia renderizada: tutorial multi-arquivo não abre estilizado sozinho (CSS/imagens relativos). Pra revisar num visualizador, gerar versão self-contained com CSS inline + imagens em base64.
 
 ## Captura de lead (peça crítica)
-- A captura fica embutida em **consultoria**, **mentoria** e na página **/formulario** (a home só tem CTA pra /formulario, sem form). Faz `POST` direto pra **`leads_formulario`** no Supabase do **iago-bald** (mesma base do CRM), com a **chave publishable** (anon) e honeypot anti-bot. `respostas.origem` varia (`formulario`/`landing-consultoria`/`landing-mentoria`); um gatilho (`leads_formulario_to_funil`) cria o card no funil (col-lead). A **Newsletter** usa outra tabela (`newsletter_assinantes`). *(Corrigido 2026-10-26; antes dizia `leads_site`, que está dormente.)*
+- A captura fica embutida em **consultoria**, **mentoria** e na página **/formulario** (a home tem duas portas: **/papo** e **/formulario** — ver seção Agendamento). Faz `POST` direto pra **`leads_formulario`** no Supabase do **iago-bald** (mesma base do CRM), com a **chave publishable** (anon) e honeypot anti-bot. `respostas.origem` varia (`formulario`/`landing-consultoria`/`landing-mentoria`); um gatilho (`leads_formulario_to_funil`) cria o card no funil (col-lead). A **Newsletter** usa outra tabela (`newsletter_assinantes`). *(Corrigido 2026-10-26; antes dizia `leads_site`, que está dormente.)*
 - **Segurança:** RLS OK. O `anon` só tem policy de **INSERT** em `leads_formulario` (`with check true`); **não há SELECT** pro anon, então a chave pública no HTML NÃO lê a lista de leads. Não afrouxar.
 - **`nome` é OPCIONAL (coluna nullable) — NÃO re-adicionar `NOT NULL` em `leads_formulario.nome`.** O campo "Como te chamo?" é opcional (só telefone+email são obrigatórios) e o trigger `leads_formulario_to_funil` é null-safe (cai pra telefone/'Lead'). *Bug corrigido 2026-11-10: `nome` tinha virado NOT NULL (regressão) e derrubava TODO envio com nome em branco, em todos os forms (consultoria/mentoria/formulario) — erro `23502` → "Ops, não consegui enviar". Fix: `ALTER COLUMN nome DROP NOT NULL`.*
 - Limitação: se o POST falhar, o lead se perde (só `alert`). Melhoria futura: fallback (e-mail/Formspree) ou retry.
+
+## Agendamento — /papo (duas portas) — feito 2026-11-19
+Fluxo único de "falar comigo", com **duas portas de mesmo peso** espalhadas pelo site:
+- **Agendar um papo** → **`/papo`** = página de marca minimalista (mobile-first: só hero curto + iframe). Embute o **agendador do Google Appointment** (1 compromisso, **1 hora**, nome/sobrenome/email/telefone obrigatórios, Google Meet + convite automático pros dois). O Google **é o formulário** — não construir form próprio aqui.
+  - URL do agendador no iframe: `calendar.google.com/calendar/appointments/schedules/AcZssZ2...?gv=true` (trocar aqui se mudar a página do Google). `/agenda` e `/agendar` fazem 301 → `/papo`.
+  - A página fica **limpa** (sem passo-a-passo, sem fallback dentro). Se mexer: `header` é `position:fixed` → `main` precisa `padding-top:~102px` senão some sob o menu.
+- **Enviar uma mensagem** → **`/formulario`** = quem não quer marcar hora, deixa contato (cai no mesmo `leads_formulario`).
+- Os **dois botões iguais** (ícone laranja, mesmo estilo) aparecem: na **home** (hero) e no **`/links`** (seção "Falar comigo", classe `.doors`/`.door`). Cross-link em `/formulario` → `/papo`.
+- **WhatsApp saiu do fluxo** mas está **comentado (não deletado)** em `links.html`, `diagnostico/`, e nos 3 tutoriais de `recursos/` — reusar no futuro. Mantidos: suporte do curso, grupo da Comunidade, follow-up pós-form, webhook do `/pagar`.
+- **CRM:** o agendamento do Google **não** preenche o CRM pelo iframe (cross-origin). O caminho é o **evento no Google Calendar** → bald-ops já lê via `calendar-feed`. Fase 2 (no bald-ops): virar card no CRM + foco no dashboard. Não feito ainda.
 
 ## SEO (feito 2026-09-23)
 - `robots.txt` + `sitemap.xml` na raiz; JSON-LD (Person + ProfessionalService) no `index.html`; `canonical` em index, consultoria, mentoria e tutoriais.
